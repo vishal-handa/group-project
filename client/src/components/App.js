@@ -34,7 +34,7 @@ function App() {
           </Route>
 
         </Switch>
-        <Cart />
+        {/* <Cart /> */}
       </Wrapper>
     </BrowserRouter>
   )
