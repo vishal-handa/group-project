@@ -11,7 +11,6 @@ function App() {
       .then(data => setBacon(data));
   }, []);
 
-  // return <div>{bacon ? bacon : `...where's my stuff?...`}</div>;
 
   return (
     <BrowserRouter>
@@ -39,6 +38,7 @@ function App() {
       </Wrapper>
     </BrowserRouter>
   )
+
 }
 
 const Wrapper = styled.div` 
