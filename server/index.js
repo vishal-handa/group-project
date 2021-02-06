@@ -1,8 +1,10 @@
 'use strict';
 
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const { getItems, getSingleItem, getBrands, getSingleBrand, } = require("./handlers");
 
 const PORT = 4000;
 
@@ -26,5 +28,10 @@ express()
 
   // REST endpoints?
   .get('/bacon', (req, res) => res.status(200).json('🥓'))
+
+  .get("/items", getItems)
+  .get("/products/:id", getSingleItem)
+  .get("/brands", getBrands)
+  .get('/companies/:id', getSingleBrand)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
