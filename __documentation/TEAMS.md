@@ -26,4 +26,3 @@
 - Boris
 - Elodie
 
-Testing 
