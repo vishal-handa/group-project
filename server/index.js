@@ -1,12 +1,24 @@
 'use strict';
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
 const items = require('./data/items.json');
 const companies = require ('./data/companies.json');
-const { getProducts, getSingleProduct, getCompanies, getSingleCompany, getCategories, getItems} = require("./handlers");
+
+
+const { 
+  getProducts, 
+  getSingleProduct, 
+  getCompanies, 
+  // getSingleCompany, 
+  getCategories,
+  getProductsByCategory,
+  getProductsByCompany,
+    getItems,
+} = require("./handlers");
+
 
 const PORT = 4000;
 
@@ -29,13 +41,15 @@ express()
   .use('/', express.static(__dirname + '/'))
 
   // REST endpoints?
-  .get('/bacon', (req, res) => res.status(200).json('🥓'))
 
   .get("/products", getProducts)
   .get("/products/:id", getSingleProduct)
   .get("/companies", getCompanies)
-  .get('/companies/:id', getSingleCompany)
+  // .get('/companies/:id', getSingleCompany)
   .get('/categories', getCategories)
+
+  .get("/categories/:category", getProductsByCategory)
+  .get("/companies/:company", getProductsByCompany)
   .get('/allItems', getItems)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
