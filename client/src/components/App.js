@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
 import Cart from "./Cart";
+import Menu from "./Menu";
 
 function App() {
   const [bacon, setBacon] = useState(null);
@@ -16,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Wrapper>
+        <Menu />
         <Switch>
 
           <Route exact path="/">
