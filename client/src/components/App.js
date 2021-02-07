@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
+import { useDispatch, useSelector } from 'react-redux';
+import { receiveCategories } from '../actions';
 
-function App() {
-  const [bacon, setBacon] = useState(null);
-
+const App = () => {
+  const dispatch = useDispatch();
+  const theCategories = useSelector(state=>state);
+  console.log(theCategories);
   useEffect(() => {
-    fetch('/bacon')
-      .then(res => res.json())
-      .then(data => setBacon(data));
+    fetch('/categories')
+      .then(res=>res.json())
+      .then(res=>dispatch(receiveCategories(res.data)))
   }, []);
 
 
@@ -21,15 +24,15 @@ function App() {
             Home
           </Route>
 
-          <Route exact path="/product/:id">
+          <Route path="/product/:id">
             Individual product
           </Route>
 
-          <Route exact path="/:category">
+          <Route path="/:category">
             Category
           </Route>
 
-          <Route exact path="/company/:companyId">
+          <Route path="/company/:companyId">
             Company
           </Route>
 
