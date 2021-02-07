@@ -4,6 +4,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const items = require('./data/items.json');
+const companies = require ('./data/companies.json');
+const { getItems, getSingleItem, getBrands, getSingleBrand, getCategories } = require("./handlers");
 const { getProducts, getSingleProduct, getCompanies, getSingleCompany, } = require("./handlers");
 
 const PORT = 4000;

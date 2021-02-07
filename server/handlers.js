@@ -30,11 +30,21 @@ const getSingleCompany = (req, res) => {
     };
 }     
 
-module.exports = {
-    getProducts,
-    getSingleProduct,
-    getCompanies,
-    getSingleCompany,
+const getCategories = (req, res) => {
+    const categoryArray=items.map(elem=>{
+        return elem.category;
+    });
+    const uniqueCategories = categoryArray.filter((item, i, ar) => ar.indexOf(item) === i);
+    // console.log(unique);
+    res.status(200).json({status:200, data:uniqueCategories})
+}
 
+module.exports = {
+    getItems,
+    getSingleItem,
+    getBrands,
+    getSingleBrand,
+    getCategories
 };
-      
+
+
