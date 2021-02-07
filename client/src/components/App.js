@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
+import Cart from "./Cart";
 
 function App() {
   const [bacon, setBacon] = useState(null);
