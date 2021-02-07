@@ -39,12 +39,17 @@ const getCategories = (req, res) => {
     res.status(200).json({status:200, data:uniqueCategories})
 }
 
+const getItems = (req, res) => {
+    res.status(200).json({status:200, data:products})
+}
+
 module.exports = {
     getProducts,
     getSingleProduct,
     getCompanies,
     getSingleCompany,
-    getCategories
+    getCategories,
+    getItems,
 };
 
 
