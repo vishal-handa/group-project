@@ -1,39 +1,40 @@
 "use strict";
 
 const companies = require("./data/companies.json");
-const items = require("./data/items.json");
+const products = require("./data/items.json");
 
-const getItems = (req, res) => {
-    res.status(200).json({ status: 200, data: items })
+const getProducts = (req, res) => {
+    res.status(200).json({ status: 200, data: products })
 };
 
-const getSingleItem = (req, res) => {
+const getSingleProduct = (req, res) => {
     const id = req.params.id;
-    const item = items.find((item) => item.name === id)
-
-    if(item) {
-        res.status(200).json({ item }) 
+    const product = products.find((item) => item._id === id)
+    console.log(id)
+    if(product) {
+        res.status(200).json({ product }) 
     } res.status(404).json("Error: not Found")
 }   
 
-const getBrands = (req, res) => {
+const getCompanies = (req, res) => {
     res.status(200).json({ data: companies })
 };
 
-const getSingleBrand = (req, res) => {
+const getSingleCompany = (req, res) => {
     const id = req.params.id;
-    const brand = companies.find((item) => item.name === id)
+    console.log(id)
+    const company = companies.find((item) => item.name === id)
 
-    if(brand) {
-        res.status(200).json({ brand }) 
-    } res.status(404).json("Error: not Found")
+    if(company) {
+        res.status(200).json({ company }) 
+    };
 }     
 
 module.exports = {
-    getItems,
-    getSingleItem,
-    getBrands,
-    getSingleBrand,
+    getProducts,
+    getSingleProduct,
+    getCompanies,
+    getSingleCompany,
 
 };
       
