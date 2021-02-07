@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveCategories } from '../actions';
 import Cart from "./Cart";
+import Menu from "./Menu";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Wrapper>
+        <Menu />
         <Switch>
 
           <Route exact path="/">
