@@ -38,7 +38,7 @@ const App = () => {
           </Route>
 
         </Switch>
-        {/* <Cart /> */}
+        <Cart />
       </Wrapper>
     </BrowserRouter>
   )
