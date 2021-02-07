@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveCategories } from '../actions';
+import Cart from "./Cart";
 
 const App = () => {
   const dispatch = useDispatch();
