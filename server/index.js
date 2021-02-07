@@ -6,8 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const items = require('./data/items.json');
 const companies = require ('./data/companies.json');
-const { getItems, getSingleItem, getBrands, getSingleBrand, getCategories } = require("./handlers");
-const { getProducts, getSingleProduct, getCompanies, getSingleCompany, } = require("./handlers");
+const { getProducts, getSingleProduct, getCompanies, getSingleCompany, getCategories} = require("./handlers");
 
 const PORT = 4000;
 
@@ -36,5 +35,6 @@ express()
   .get("/products/:id", getSingleProduct)
   .get("/companies", getCompanies)
   .get('/companies/:id', getSingleCompany)
+  .get('/categories', getCategories)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

@@ -31,7 +31,7 @@ const getSingleCompany = (req, res) => {
 }     
 
 const getCategories = (req, res) => {
-    const categoryArray=items.map(elem=>{
+    const categoryArray=products.map(elem=>{
         return elem.category;
     });
     const uniqueCategories = categoryArray.filter((item, i, ar) => ar.indexOf(item) === i);
@@ -40,10 +40,10 @@ const getCategories = (req, res) => {
 }
 
 module.exports = {
-    getItems,
-    getSingleItem,
-    getBrands,
-    getSingleBrand,
+    getProducts,
+    getSingleProduct,
+    getCompanies,
+    getSingleCompany,
     getCategories
 };
 
