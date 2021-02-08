@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+import ItemContainerBig from "./ItemContainerBig";
 
 const ItemContainerSmall = ({
     productName,
@@ -9,12 +12,22 @@ const ItemContainerSmall = ({
     companyId,
     price,
     location,
+    element_id,
 }) => {
+
+    // let history = useHistory();
+
+    const onClick = () => {
+        console.log(element_id);
+        // finish onClick function
+    }
+
     return (
-        <SmallItemView>
+        <SmallItemView onClick={onClick}>
             <ImageWrapper>
                 <Image src={imageSRC}/>
             </ImageWrapper>
+            {element_id}
             <Title>{productName}</Title>
             <Button>Add to Cart</Button>
         </SmallItemView>
