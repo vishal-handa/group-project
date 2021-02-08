@@ -22,7 +22,7 @@ const App = () => {
     fetch('/categories')
       .then(res=>res.json())
       .then(res=>dispatch(receiveCategories(res.data)));
-    fetch('./allItems')
+    fetch('./products')
       .then(res=>res.json())
       .then(res=>dispatch(receiveItems(res.data)))
   }, []);
@@ -43,7 +43,7 @@ const App = () => {
             <Home />
           </Route>
 
-          <Route path="/product/:id">
+          <Route path="/products/:id">
             Individual product
           </Route>
 
