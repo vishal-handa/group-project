@@ -1,14 +1,24 @@
-import React from "react";
-import ItemContainerSmall from "./ItemContainerSmall";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ProductGrid from "./ProductGrid";
 
 const SelectedCompanyPage = () => {
+    const {company}=useParams();
+    // console.log(company);
+    const [companyProducts, setCompanyProducts]=useState([]);
 
+    useEffect(()=>{
+        fetch(`/companies/${decodeURIComponent(company)}`)
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+                setCompanyProducts(res.data);
+            })
+    },[company]);
     return (
-        <div>
-            Page once company has been selected from dropdown.
-            Fetch and map over items from this company and display.
-            <ItemContainerSmall />
-        </div>
+        <>
+            {companyProducts && <ProductGrid products={companyProducts}/>}
+        </>
     )
 }
 

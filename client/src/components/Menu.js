@@ -81,7 +81,6 @@ const Wrapper = styled.div`
 
 const MenuItemContainer = styled.div` 
   display: flex;
-  width: 300px;
   position: relative;
 `;
 
