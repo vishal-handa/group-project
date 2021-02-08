@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+// import companies from "../../../server/data/companies.json";
 
-const Menu = () => {
+const Menu = ({homePageState}) => {
 
-//   const dropdownRef = useRef(null);
+  // assemble array of categories
+  let listOfCategories = homePageState.categories.categories;
+
   const [categoryIsActive, setCategoryIsActive] = useState(false);
   const [companyIsActive, setCompanyIsActive] = useState(false);
+
+  const [displayCompanies, setDisplayCompanies] = useState([]);
 
   const onClickCategory = () => {
     setCategoryIsActive(!categoryIsActive);
@@ -32,11 +37,11 @@ const Menu = () => {
         </CategoryMenuItem>
         {categoryIsActive === true &&
           <CategoryNav>
-            <ul>
-              <p>Item 1</p>
-              <p>Item 2</p>
-              <p>Continue mapping over category items</p>
-            </ul>
+            {listOfCategories.map((category) => {
+                return (
+                    <p>{category}</p>
+                )
+            })}
           </CategoryNav>
       } 
       </MenuItemContainer>
