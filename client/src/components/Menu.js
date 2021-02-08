@@ -105,6 +105,8 @@ const CompanyNav = styled.nav`
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 1;
   padding-left: 5px;
+  max-height: 400px;
+  overflow-y: auto;
 `;
 
 const MenuItem = styled.button` 
