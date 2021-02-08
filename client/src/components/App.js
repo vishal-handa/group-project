@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { receiveCategories, receiveItems, receiveCompanies } from '../actions';
-import SelectedCompanyPage from "./CompanyProduct";
-import SelectedCategoryPage from "./CategoryProduct";
+import SelectedCompanyPage from "./SelectedCompanyPage";
+import SelectedCategoryPage from "./SelectedCategoryPage";
+import AllProductPage from "./AllProductPage";
 
 import Home from "./Home";
 //import Menu from "./Menu";
@@ -39,14 +40,20 @@ const App = () => {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/products">
+            <AllProductPage />
+          </Route>
           <Route path="/products/:id">
             Individual product
           </Route>
-          <Route path="/products">
-            All products here
+          <Route exact path="/categories">
+            All of categories
           </Route>
           <Route path="/categories/:category">
             <SelectedCategoryPage />
+          </Route>
+          <Route exact path="/companies">
+            All of our brands
           </Route>
           <Route path="/companies/:company">
             <SelectedCompanyPage />
