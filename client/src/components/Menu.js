@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import companies from "../../../server/data/companies.json";
 
 const Menu = ({homePageState}) => {
-
-  console.log(homePageState)
   
   // assemble array of categories
   let listOfCategories = homePageState.categories.categories;
@@ -14,7 +11,6 @@ const Menu = ({homePageState}) => {
 
   if (homePageState.companies.companies) {
     listOfCompanies = Object.values(homePageState.companies.companies)
-    console.log(listOfCompanies); 
   }
 
   const [categoryIsActive, setCategoryIsActive] = useState(false);
@@ -94,6 +90,7 @@ const CategoryNav = styled.nav`
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 1;
+  padding-left: 5px;
 `;
 
 const CompanyNav = styled.nav` 
@@ -104,6 +101,7 @@ const CompanyNav = styled.nav`
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 1;
+  padding-left: 5px;
 `;
 
 const MenuItem = styled.button` 
