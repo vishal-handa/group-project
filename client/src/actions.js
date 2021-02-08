@@ -6,4 +6,10 @@ export const receiveCategories=(categories)=>({
 export const receiveItems=(items)=>({
     type: "RECEIVE_ITEMS",
     items,
-})
+});
+
+export const receiveCompanies = (companies) => ({
+    type: "RECEIVE_COMPANIES",
+    companies,
+});
+

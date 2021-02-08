@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Menu = () => {
+const Menu = ({homePageState}) => {
+  
+  // assemble array of categories
+  let listOfCategories = homePageState.categories.categories;
 
-//   const dropdownRef = useRef(null);
+  // assemble array of companies
+  let listOfCompanies = []
+
+  if (homePageState.companies.companies) {
+    listOfCompanies = Object.values(homePageState.companies.companies)
+  }
+
   const [categoryIsActive, setCategoryIsActive] = useState(false);
   const [companyIsActive, setCompanyIsActive] = useState(false);
 
@@ -32,11 +41,11 @@ const Menu = () => {
         </CategoryMenuItem>
         {categoryIsActive === true &&
           <CategoryNav>
-            <ul>
-              <p>Item 1</p>
-              <p>Item 2</p>
-              <p>Continue mapping over category items</p>
-            </ul>
+            {listOfCategories.map((category) => {
+              return (
+                <p key={category}>{category}</p>
+              )
+            })}
           </CategoryNav>
       } 
       </MenuItemContainer>
@@ -47,11 +56,11 @@ const Menu = () => {
         </CompanyMenuItem>
         {companyIsActive === true &&
           <CompanyNav>
-            <ul>
-              <p>Item 1</p>
-              <p>Item 2</p>
-              <p>Continue mapping over company items</p>
-            </ul>
+            {listOfCompanies.map((company) => {
+              return (
+                <p key={company}>{company}</p>
+              )
+            })}  
           </CompanyNav>
       }
       </MenuItemContainer>
@@ -81,6 +90,7 @@ const CategoryNav = styled.nav`
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 1;
+  padding-left: 5px;
 `;
 
 const CompanyNav = styled.nav` 
@@ -91,6 +101,7 @@ const CompanyNav = styled.nav`
   width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 1;
+  padding-left: 5px;
 `;
 
 const MenuItem = styled.button` 

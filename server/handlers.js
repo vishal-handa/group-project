@@ -17,10 +17,13 @@ const getSingleProduct = (req, res) => {
     res.status(200).json({ status: 200, data: product })
 }   
 
-// Get all companies:
+// Get all companies (names):
 const getCompanies = (req, res) => {
-    res.status(200).json({ data: companies })
+    const allCompanies = companies.map((item) => item.name);
+    const companyArray = allCompanies.sort();
+    res.status(200).json({ data: companyArray })
 };
+
 
 // const getSingleCompany = (req, res) => {
 //     const id = req.params.id;

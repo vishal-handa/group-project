@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
-import { receiveCategories, receiveItems } from '../actions';
+
+import { receiveCategories, receiveItems, receiveCompanies } from '../actions';
+
 import Cart from "./Cart";
 
 import Home from "./Home";
@@ -12,8 +14,10 @@ import Menu from "./Menu";
 
 const App = () => {
   const dispatch = useDispatch();
-  // const theCategories = useSelector(state=>state);
-  // console.log(theCategories);
+
+  const homePageState = useSelector(state=>state);
+  console.log(homePageState);
+
   useEffect(() => {
     fetch('/categories')
       .then(res=>res.json())
@@ -23,6 +27,11 @@ const App = () => {
       .then(res=>dispatch(receiveItems(res.data)))
   }, []);
 
+  useEffect(() => {
+    fetch("/companies")
+      .then((res) => res.json())
+      .then((data) => dispatch(receiveCompanies(data.data)))
+  }, [])
 
   return (
     <BrowserRouter>
