@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 const Menu = ({homePageState}) => {
   
@@ -30,9 +31,11 @@ const Menu = ({homePageState}) => {
     <Wrapper>
 
       <MenuItemContainer>
-        <MenuItem>
-          <MenuText>Shop all products</MenuText>
-        </MenuItem>
+        <Link to="/products">
+          <MenuItem>
+            <MenuText>Shop all products</MenuText>
+          </MenuItem>
+        </Link>
       </MenuItemContainer>
 
       <MenuItemContainer>
@@ -43,7 +46,7 @@ const Menu = ({homePageState}) => {
           <CategoryNav>
             {listOfCategories.map((category) => {
               return (
-                <p key={category}>{category}</p>
+                <div><Link to={`/categories/${category}`} key={category}>{category}</Link></div>
               )
             })}
           </CategoryNav>
@@ -58,7 +61,7 @@ const Menu = ({homePageState}) => {
           <CompanyNav>
             {listOfCompanies.map((company) => {
               return (
-                <p key={company}>{company}</p>
+                <div><Link to={`/companies/${company}`} key={company}>{company}</Link></div>
               )
             })}  
           </CompanyNav>
