@@ -4,13 +4,21 @@ import styled from "styled-components";
 
 const Menu = ({homePageState}) => {
 
+  console.log(homePageState)
+  
   // assemble array of categories
   let listOfCategories = homePageState.categories.categories;
 
+  // assemble array of companies
+  let listOfCompanies = []
+
+  if (homePageState.companies.companies) {
+    listOfCompanies = Object.values(homePageState.companies.companies)
+    console.log(listOfCompanies); 
+  }
+
   const [categoryIsActive, setCategoryIsActive] = useState(false);
   const [companyIsActive, setCompanyIsActive] = useState(false);
-
-  const [displayCompanies, setDisplayCompanies] = useState([]);
 
   const onClickCategory = () => {
     setCategoryIsActive(!categoryIsActive);
@@ -38,9 +46,9 @@ const Menu = ({homePageState}) => {
         {categoryIsActive === true &&
           <CategoryNav>
             {listOfCategories.map((category) => {
-                return (
-                    <p>{category}</p>
-                )
+              return (
+                <p key={category}>{category}</p>
+              )
             })}
           </CategoryNav>
       } 
@@ -52,11 +60,11 @@ const Menu = ({homePageState}) => {
         </CompanyMenuItem>
         {companyIsActive === true &&
           <CompanyNav>
-            <ul>
-              <p>Item 1</p>
-              <p>Item 2</p>
-              <p>Continue mapping over company items</p>
-            </ul>
+            {listOfCompanies.map((company) => {
+              return (
+                <p key={company}>{company}</p>
+              )
+            })}  
           </CompanyNav>
       }
       </MenuItemContainer>
