@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 
 const ProductGrid = ({ products }) => {
-    // console.log(products);
+    console.log(products);
     return (
         <Wrapper>
             {products && products.map((elem, i)=>{
                 return (
                     <ItemContainerSmall 
-                        key={elem._id}
+                        element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}
                         stock={elem.numInStock}
