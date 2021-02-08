@@ -6,6 +6,7 @@ import bags from '../images/bags.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
+    const homePageState = useSelector(state => state)
     useEffect(()=>{
         if(theCategories){
         const item1=theCategories[Math.floor(Math.random() * 348) + 1];
@@ -23,6 +24,7 @@ const Home=()=>{
             </Header>
             <Body>
                 {/* <Image src={bags} /> */}
+                <Menu homePageState={homePageState}/>
                 <SiteName>
                     BluCast
                 </SiteName>
