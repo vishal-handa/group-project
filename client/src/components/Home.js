@@ -20,7 +20,6 @@ const Home=()=>{
     return (
         <Wrapper>
             <Header>
-                <Menu />
             </Header>
             <Body>
                 {/* <Image src={bags} /> */}

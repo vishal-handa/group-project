@@ -36,7 +36,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Wrapper>
-        <Menu />
+        <Menu homePageState={homePageState}/>
         <Switch>
 
           <Route exact path="/">
