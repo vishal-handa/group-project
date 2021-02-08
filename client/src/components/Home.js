@@ -6,25 +6,11 @@ import bags from '../images/bags.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
-    const homePageState = useSelector(state => state)
-    useEffect(()=>{
-        if(theCategories){
-        const item1=theCategories[Math.floor(Math.random() * 348) + 1];
-        const item2=theCategories[Math.floor(Math.random() * 348) + 1];
-        const item3=theCategories[Math.floor(Math.random() * 348) + 1];
-        const item4=theCategories[Math.floor(Math.random() * 348) + 1];
-        const item5=theCategories[Math.floor(Math.random() * 348) + 1];
-        console.log(item1)
-    }
-    },[theCategories])
-    // console.log(theCategories);
     return (
         <Wrapper>
-            <Header>
-            </Header>
             <Body>
                 {/* <Image src={bags} /> */}
-                <Menu homePageState={homePageState}/>
+                
                 <SiteName>
                     BluCast
                 </SiteName>
