@@ -44,6 +44,10 @@ const getCategories = (req, res) => {
     res.status(200).json({status:200, data:uniqueCategories})
 }
 
+
+const getItems = (req, res) => {
+    res.status(200).json({status:200, data:products})
+
 // Find products with the same category name: 
 const getProductsByCategory = (req,res) => {
     const category = req.params.category;
@@ -62,16 +66,19 @@ const getProductsByCompany = (req,res) => {
     const productsByCompanyArray = products.filter((item) => item.companyId === company._id )
     
     res.status(200).json({ status: 200, data: productsByCompanyArray });
+
 }
 
 module.exports = {
     getProducts,
     getSingleProduct,
     getCompanies,
+
     // getSingleCompany,
     getCategories,
     getProductsByCategory,
     getProductsByCompany,
+  getItems,
 };
 
 
