@@ -12,7 +12,7 @@ import AllProductPage from "./AllProductPage";
 
 import Home from "./Home";
 import Menu from "./Menu";
-//import Cart from "./Cart";
+import Cart from "./Cart";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -61,8 +61,10 @@ const App = () => {
           <Route path="/companies/:company">
             <SelectedCompanyPage />
           </Route>
+          <Route exact path="/cart">
+             <Cart />
+          </Route>
         </Switch>
-        {/* <Cart /> */}
       </Wrapper>
     </BrowserRouter>
   )
