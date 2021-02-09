@@ -46,7 +46,7 @@ const Menu = ({homePageState}) => {
           <CategoryNav>
             {listOfCategories.map((category) => {
               return (
-                <div><Link to={`/categories/${category}`} key={category}>{category}</Link></div>
+                <div><StyledLink to={`/categories/${category}`} key={category}>{category}</StyledLink></div>
               )
             })}
           </CategoryNav>
@@ -61,13 +61,19 @@ const Menu = ({homePageState}) => {
           <CompanyNav>
             {listOfCompanies.map((company) => {
               return (
-                <div><Link to={`/companies/${company}`} key={company}>{company}</Link></div>
+                <div><StyledLink to={`/companies/${company}`} key={company}>{company}</StyledLink></div>
               )
             })}  
           </CompanyNav>
       }
       </MenuItemContainer>
-
+      <MenuItemContainer>
+        <Link to="/cart">
+          <MenuItem>
+            <MenuText>🛒 Cart</MenuText>
+          </MenuItem>
+        </Link>
+      </MenuItemContainer>
     </Wrapper>
   )
 }
@@ -82,6 +88,7 @@ const Wrapper = styled.div`
 const MenuItemContainer = styled.div` 
   display: flex;
   position: relative;
+
 `;
 
 const CategoryNav = styled.nav` 
@@ -108,6 +115,7 @@ const CompanyNav = styled.nav`
   overflow-y: auto;
 `;
 
+
 const MenuItem = styled.button` 
   width: 150px;
 `;
@@ -122,6 +130,17 @@ const CompanyMenuItem = styled.button`
 
 const MenuText = styled.p` 
   font-size: 16px;
+`;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray;
+
+    /* &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    } */
 `;
 
 export default Menu;
