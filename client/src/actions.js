@@ -13,3 +13,7 @@ export const receiveCompanies = (companies) => ({
     companies,
 });
 
+export const addToCart = (item) => ({
+    type: "ADD_TO_CART",
+    item,
+});
