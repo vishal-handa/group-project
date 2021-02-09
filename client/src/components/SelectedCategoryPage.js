@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductGrid from "./ProductGrid";
 import Pagination from "./Pagination";
+import Banner from "./Banner";
+
 const SelectedCategoryPage = () => {
     const { category }=useParams();
     // console.log(category);
@@ -29,6 +31,7 @@ const SelectedCategoryPage = () => {
         <>
             {categoryProducts ? 
             <>
+                <Banner text={`${category}`} />
                 <ProductGrid products={currentProducts}/>
                 <Pagination 
                     productsPerPage={productsPerPage} 
