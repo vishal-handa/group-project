@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 //import ItemSmallPageTest from "./ItemSmallPageTest";
 import Pagination from "./Pagination";
 import ProductGrid from "./ProductGrid";
-import { useDispatch, useSelector } from 'react-redux';
-import {  receiveItems } from '../actions';
+import { useSelector } from 'react-redux';
+import Banner from "./Banner";
 
 const AllProductPage = () => {
-    const dispatch = useDispatch();
+
     const allTheProducts = useSelector(state=>state.items.items);
     const status = useSelector(state => state.items.status);
     //console.log(allTheProducts)
@@ -29,8 +29,7 @@ const AllProductPage = () => {
 
     return (
         <div>
-            <h1>All PRODUCTS</h1>
-            
+            <Banner text={"All Products"} />
             <ProductGrid products={currentProducts} />
             <Pagination 
                 productsPerPage={productsPerPage} 
