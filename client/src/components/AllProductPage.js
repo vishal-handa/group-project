@@ -12,15 +12,9 @@ const AllProductPage = () => {
     //console.log(allTheProducts)
     const [ currentPage, setCurrentPage ] = useState(1);
     const  productsPerPage = 16;
-   
-    useEffect(() => {
-        fetch('/products')
-        .then(res=>res.json())
-        .then(res=>dispatch(receiveItems(res.data)))
-    }, [])
     
     if(!allTheProducts || status === "loading") {
-         return <div>Loading</div>
+        return <div>Loading</div>
     }
     
     const indexOfLastProduct = currentPage * productsPerPage; // 16

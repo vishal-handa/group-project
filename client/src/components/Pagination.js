@@ -12,27 +12,41 @@ const Pagination = ({ productsPerPage, totalProducts, handlePageClicked }) => {
     //console.log(pageNum)
 
     return (
-      <PageBox>
-        {pageNum.map((page) => {
-            return (
-                <li key={page}>
-                    <a onClick={() => handlePageClicked(page)} >{page}</a>
-                    {/* could add href to access pages eventually */}
-                </li>
-            )
-        })}
-      </PageBox>
+        <PageBox>
+            {pageNum.map((page) => {
+                return (
+                    <PageNumber key={page}>
+                        <a onClick={() => handlePageClicked(page)} >{page}</a>
+                        {/* could add href to access pages eventually */}
+                    </PageNumber>
+                )
+            })}
+        </PageBox>
     )
 };
 
 const PageBox = styled.div`
     display: flex;
-    border: 1px solid gray;
-    & li {
-        list-style-type: none;
-        padding: 10px;
-        border-right: 1px solid gray;
+    justify-content:center;
+`;
+
+const PageNumber = styled.li`
+    list-style-type: none;
+    &>a{
+        background-color:inherit;
+        color:black;    
+        padding: 7px 13px 7px 13px;
+        transition: 0.3s;
+        &:hover{
+            cursor: pointer;
+            background-color:black;
+            color:white;
+        }
+        &.active{
+            border-bottom:3px solid gray;
+        }
     }
+    
 `;
 
 export default Pagination;
