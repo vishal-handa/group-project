@@ -13,6 +13,7 @@ import AllProductPage from "./AllProductPage";
 import Home from "./Home";
 import Menu from "./Menu";
 import Cart from "./Cart";
+import ItemContainerBig from './ItemContainerBig';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const App = () => {
             <AllProductPage />
           </Route>
           <Route path="/products/:id">
-            Individual product
+            <ItemContainerBig />
           </Route>
           <Route exact path="/categories">
             All of categories

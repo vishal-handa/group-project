@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ItemContainerBig from "./ItemContainerBig";
 
 const ItemContainerSmall = ({
@@ -15,13 +15,19 @@ const ItemContainerSmall = ({
     element_id,
 }) => {
 
-    // let history = useHistory();
+    let history = useHistory();
+
+    const [selectedItem, setSelectedItem] = useState();
 
     const onClick = () => {
         console.log(element_id);
-        // finish onClick function
+        history.push(`/products/${element_id}`);
+        return (
+            <ItemContainerBig />
+        )
     }
 
+ 
     return (
         <SmallItemView onClick={onClick}>
             <ImageWrapper>
