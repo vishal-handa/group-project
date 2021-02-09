@@ -41,7 +41,8 @@ const getCategories = (req, res) => {
     });
     const uniqueCategories = categoryArray.filter((item, i, ar) => ar.indexOf(item) === i);
     // console.log(unique);
-    res.status(200).json({status:200, data:uniqueCategories})
+    const uniqueCategoriesArray = uniqueCategories.sort();
+    res.status(200).json({status:200, data:uniqueCategoriesArray})
 }
 
 // Find products with the same category name: 
