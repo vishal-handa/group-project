@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
 import { useHistory } from "react-router-dom";
 import ItemContainerBig from "./ItemContainerBig";
+import { addToCart } from "../actions";
+import { useDispatch } from 'react-redux';
 
 const ItemContainerSmall = ({
+    item,
     productName,
     imageSRC,
     stock,
@@ -14,9 +17,8 @@ const ItemContainerSmall = ({
     location,
     element_id,
 }) => {
-
+    const dispatch = useDispatch();
     let history = useHistory();
-
     const [selectedItem, setSelectedItem] = useState();
 
     const onClick = () => {
@@ -27,6 +29,9 @@ const ItemContainerSmall = ({
         )
     }
 
+    const handleAddToCart = (item) => {
+        dispatch(addToCart(item));
+    }
  
     return (
         <SmallItemView onClick={onClick}>
@@ -35,7 +40,7 @@ const ItemContainerSmall = ({
             </ImageWrapper>
             {element_id}
             <Title>{productName}</Title>
-            <Button>Add to Cart</Button>
+            <Button onClick={() => handleAddToCart(item)}>Add to Cart</Button>
         </SmallItemView>
     )
 };

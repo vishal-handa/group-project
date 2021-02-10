@@ -9,6 +9,7 @@ const ProductGrid = ({ products }) => {
             {products && products.map((elem, i)=>{
                 return (
                     <ItemContainerSmall 
+                        item={elem}
                         element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}
