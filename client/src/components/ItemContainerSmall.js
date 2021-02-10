@@ -16,7 +16,9 @@ const ItemContainerSmall = ({
     price,
     location,
     element_id,
+    handleTarget
 }) => {
+    // console.log(stock);
     const dispatch = useDispatch();
     let history = useHistory();
     const [selectedItem, setSelectedItem] = useState();
@@ -36,12 +38,12 @@ const ItemContainerSmall = ({
             method: "POST", 
             body: JSON.stringify({item}),
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
+                Accept: "application/json",
+                "Content-Type": "application/json",
             },
-          })
-          .then((res) => res.json())
-          .then(data => console.log(data))
+        })
+            .then((res) => res.json())
+            .then(data => console.log(data))
     
         fetch('/products')
             .then(res=>res.json())
@@ -51,8 +53,9 @@ const ItemContainerSmall = ({
     const handleAddToCart = (item) => {
         updateQuantity(item);
         dispatch(addToCart(item));
+        
     }
- 
+
     return (
         <SmallItemView>
             <OnClickWrapper onClick={onClick}>
@@ -62,7 +65,14 @@ const ItemContainerSmall = ({
                 {element_id}
                 <Title>{productName}</Title>
             </OnClickWrapper>
-            <Button onClick={() => handleAddToCart(item)} disabled={stock<0}>Add to Cart</Button>
+            <Button onClick={(ev) => {
+                handleAddToCart(item);
+                handleTarget(ev);
+            }} 
+                    disabled={stock===0}
+                    id={"cartButton"}>
+                        Add to Cart
+            </Button>
         </SmallItemView>
     )
 };
