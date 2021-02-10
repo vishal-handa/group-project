@@ -34,8 +34,8 @@ const ItemContainerSmall = ({
     }
  
     return (
-        <SmallItemView onClick={onClick}>
-            <ImageWrapper>
+        <SmallItemView>
+            <ImageWrapper onClick={onClick}>
                 <Image src={imageSRC}/>
             </ImageWrapper>
             {element_id}
@@ -63,6 +63,7 @@ const ImageWrapper = styled.div`
     border-bottom: 1px solid gray;
     display:flex;
     justify-content:center;
+    border: 1px solid blue;
 `;
 
 const Image = styled.img`
