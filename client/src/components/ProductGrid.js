@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 
 const ProductGrid = ({ products }) => {
-    console.log(products);
+    // console.log(products);
     return (
         <Wrapper>
             {products && products.map((elem, i)=>{
