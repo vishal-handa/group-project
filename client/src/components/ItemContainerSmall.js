@@ -22,7 +22,7 @@ const ItemContainerSmall = ({
     const [selectedItem, setSelectedItem] = useState();
 
     const onClick = () => {
-        console.log(element_id);
+        // console.log(element_id);
         history.push(`/products/${element_id}`);
         return (
             <ItemContainerBig />
@@ -42,7 +42,7 @@ const ItemContainerSmall = ({
                 {element_id}
                 <Title>{productName}</Title>
             </OnClickWrapper>
-            <Button onClick={() => handleAddToCart(item)}>Add to Cart</Button>
+            <Button onClick={() => handleAddToCart(item)} disabled={stock===0}>Add to Cart</Button>
         </SmallItemView>
     )
 };

@@ -66,6 +66,26 @@ const getProductsByCompany = (req,res) => {
 
 }
 
+const updateProductStock = (req, res) => {
+    const productId=res.params.id;
+    const productBody=req.body.product;
+    const oldProduct=products.find(elem=>elem._id===productId);
+    if(productBody &&
+        productBody.name===oldProduct.name &&
+        productBody.price===oldProduct.price &&
+        productBody.body_location===oldProduct.body_location &&
+        productBody.category===oldProduct.category
+    ){
+        const index=products.indexOf(oldProduct);
+        const updatedProduct={...oldProduct, numInStock:productBody.numInStock};
+        items[index]=updatedProduct;
+        res.status(200).json({status:200, data:updatedProduct})
+    }
+    else{
+        res.status(400).json({status:400, data:productBody})
+    }
+}
+
 module.exports = {
     getProducts,
     getSingleProduct,
@@ -74,6 +94,7 @@ module.exports = {
     getCategories,
     getProductsByCategory,
     getProductsByCompany,
+    updateProductStock,
 };
 
 

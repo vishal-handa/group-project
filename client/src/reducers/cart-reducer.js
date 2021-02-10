@@ -1,17 +1,16 @@
-const initialState={
-    status:'idle',
-    cartItems: [],
-}
+const initialState={}
 
 export default function cartReducer(state = initialState, action){
     switch (action.type){
         case "ADD_TO_CART" :{
-           return {
-                ...state,
-                cartItems: [
-                    ...state.cartItems, action.item
-                ]
-           }
+            console.log(action)
+            return {
+                    ...state,
+                    [action.item._id]:{
+                        ...action.item,
+                        numInStock: state[action.item._id] ? state[action.item._id].numInStock+1 : 1,
+                    }
+            }
         }
         default:{
             return state;

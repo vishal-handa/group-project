@@ -12,6 +12,7 @@ const {
   getCategories,
   getProductsByCategory,
   getProductsByCompany,
+  updateProductStock,
 } = require("./handlers");
 
 
@@ -44,5 +45,6 @@ express()
   .get('/categories', getCategories)
   .get("/categories/:category", getProductsByCategory)
   .get("/companies/:company", getProductsByCompany)
+  .post("/updateProduct/:id", updateProductStock)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
