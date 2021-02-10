@@ -34,12 +34,14 @@ const ItemContainerSmall = ({
     }
  
     return (
-        <SmallItemView onClick={onClick}>
-            <ImageWrapper>
-                <Image src={imageSRC}/>
-            </ImageWrapper>
-            {element_id}
-            <Title>{productName}</Title>
+        <SmallItemView>
+            <OnClickWrapper onClick={onClick}>
+                <ImageWrapper >
+                    <Image src={imageSRC}/>
+                </ImageWrapper>
+                {element_id}
+                <Title>{productName}</Title>
+            </OnClickWrapper>
             <Button onClick={() => handleAddToCart(item)}>Add to Cart</Button>
         </SmallItemView>
     )
@@ -56,6 +58,11 @@ const SmallItemView = styled.div`
     width: 225px;
     height: 320px;
     margin-bottom:20px;
+`;
+
+const OnClickWrapper = styled.div` 
+    display: flex;
+    flex-direction: column;
 `;
 
 const ImageWrapper = styled.div`
