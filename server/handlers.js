@@ -70,7 +70,7 @@ const updateProductStock = (req, res) => {
     const productId=Number(req.params.id);
     //console.log(productId)
     const productBody = req.body;
-    //console.log(productBody)
+    console.log(productBody)
     const oldProduct=products.find(elem=>elem._id===productId);
     //console.log(oldProduct)
     if(productBody.item.name === oldProduct.name 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 
-const ProductGrid = ({ products }) => {
+const ProductGrid = ({ products, handleTarget }) => {
     // console.log(products);
     return (
         <Wrapper>
@@ -18,6 +18,7 @@ const ProductGrid = ({ products }) => {
                         companyId={elem.companyId}
                         price={elem.price}
                         location={elem.body_location}
+                        handleTarget={handleTarget}
                     />
                 )
             })}
