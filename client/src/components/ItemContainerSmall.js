@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useHistory } from "react-router-dom";
 import ItemContainerBig from "./ItemContainerBig";
-import { addToCart } from "../actions";
+import { addToCart, receiveItems } from "../actions";
 import { useDispatch } from 'react-redux';
 
 const ItemContainerSmall = ({
@@ -29,7 +29,27 @@ const ItemContainerSmall = ({
         )
     }
 
+    const updateQuantity = (item) => {
+        //console.log(item)
+        //console.log(element_id)
+        fetch(`/updateProduct/${element_id}`, {
+            method: "POST", 
+            body: JSON.stringify({item}),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => res.json())
+          .then(data => console.log(data))
+    
+        fetch('/products')
+            .then(res=>res.json())
+            .then(res=>dispatch(receiveItems(res.data)))
+    }
+
     const handleAddToCart = (item) => {
+        updateQuantity(item);
         dispatch(addToCart(item));
     }
  
@@ -42,7 +62,7 @@ const ItemContainerSmall = ({
                 {element_id}
                 <Title>{productName}</Title>
             </OnClickWrapper>
-            <Button onClick={() => handleAddToCart(item)} disabled={stock===0}>Add to Cart</Button>
+            <Button onClick={() => handleAddToCart(item)} disabled={stock<0}>Add to Cart</Button>
         </SmallItemView>
     )
 };
