@@ -7,8 +7,8 @@ export default function cartReducer(state = initialState, action){
             return {
                     ...state,
                     [action.item._id]:{
-                        ...action.item,
-                        numInStock: state[action.item._id] ? state[action.item._id].numInStock+1 : 1,
+                        ...action.item, 
+                        numInCart: state[action.item._id] ? state[action.item._id].numInCart + 1 : 1,
                     }
             }
         }
