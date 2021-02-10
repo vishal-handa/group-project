@@ -67,19 +67,18 @@ const getProductsByCompany = (req,res) => {
 }
 
 const updateProductStock = (req, res) => {
-    const productId=res.params.id;
-    const productBody=req.body.product;
+    const productId=Number(req.params.id);
+    //console.log(productId)
+    const productBody = req.body;
+    //console.log(productBody)
     const oldProduct=products.find(elem=>elem._id===productId);
-    if(productBody &&
-        productBody.name===oldProduct.name &&
-        productBody.price===oldProduct.price &&
-        productBody.body_location===oldProduct.body_location &&
-        productBody.category===oldProduct.category
+    //console.log(oldProduct)
+    if(productBody.item.name === oldProduct.name 
     ){
         const index=products.indexOf(oldProduct);
-        const updatedProduct={...oldProduct, numInStock:productBody.numInStock};
-        items[index]=updatedProduct;
-        res.status(200).json({status:200, data:updatedProduct})
+        const updatedProduct={...oldProduct, numInStock: oldProduct.numInStock - 1};
+        products[index]=updatedProduct;
+        res.status(200).json({status:200, data: updatedProduct})
     }
     else{
         res.status(400).json({status:400, data:productBody})
