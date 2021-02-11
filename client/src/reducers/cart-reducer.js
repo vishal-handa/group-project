@@ -14,7 +14,7 @@ export default function cartReducer(state = initialState, action){
         }
 
         case "REMOVE_FROM_CART" :{
-            console.log(action)
+            // console.log(action)
             const removeItemId = action.item._id;
             const stateCopy = { ...state };
             delete stateCopy[removeItemId];

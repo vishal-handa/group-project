@@ -17,7 +17,7 @@ const Cart = () => {
             <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
             <CartContainer>
                 {selectedItem && selectedItem.map(elem=>{
-                    return <CartItem item={elem}/>
+                    return <CartItem item={elem} key={elem._id}/>
                 })}
             </CartContainer>
         </Wrapper>
