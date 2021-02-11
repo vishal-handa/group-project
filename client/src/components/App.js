@@ -19,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const homePageState = useSelector(state=>state);
-  // console.log(homePageState);
+  console.log(homePageState);
 
   useEffect(() => {
     fetch('/categories')

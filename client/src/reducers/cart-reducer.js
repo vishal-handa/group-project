@@ -1,9 +1,9 @@
 const initialState={}
 
 export default function cartReducer(state = initialState, action){
-    switch (action.type){
+    switch (action.type) {
         case "ADD_TO_CART" :{
-            console.log(action)
+            // console.log(action)
             return {
                     ...state,
                     [action.item._id]:{
@@ -12,8 +12,19 @@ export default function cartReducer(state = initialState, action){
                     }
             }
         }
+
+        case "REMOVE_FROM_CART" :{
+            // console.log(action)
+            const removeItemId = action.item.id;
+            const stateCopy = { ...state };
+            delete stateCopy[removeItemId];
+            return stateCopy;       
+        }
+
         default:{
             return state;
         }
     }
 }
+
+export const getSelectedItems = (state) => Object.values(state);
