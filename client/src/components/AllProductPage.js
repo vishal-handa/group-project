@@ -5,7 +5,7 @@ import ProductGrid from "./ProductGrid";
 import { useSelector } from 'react-redux';
 import Banner from "./Banner";
 
-const AllProductPage = () => {
+const AllProductPage = ({handleTarget}) => {
 
     const allTheProducts = useSelector(state=>state.items.items);
     const status = useSelector(state => state.items.status);
@@ -30,7 +30,9 @@ const AllProductPage = () => {
     return (
         <div>
             <Banner text={"All Products"} />
-            <ProductGrid products={currentProducts} />
+            <ProductGrid products={currentProducts} 
+                        handleTarget={handleTarget}
+            />
             <Pagination 
                 productsPerPage={productsPerPage} 
                 totalProducts={allTheProducts.length} 

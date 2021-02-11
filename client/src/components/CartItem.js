@@ -3,17 +3,20 @@ import styled from "styled-components";
 import { removeFromCart } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = (item) => {
+const CartItem = ({item}) => {
     const dispatch = useDispatch();
-
+    console.log(item);
     return (
         <Wrapper>
         {/* <ItemImage>Image</ItemImage> */}
             <ItemInfoContainer>
-                <ItemName>Item name</ItemName>
-                <ItemQuantity>Item quantity</ItemQuantity>
-                <ItemPrice>Item price</ItemPrice>
-            <RemoveItem onClick={() => dispatch(removeFromCart(item.item))}>Remove item</RemoveItem>
+                <ItemImage src={item.imageSrc}/>
+                <div>
+                    <ItemName>{item.name}</ItemName>
+                    <ItemQuantity>{item.numInCart}</ItemQuantity>
+                </div>
+                <ItemPrice>{item.price}</ItemPrice>
+            <RemoveItem onClick={() => dispatch(removeFromCart(item))}>Remove item</RemoveItem>
             </ItemInfoContainer>
         </Wrapper>
     )
@@ -42,6 +45,7 @@ const ItemName = styled.p`
     margin: 5px 0px;
     font-size: 14px;
     font-family: Montserrat;
+    max-width:400px;
 `;
 
 // make this an input field so customers can increase quantity

@@ -4,11 +4,19 @@ import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 import { addToCart, receiveItems } from "../actions";
 
-const ItemContainerBig = ({handleTarget, stock}) => {
+const ItemContainerBig = () => {
     const { id } = useParams();
     const [selectedItem, setSelectedItem] = useState({});
+    const [theEvent, setTheEvent] = useState(0);
     const dispatch = useDispatch();
-    console.log(handleTarget, stock);
+    const stock=selectedItem.numInStock;
+    // console.log(stock);
+    const handleTarget=(ev)=>{
+        const clickId=ev.target.id;
+        if(clickId==="cartButton"){
+            setTheEvent(theEvent+1);
+        }
+    }
 
     useEffect(() => {
         fetch(`/products/${id}`, {
@@ -18,7 +26,7 @@ const ItemContainerBig = ({handleTarget, stock}) => {
         .then(data => {
             setSelectedItem(data.data[0]);
         })
-    }, []);
+    }, [theEvent]);
 
     const updateQuantity = (item) => {
         //console.log(item)
