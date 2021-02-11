@@ -79,7 +79,9 @@ const ItemContainerSmall = ({
                         Add to Cart
             </Button>
             : 
-            <Button>Out of Stock</Button>
+            <OutOfStockTextContainer>
+                <OutOfStockText>Out of Stock</OutOfStockText>
+            </OutOfStockTextContainer>
             }
 
         </SmallItemView>
@@ -146,7 +148,25 @@ const Button=styled.button`
     padding: 8px;
     font-size: 16px;
     font-weight: 600;
+    font-family: Montserrat;
     cursor: pointer;
+`;
+
+const OutOfStockTextContainer = styled.div`
+    display: block;
+    width: 100%;
+    background: black;
+    border: none;
+    margin-bottom: 8px;
+`;
+
+const OutOfStockText = styled.p` 
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Montserrat;
+    color: white;
+    padding: 8px;
+    margin: 0;
 `;
 
 export default ItemContainerSmall;
