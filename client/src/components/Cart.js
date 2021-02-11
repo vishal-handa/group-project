@@ -2,32 +2,26 @@ import React from "react";
 import Banner from "./Banner";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CartItem from "./CartItem";
+import getSelectedItems from "../reducers/cart-reducer";
 
 const Cart = () => {
+
+    const selectedItem = useSelector((state) => state.cart);
+
+    console.log(getSelectedItems(selectedItem));
+
+    // const selectedItem = useSelector(getSelectedItems);
+    // console.log(cartState);
 
     return (
         <Wrapper>
             <Banner text={"Your Cart"} />
             <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
             <CartContainer>
-                <CartItem>
-                    {/* <ItemImage>Image</ItemImage> */}
-                    <ItemInfoContainer>
-                        <ItemName>Item name</ItemName>
-                        <ItemQuantity>Item quantity</ItemQuantity>
-                        <ItemPrice>Item price</ItemPrice>
-                    </ItemInfoContainer>
-                </CartItem>
-
-                <CartItem>
-                    {/* <ItemImage>Image</ItemImage> */}
-                    <ItemInfoContainer>
-                        <ItemName>Item name</ItemName>
-                        <ItemQuantity>Item quantity</ItemQuantity>
-                        <ItemPrice>Item price</ItemPrice>
-                    </ItemInfoContainer>
-                </CartItem>
-
+                <CartItem  selectedItem={selectedItem} />
+                <CartItem selectedItem={selectedItem} />
             </CartContainer>
         </Wrapper>
     )
@@ -57,11 +51,6 @@ const CartContainer = styled.div`
         3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
         3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
         3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
-`;
-
-const CartItem = styled.div` 
-    display: flex;
-    padding: 10px;
 `;
 
 const ItemInfoContainer = styled.div`
