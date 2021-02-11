@@ -59,10 +59,17 @@ const ItemContainerSmall = ({
         <SmallItemView>
             <OnClickWrapper onClick={()=>onClick}>
                 <ImageWrapper >
+
+                    {stock > 0 ? 
                     <Image src={imageSRC}/>
+                    : 
+                    <OutOfStock src={imageSRC}/>
+                }
                 </ImageWrapper>
                 <Title>{productName}</Title>
             </OnClickWrapper>
+
+            {stock > 0 ?     
             <Button onClick={(ev) => {
                 handleAddToCart(item);
                 handleTarget(ev);
@@ -71,6 +78,10 @@ const ItemContainerSmall = ({
                     id={"cartButton"}>
                         Add to Cart
             </Button>
+            : 
+            <Button>Out of Stock</Button>
+            }
+
         </SmallItemView>
     )
 };
@@ -106,6 +117,15 @@ const Image = styled.img`
     height: 180px;
     margin:0;
     padding:8px;
+`;
+
+const OutOfStock = styled.img` 
+    display: block;
+    max-width: 100%;
+    height: 180px;
+    margin:0;
+    padding:8px;
+    opacity: 25%;
 `;
 
 const Title = styled.p`
