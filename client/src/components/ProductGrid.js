@@ -6,10 +6,11 @@ const ProductGrid = ({ products, handleTarget }) => {
     // console.log(products);
     return (
         <Wrapper>
-            {products && products.map((elem, i)=>{
+            {products && products.map((elem)=>{
                 return (
                     <ItemContainerSmall 
                         item={elem}
+                        key={elem._id}
                         element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}

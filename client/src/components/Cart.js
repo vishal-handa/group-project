@@ -4,24 +4,21 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import getSelectedItems from "../reducers/cart-reducer";
+// import getSelectedItems from "../reducers/cart-reducer";
 
 const Cart = () => {
 
-    const selectedItem = useSelector((state) => state.cart);
-
-    console.log(getSelectedItems(selectedItem));
-
-    // const selectedItem = useSelector(getSelectedItems);
-    // console.log(cartState);
+    const selectedItem=Object.values(useSelector(state=>state.cart));
+    console.log(selectedItem);
 
     return (
         <Wrapper>
             <Banner text={"Your Cart"} />
             <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
             <CartContainer>
-                <CartItem  selectedItem={selectedItem} />
-                <CartItem selectedItem={selectedItem} />
+                {selectedItem && selectedItem.map(elem=>{
+                    return <CartItem item={elem}/>
+                })}
             </CartContainer>
         </Wrapper>
     )

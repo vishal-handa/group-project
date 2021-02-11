@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import { addToCart, receiveItems } from "../actions";
 
-const ItemContainerBig = () => {
-
+const ItemContainerBig = ({handleTarget, stock}) => {
     const { id } = useParams();
-
     const [selectedItem, setSelectedItem] = useState({});
+    const dispatch = useDispatch();
+    console.log(handleTarget, stock);
 
     useEffect(() => {
         fetch(`/products/${id}`, {
@@ -18,17 +20,48 @@ const ItemContainerBig = () => {
         })
     }, []);
 
+    const updateQuantity = (item) => {
+        //console.log(item)
+        //console.log(element_id)
+        fetch(`/updateProduct/${id}`, {
+            method: "POST", 
+            body: JSON.stringify({item}),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+    
+        fetch('/products')
+            .then(res=>res.json())
+            .then(res=>dispatch(receiveItems(res.data)))
+    }
+
+    const handleAddToCart = (item) => {
+        updateQuantity(item);
+        dispatch(addToCart(item));
+        
+    }
+
     return (
-      <Wrapper>
-        <BigItemView>
-            <ImageWrapper>
-                <Image src={selectedItem.imageSrc}/>
-            </ImageWrapper>
-            <Title>{selectedItem.name}</Title>
-            <Price>{selectedItem.price}</Price>
-            <Button>Add to Cart</Button>
-        </BigItemView>
-      </Wrapper>
+        <Wrapper>
+            <BigItemView>
+                <ImageWrapper>
+                    <Image src={selectedItem.imageSrc}/>
+                </ImageWrapper>
+                <Title>{selectedItem.name}</Title>
+                <Price>{selectedItem.price}</Price>
+                <Button onClick={(ev) => {
+                    handleAddToCart(selectedItem);
+                    handleTarget(ev);
+                }} 
+                        disabled={stock===0}
+                        id={"cartButton"}>
+                            Add to Cart
+                </Button>
+            </BigItemView>
+        </Wrapper>
     )
 }
 

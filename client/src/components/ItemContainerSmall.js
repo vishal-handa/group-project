@@ -27,7 +27,7 @@ const ItemContainerSmall = ({
         // console.log(element_id);
         history.push(`/products/${element_id}`);
         return (
-            <ItemContainerBig />
+            <ItemContainerBig handleTarget={handleTarget} stock={stock}/>
         )
     }
 
@@ -43,7 +43,6 @@ const ItemContainerSmall = ({
             },
         })
             .then((res) => res.json())
-            .then(data => console.log(data))
     
         fetch('/products')
             .then(res=>res.json())
@@ -58,11 +57,10 @@ const ItemContainerSmall = ({
 
     return (
         <SmallItemView>
-            <OnClickWrapper onClick={onClick}>
+            <OnClickWrapper onClick={()=>onClick}>
                 <ImageWrapper >
                     <Image src={imageSRC}/>
                 </ImageWrapper>
-                {element_id}
                 <Title>{productName}</Title>
             </OnClickWrapper>
             <Button onClick={(ev) => {
