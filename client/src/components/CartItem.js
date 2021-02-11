@@ -3,15 +3,8 @@ import styled from "styled-components";
 import { removeFromCart } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ selectedItem }) => {
-
+const CartItem = (item) => {
     const dispatch = useDispatch();
-
-    console.log(selectedItem);
-
-
-    // console.log(selectedItem(state));
-
 
     return (
         <Wrapper>
@@ -20,7 +13,7 @@ const CartItem = ({ selectedItem }) => {
                 <ItemName>Item name</ItemName>
                 <ItemQuantity>Item quantity</ItemQuantity>
                 <ItemPrice>Item price</ItemPrice>
-            {/* <RemoveItem onClick={() => dispatch(removeFromCart(selectedItem[6543]))}>Remove item</RemoveItem> */}
+            <RemoveItem onClick={() => dispatch(removeFromCart(item.item))}>Remove item</RemoveItem>
             </ItemInfoContainer>
         </Wrapper>
     )

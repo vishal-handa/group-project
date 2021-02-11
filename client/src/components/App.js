@@ -9,7 +9,6 @@ import SelectedCategoryPage from "./SelectedCategoryPage";
 
 import AllProductPage from "./AllProductPage";
 
-
 import Home from "./Home";
 import Menu from "./Menu";
 import Cart from "./Cart";
@@ -19,7 +18,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const homePageState = useSelector(state=>state);
-  console.log(homePageState);
+  // console.log(homePageState);
 
   useEffect(() => {
     fetch('/categories')
@@ -37,8 +36,8 @@ const App = () => {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Wrapper>
+    <Wrapper>
+      <BrowserRouter>
         <Menu homePageState={homePageState}/>
         <Switch>
           <Route exact path="/">
@@ -63,11 +62,12 @@ const App = () => {
             <SelectedCompanyPage />
           </Route>
           <Route exact path="/cart">
-             <Cart />
+            {homePageState.cart && <Cart />}
           </Route>
         </Switch>
-      </Wrapper>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Wrapper>
+    
   )
 
 }
