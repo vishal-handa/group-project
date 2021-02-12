@@ -67,16 +67,17 @@ const getProductsByCompany = (req,res) => {
 }
 
 const updateProductStock = (req, res) => {
-    const productId=Number(req.params.id);
+    const productId = parseInt(req.params.id);
     //console.log(productId)
     const productBody = req.body;
     // console.log(productBody)
+    // console.log(productBody.item.numInCart)
     const oldProduct=products.find(elem=>elem._id===productId);
     //console.log(oldProduct)
     if(productBody.item.name === oldProduct.name 
     ){
         const index=products.indexOf(oldProduct);
-        const updatedProduct={...oldProduct, numInStock: oldProduct.numInStock - 1};
+        const updatedProduct={...oldProduct, numInStock: oldProduct.numInStock - parseInt(productBody.item.numInCart)};
         products[index]=updatedProduct;
         res.status(200).json({status:200, data: updatedProduct})
     }

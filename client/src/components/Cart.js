@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Banner from "./Banner";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
-// import getSelectedItems from "../reducers/cart-reducer";
+import { receiveItems } from "../actions";
 
 const Cart = () => {
-
+    const dispatch = useDispatch();
     const [hasCheckedOut, setHasCheckedOut] = useState(false);
 
     const selectedItem=Object.values(useSelector(state=>state.cart));
@@ -16,11 +16,30 @@ const Cart = () => {
     const handleCheckout = () => {
         setHasCheckedOut(true);
     }
+    //console.log(hasCheckedOut);
 
-    console.log(hasCheckedOut);
+    const updateQuantity = (selectedItem) => {
+        selectedItem.map((item) => {
+            fetch(`/updateProduct/${item._id}`, {
+                method: "POST", 
+                body: JSON.stringify({item}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((res) => res.json())
+                .then(data => console.log(data))
+        })
+        fetch('/products')
+        .then(res=>res.json())
+        .then(res=>dispatch(receiveItems(res.data)))
+    };
 
-    const handlePurchase = (event) => {
-        alert("Your purchase was successful!")
+    const handlePurchase = (selectedItem) => {
+        updateQuantity(selectedItem);
+        console.log("Your purchase was successful!")
+        //alert("Your purchase was successful!")
     }
 
     return (
@@ -32,7 +51,7 @@ const Cart = () => {
                     return <CartItem item={elem} key={elem._id}/>
                 })}
             </CartContainer>
-            <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
+            <CheckoutButton onClick={() => handleCheckout()}>Checkout</CheckoutButton>
 
             {hasCheckedOut ?
                 <CheckoutDiv>
@@ -61,7 +80,7 @@ const Cart = () => {
                     />
                     </Input>
                     <SubmitButton
-                    onClick={handlePurchase}
+                    onClick={()=>handlePurchase(selectedItem)}
                     >Complete Your Purchase 
                     </SubmitButton>
                 </CheckoutDiv>
