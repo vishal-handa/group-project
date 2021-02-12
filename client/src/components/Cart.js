@@ -48,10 +48,10 @@ const Cart = () => {
             <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
             <CartContainer>
                 {selectedItem && selectedItem.map(elem=>{
-                    return <CartItem item={elem} key={elem._id}/>
+                    return <CartItem item={elem} key={elem._id} setHasCheckedOut={setHasCheckedOut}/>
                 })}
             </CartContainer>
-            <CheckoutButton onClick={() => handleCheckout()}>Checkout</CheckoutButton>
+            <CheckoutButton onClick={() => handleCheckout()} disabled={selectedItem.length<1}>Checkout</CheckoutButton>
 
             {hasCheckedOut ?
                 <CheckoutDiv>
