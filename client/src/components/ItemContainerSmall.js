@@ -55,26 +55,19 @@ const ItemContainerSmall = ({
         
     }
 
+    // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"), 
+    // and opacity based on whether item is available or not
+
     return (
         <SmallItemView>
-            <OnClickWrapper onClick={()=>onClick}>
+            <OnClickWrapper onClick={onClick}>
                 <ImageWrapper >
-
-                    {stock > 0 ? 
-                    <Image src={imageSRC}/>
-                    : 
-                    <OutOfStock src={imageSRC}/>
-                }
+                    {stock > 0 ? <Image src={imageSRC}/> : <OutOfStock src={imageSRC}/>}
                 </ImageWrapper>
                 <Title>{productName}</Title>
             </OnClickWrapper>
-
-            {stock > 0 ? 
-                <Price>{price}</Price>
-                :
-                <Padding />
-            }
-
+            {stock > 0 ? <Price>{price}</Price> : <Padding />}
+            
             {stock > 0 ?     
             <Button onClick={(ev) => {
                 handleAddToCart(item);
