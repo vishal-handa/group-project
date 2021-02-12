@@ -69,6 +69,12 @@ const ItemContainerSmall = ({
                 <Title>{productName}</Title>
             </OnClickWrapper>
 
+            {stock > 0 ? 
+                <Price>{price}</Price>
+                :
+                <Padding />
+            }
+
             {stock > 0 ?     
             <Button onClick={(ev) => {
                 handleAddToCart(item);
@@ -98,18 +104,18 @@ const SmallItemView = styled.div`
     text-align: center;
     width: 225px;
     height: 320px;
-    margin-bottom:20px;
 `;
 
 const OnClickWrapper = styled.div` 
     display: flex;
     flex-direction: column;
+    height: 260px;
 `;
 
 const ImageWrapper = styled.div`
     overflow: hidden;
     border-bottom: 1px solid gray;
-    display:flex;
+    display: flex;
     justify-content:center;
 `;
 
@@ -117,8 +123,20 @@ const Image = styled.img`
     display: block;
     max-width: 100%;
     height: 180px;
-    margin:0;
+    margin: 0;
     padding:8px;
+`;
+
+const Price = styled.p`
+    font-size: 16px;
+    font-family: Montserrat;
+    margin: 0px 0px 10px 0px;
+    padding: 0;
+    height: 15px;
+`;
+
+const Padding = styled.div`
+    height: 25px;
 `;
 
 const OutOfStock = styled.img` 
@@ -132,11 +150,10 @@ const OutOfStock = styled.img`
 
 const Title = styled.p`
     margin: 0;
-    margin-bottom: 14px;
     margin-top: 8px;
     font-size: 12px;
-    min-height:60px;
-    font-family:Montserrat;
+    min-height: 40px;
+    font-family: Montserrat;
 `;
 
 const Button=styled.button`
