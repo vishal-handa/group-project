@@ -48,18 +48,25 @@ const ItemContainerBig = () => {
 
     const handleAddToCart = (item) => {
         updateQuantity(item);
-        dispatch(addToCart(item));
-        
+        dispatch(addToCart(item));        
     }
+
+    // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"), 
+    // and opacity based on whether item is available or not
 
     return (
         <Wrapper>
             <BigItemView>
                 <ImageWrapper>
-                    <Image src={selectedItem.imageSrc}/>
+                    {selectedItem.numInStock > 0 ?
+                    <Image src={selectedItem.imageSrc}/> : <OutOfStock src={selectedItem.imageSrc} />
+                    }
                 </ImageWrapper>
                 <Title>{selectedItem.name}</Title>
-                <Price>{selectedItem.price}</Price>
+
+                {selectedItem.numInStock > 0 ? <Price>{selectedItem.price}</Price> : <Padding />}
+
+                {selectedItem.numInStock > 0 ?
                 <Button onClick={(ev) => {
                     handleAddToCart(selectedItem);
                     handleTarget(ev);
@@ -68,6 +75,12 @@ const ItemContainerBig = () => {
                         id={"cartButton"}>
                             Add to Cart
                 </Button>
+                : 
+                <OutOfStockTextContainer>
+                    <OutOfStockText>Out of Stock</OutOfStockText>
+                </OutOfStockTextContainer>
+                }
+
             </BigItemView>
         </Wrapper>
     )
@@ -105,8 +118,17 @@ const Image = styled.img`
     display: block;
     max-width: 100%;
     height: 300px;
+    margin: 0;
+    padding: 8px;
+`;
+
+const OutOfStock = styled.img` 
+    display: block;
+    max-width: 100%;
+    height: 300px;
     margin:0;
-    padding:8px;
+    padding: 8px;
+    opacity: 25%;
 `;
 
 const Title = styled.p`
@@ -124,6 +146,10 @@ const Price = styled.p`
     font-family: Montserrat;
 `;
 
+const Padding = styled.div` 
+    height: 25px;
+`;
+
 const Button=styled.button`
     display: block;
     width: 100%;
@@ -131,9 +157,26 @@ const Button=styled.button`
     color: white;
     border: none;
     padding: 8px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     cursor: pointer;
+`;
+
+const OutOfStockTextContainer = styled.div`
+    display: block;
+    width: 100%;
+    background: black;
+    border: none;
+    margin-bottom: 8px;
+`;
+
+const OutOfStockText = styled.p` 
+    font-size: 18px;
+    font-weight: 600;
+    font-family: Montserrat;
+    color: white;
+    padding: 8px;
+    margin: 0;
 `;
 
 export default ItemContainerBig;
