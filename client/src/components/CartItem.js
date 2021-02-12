@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { removeFromCart } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({item}) => {
+const CartItem = ({item, setHasCheckedOut}) => {
     const dispatch = useDispatch();
     console.log(item);
     return (
@@ -16,7 +16,13 @@ const CartItem = ({item}) => {
                     <ItemQuantity>{item.numInCart}</ItemQuantity>
                 </div>
                 <ItemPrice>{item.price}</ItemPrice>
-            <RemoveItem onClick={() => dispatch(removeFromCart(item))}>Remove item</RemoveItem>
+            <RemoveItem onClick={() => {
+                dispatch(removeFromCart(item));
+                setHasCheckedOut(false);
+                }}
+            >
+                Remove item
+            </RemoveItem>
             </ItemInfoContainer>
         </Wrapper>
     )
