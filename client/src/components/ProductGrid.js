@@ -46,16 +46,17 @@ const ProductGrid = ({ products, handleTarget }) => {
     return (
         <>
         <select onChange={(event) => handleSortBy(event)}>
-            <option disabled selected>SORT BY</option>
+            <option disabled>SORT BY</option>
             <option value="low">Price: low - high</option>
             <option value="high">Price: high - low</option>
         </select>
         <Wrapper>
             {showProducts && showProducts.map((elem, i)=>{
+                console.log(elem)
                 return (
                     <ItemContainerSmall 
+                        key={elem._id}
                         item={{...elem, price: typeof elem.price === "number" ? "$" + (elem.price).toString(): elem.price}}
-                        //item={elem}
                         element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}

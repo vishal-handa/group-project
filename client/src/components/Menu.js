@@ -29,7 +29,13 @@ const Menu = ({homePageState}) => {
     
   return (
     <Wrapper>
-
+     <MenuItemContainer>
+        <Link to="/">
+          <MenuItem>
+            <MenuText>Home</MenuText>
+          </MenuItem>
+        </Link>
+      </MenuItemContainer>
       <MenuItemContainer>
         <Link to="/products">
           <MenuItem>
@@ -37,9 +43,8 @@ const Menu = ({homePageState}) => {
           </MenuItem>
         </Link>
       </MenuItemContainer>
-
       <MenuItemContainer>
-        <CategoryMenuItem onClick={onClickCategory}>
+        <CategoryMenuItem onClick={() => onClickCategory()}>
           <MenuText>Shop by category</MenuText>
         </CategoryMenuItem>
         {categoryIsActive === true &&
