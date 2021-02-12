@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "./Banner";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
@@ -8,8 +8,20 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
 
+    const [hasCheckedOut, setHasCheckedOut] = useState(false);
+
     const selectedItem=Object.values(useSelector(state=>state.cart));
     console.log(selectedItem);
+
+    const handleCheckout = () => {
+        setHasCheckedOut(true);
+    }
+
+    console.log(hasCheckedOut);
+
+    const handlePurchase = (event) => {
+        alert("Your purchase was successful!")
+    }
 
     return (
         <Wrapper>
@@ -20,6 +32,42 @@ const Cart = () => {
                     return <CartItem item={elem} key={elem._id}/>
                 })}
             </CartContainer>
+            <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
+
+            {hasCheckedOut ?
+                <CheckoutDiv>
+                    <Input>
+                        <input
+                        name="firstName"
+                        placeholder="First Name"
+                        type="text"
+                        style={{height: "25px", width: "200px"}}
+                    />
+                    </Input>
+                    <Input>
+                        <input
+                        name="surname"
+                        placeholder="Last Name"
+                        type="text"
+                        style={{height: "25px", width: "200px"}}
+                    />
+                    </Input>
+                    <Input>
+                        <input
+                        name="email"
+                        placeholder="Email"
+                        type="text"
+                        style={{height: "25px", width: "200px"}}
+                    />
+                    </Input>
+                    <SubmitButton
+                    onClick={handlePurchase}
+                    >Complete Your Purchase 
+                    </SubmitButton>
+                </CheckoutDiv>
+                :
+                <div />
+            }
         </Wrapper>
     )
 };
@@ -31,16 +79,18 @@ const Wrapper = styled.div`
 `;
 
 const ContinueShopping = styled(NavLink)`
-    margin: 5px 0px 20px 0px;
+    margin: 5px 0px 30px 0px;
     font-size: 24px;
     font-family: Montserrat;
     text-decoration: none;
+    color: black;
+    cursor: pointer;
 `;
 
 const CartContainer = styled.div` 
     display: flex;
     flex-direction: column;
-    min-width: 800px;
+    min-width: 900px;
     max-height: 500px;
     overflow-y: auto;
     background: #fff;
@@ -82,6 +132,49 @@ const ItemPrice = styled.p`
     margin: 5px 0px;
     font-size: 14px;
     font-family: Montserrat;
+`;
+
+const CheckoutButton = styled.button` 
+    display: block;
+    width: 200px;
+    height: 50px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin: 50px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Montserrat;
+    cursor: pointer;
+`;
+
+const CheckoutDiv = styled.div` 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 150px;
+    width: 800px;
+    margin-bottom: 100px;
+`;
+
+const Input = styled.div` 
+    padding: 10px;
+`;
+
+const SubmitButton = styled.button` 
+    display: block;
+    width: 400px;
+    height: 40px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin: 20px 0px 50px 0px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Montserrat;
+    cursor: pointer;
 `;
 
 export default Cart;
