@@ -1,16 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 
 const ProductGrid = ({ products, handleTarget }) => {
-    // console.log(products);
+    //console.log(products)
+    const [ sortBy, setSortBy ] = useState()
+    
+    const productsArray = products.map((item) => {
+        return {... item, price: parseFloat(item.price.replace("$", ""))}
+    })
+    //console.log(productsArray)
+
+    const sortCopy = (arrOfObjects, key, order = 'asc') => {
+        const arrCopy = [...arrOfObjects];
+        if(order === 'asc'){
+           arrCopy.sort((a, b) => a[key] - b[key])
+       } else{
+           arrCopy.sort((a, b) => b[key] - a[key])
+        }
+        return arrCopy
+   };
+
+    const ascendPrice = sortCopy(productsArray, 'price', 'asc');
+    const descendPrice = sortCopy(productsArray, 'price', 'desc');
+    //console.log({ascendPrice, descendPrice})
+
+    const handleSortBy = (event) => {
+        setSortBy(event.target.value)
+    }
+    ///console.log(sortBy)
+
+    if(!products) {
+        return <div>Loading</div>
+    }
+     
+    let showProducts;
+    if(sortBy === "low") {
+        showProducts = ascendPrice;
+    } else if (sortBy === "high") {
+        showProducts = descendPrice
+    } else {
+        showProducts = products;
+    }
+
     return (
+        <>
+        <select onChange={(event) => handleSortBy(event)}>
+            <option disabled selected>SORT BY</option>
+            <option value="low">Price: low - high</option>
+            <option value="high">Price: high - low</option>
+        </select>
         <Wrapper>
-            {products && products.map((elem)=>{
+            {showProducts && showProducts.map((elem, i)=>{
                 return (
                     <ItemContainerSmall 
-                        item={elem}
-                        key={elem._id}
+                        item={{...elem, price: typeof elem.price === "number" ? "$" + (elem.price).toString(): elem.price}}
+                        //item={elem}
                         element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}
@@ -24,6 +69,7 @@ const ProductGrid = ({ products, handleTarget }) => {
                 )
             })}
         </Wrapper>
+        </>
     )
 };
 
