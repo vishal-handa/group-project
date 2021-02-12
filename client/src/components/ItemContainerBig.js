@@ -28,26 +28,7 @@ const ItemContainerBig = () => {
         })
     }, [theEvent]);
 
-    const updateQuantity = (item) => {
-        //console.log(item)
-        //console.log(element_id)
-        fetch(`/updateProduct/${id}`, {
-            method: "POST", 
-            body: JSON.stringify({item}),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-    
-        fetch('/products')
-            .then(res=>res.json())
-            .then(res=>dispatch(receiveItems(res.data)))
-    }
-
     const handleAddToCart = (item) => {
-        updateQuantity(item);
         dispatch(addToCart(item));        
     }
 
