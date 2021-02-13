@@ -58,9 +58,6 @@ const Cart = () => {
 
 
     const handlePurchase = (selectedItem) => {
-        if (customerInfo.firstName.length > 0 && customerInfo.lastName.length > 0 & customerInfo.email.length > 0) {
-            // console.log(`Thank you ${customerInfo.firstName}! Your purchase was successful!`)
-        }
         updateQuantity(selectedItem);
     }
 
@@ -116,7 +113,9 @@ const Cart = () => {
                         <SubmitButton onClick={()=>handlePurchase(selectedItem)}>Complete Your Purchase</SubmitButton> 
                     </Link>
                     :
-                    <CompleteForm>Please complete the form</CompleteForm>
+                    <CompleteForm>
+                        <CompleteFormText>Please complete the form</CompleteFormText>
+                    </CompleteForm>
                     }
                 </CheckoutDiv>
                 :
@@ -136,7 +135,6 @@ const ContinueShopping = styled(NavLink)`
     margin: 5px 0px 40px 0px;
     padding: 15px;
     font-size: 30px;
-    font-family: Montserrat;
     text-decoration: none;
     color: black;
     border: 2px solid black;
@@ -174,20 +172,17 @@ const ItemImage = styled.img`
 const ItemName = styled.p` 
     margin: 5px 0px;
     font-size: 14px;
-    font-family: Montserrat;
 `;
 
 // make this an input field so customers can increase quantity
 const ItemQuantity = styled.p` 
     margin: 5px 0px;
     font-size: 14px;
-    font-family: Montserrat;
 `;
 
 const ItemPrice = styled.p` 
     margin: 5px 0px;
     font-size: 14px;
-    font-family: Montserrat;
 `;
 
 const CheckoutButton = styled.button` 
@@ -201,7 +196,6 @@ const CheckoutButton = styled.button`
     margin: 50px;
     font-size: 24px;
     font-weight: 600;
-    font-family: Montserrat;
     cursor: pointer;
 `;
 
@@ -229,7 +223,7 @@ const SubmitButton = styled.button`
     margin: 20px 0px 50px 0px;
     font-size: 24px;
     font-weight: 600;
-    font-family: Montserrat;
+    text-decoration: none;
     cursor: pointer;
 `;
 
@@ -240,13 +234,15 @@ const CompleteForm = styled.div`
     width: 400px;
     height: 50px;
     background: black;
-    color: white;
     border: none;
-    padding: 5px;
     margin: 20px 0px 50px 0px;
     font-size: 24px;
     font-weight: 600;
-    font-family: Montserrat;
+`;
+
+const CompleteFormText = styled.p` 
+    color: white;
+    padding: 5px;
 `;
 
 export default Cart;
