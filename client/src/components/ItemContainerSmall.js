@@ -14,7 +14,6 @@ const ItemContainerSmall = ({
     price,
     location,
     element_id,
-    handleTarget,
     handleCheckInstock,
 }) => {
 
@@ -39,12 +38,8 @@ const ItemContainerSmall = ({
             </Link>
             {handleCheckInstock(item) > 0 ? <Price>{price}</Price> : <Padding />}
             {handleCheckInstock(item) > 0 ?     
-            <Button onClick={(ev) => {
-                handleAddToCart(item);
-                handleTarget(ev);
-                }} 
-                disabled={handleCheckInstock(item) < 0}
-                id={"cartButton"}>
+            <Button onClick={() => {handleAddToCart(item)}} 
+                disabled={handleCheckInstock(item) < 0}>
                     Add to Cart
             </Button>
             : 

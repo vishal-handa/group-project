@@ -20,8 +20,7 @@ const App = () => {
 
   const homePageState = useSelector(state=>state);
   // console.log(homePageState);
-  const [theEvent, setTheEvent] = useState(0);
-
+  
   useEffect(() => {
     fetch('/categories')
       .then(res=>res.json())
@@ -30,20 +29,11 @@ const App = () => {
     fetch("/companies")
     .then((res) => res.json())
     .then((data) => dispatch(receiveCompanies(data.data)))
-  }, []);
 
-  useEffect(() => {
     fetch('/products')
     .then(res=>res.json())
     .then(res=>dispatch(receiveItems(res.data)));
-  }, [theEvent]);
-
-  const handleTarget=(ev)=>{
-    const clickId=ev.target.id;
-    if(clickId==="cartButton"){
-        setTheEvent(theEvent+1);
-    }
-}
+  }, []);
 
   return (
     <Wrapper>
@@ -55,7 +45,7 @@ const App = () => {
             <Home />
           </Route>
           <Route exact path="/products">
-            <AllProductPage handleTarget={handleTarget}/>
+            <AllProductPage />
           </Route>
           <Route path="/products/:id">
             <ItemContainerBig />

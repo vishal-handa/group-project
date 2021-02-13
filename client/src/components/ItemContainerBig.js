@@ -7,18 +7,10 @@ import { addToCart } from "../actions";
 const ItemContainerBig = () => {
     const { id } = useParams();
     const [selectedItem, setSelectedItem] = useState({});
-    const [theEvent, setTheEvent] = useState(0);
     const cartItems = useSelector(state => state.cart)
 
     const dispatch = useDispatch();
     
-    const handleTarget=(ev)=>{
-        const clickId=ev.target.id;
-        if(clickId==="cartButton"){
-            setTheEvent(theEvent+1);
-        }
-    }
-
     useEffect(() => {
         fetch(`/products/${id}`, {
             method: "GET",
@@ -27,7 +19,7 @@ const ItemContainerBig = () => {
         .then(data => {
             setSelectedItem(data.data[0]);
         })
-    }, [theEvent]);
+    }, []);
 
     const handleAddToCart = (item) => {
         dispatch(addToCart(item));        
@@ -61,13 +53,9 @@ const ItemContainerBig = () => {
                 {handleCheckInstock(selectedItem) > 0 ? <Price>{selectedItem.price}</Price> : <Padding />}
 
                 {handleCheckInstock(selectedItem) > 0 ?
-                <Button onClick={(ev) => {
-                    handleAddToCart(selectedItem);
-                    handleTarget(ev);
-                }} 
-                        disabled={handleCheckInstock(selectedItem) < 0}
-                        id={"cartButton"}>
-                            Add to Cart
+                <Button onClick={() => {handleAddToCart(selectedItem);}} 
+                    disabled={handleCheckInstock(selectedItem) < 0}>
+                        Add to Cart
                 </Button>
                 : 
                 <OutOfStockTextContainer>
