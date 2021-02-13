@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
-import { addToCart, receiveItems } from "../actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from "../actions";
 
 const ItemContainerBig = () => {
     const { id } = useParams();
     const [selectedItem, setSelectedItem] = useState({});
     const [theEvent, setTheEvent] = useState(0);
+    const cartItems = useSelector(state => state.cart)
+
     const dispatch = useDispatch();
-    const stock=selectedItem.numInStock;
-    // console.log(stock);
+    
     const handleTarget=(ev)=>{
         const clickId=ev.target.id;
         if(clickId==="cartButton"){
@@ -32,6 +33,18 @@ const ItemContainerBig = () => {
         dispatch(addToCart(item));        
     }
 
+    // Same code as in itemSmall...
+    let stockNum;
+    const handleCheckInstock = (selectedItem) => {
+        if(cartItems[id]){
+            stockNum = selectedItem.numInStock - cartItems[id].numInCart
+        } else {
+            stockNum = selectedItem.numInStock;
+        }
+        return stockNum;
+    };
+
+
     // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"), 
     // and opacity based on whether item is available or not
 
@@ -39,20 +52,20 @@ const ItemContainerBig = () => {
         <Wrapper>
             <BigItemView>
                 <ImageWrapper>
-                    {selectedItem.numInStock > 0 ?
+                    {handleCheckInstock(selectedItem) > 0 ?
                     <Image src={selectedItem.imageSrc}/> : <OutOfStock src={selectedItem.imageSrc} />
                     }
                 </ImageWrapper>
                 <Title>{selectedItem.name}</Title>
 
-                {selectedItem.numInStock > 0 ? <Price>{selectedItem.price}</Price> : <Padding />}
+                {handleCheckInstock(selectedItem) > 0 ? <Price>{selectedItem.price}</Price> : <Padding />}
 
-                {selectedItem.numInStock > 0 ?
+                {handleCheckInstock(selectedItem) > 0 ?
                 <Button onClick={(ev) => {
                     handleAddToCart(selectedItem);
                     handleTarget(ev);
                 }} 
-                        disabled={stock===0}
+                        disabled={handleCheckInstock(selectedItem) < 0}
                         id={"cartButton"}>
                             Add to Cart
                 </Button>

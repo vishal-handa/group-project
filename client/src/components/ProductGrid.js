@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
+import { useSelector } from "react-redux";
 
 const ProductGrid = ({ products, handleTarget }) => {
     //console.log(products)
+    const cartItems = useSelector(state => state.cart);
+    //console.log(cartItems)
     const [ sortBy, setSortBy ] = useState()
     
     const productsArray = products.map((item) => {
@@ -42,17 +45,28 @@ const ProductGrid = ({ products, handleTarget }) => {
     } else {
         showProducts = products;
     }
+    
+    // Check to see if item is in cart, if yes return available stock (excluding numInCart), if not return original numInStock
+    let stockNum;
+    const handleCheckInstock = (elem) => {
+        if(cartItems[elem._id]){
+            stockNum = elem.numInStock - cartItems[elem._id].numInCart
+        } else {
+            stockNum = elem.numInStock;
+        }
+        return stockNum;
+    };
 
     return (
         <>
-        <select onChange={(event) => handleSortBy(event)}>
+        <select defaultValue="SORT BY"onChange={(event) => handleSortBy(event)}>
             <option disabled>SORT BY</option>
             <option value="low">Price: low - high</option>
             <option value="high">Price: high - low</option>
         </select>
         <Wrapper>
             {showProducts && showProducts.map((elem, i)=>{
-                console.log(elem)
+                //console.log(elem.numInStock)
                 return (
                     <ItemContainerSmall 
                         key={elem._id}
@@ -60,7 +74,8 @@ const ProductGrid = ({ products, handleTarget }) => {
                         element_id={elem._id}
                         productName={elem.name}
                         imageSRC={elem.imageSrc}
-                        stock={elem.numInStock}
+                        // stock={elem.numInStock}
+                        handleCheckInstock={handleCheckInstock}
                         category={elem.category}
                         companyId={elem.companyId}
                         price={elem.price}
