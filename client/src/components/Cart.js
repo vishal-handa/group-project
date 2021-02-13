@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "./Banner";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
-import { receiveItems } from "../actions";
+import { clearCart, receiveItems } from "../actions";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -32,12 +32,17 @@ const Cart = () => {
     }
 
     // selectedItem represents items that have been added to cart
-    const selectedItem=Object.values(useSelector(state=>state.cart));
+    const selectedItem = Object.values(useSelector(state=>state.cart));
     console.log(selectedItem);
 
     const handleCheckout = () => {
         setHasCheckedOut(true);
     }
+
+    const handleClearCart = () => {
+        dispatch(clearCart())
+    }
+
 
     const updateQuantity = (selectedItem) => {
         selectedItem.map((item) => {
@@ -55,12 +60,20 @@ const Cart = () => {
         fetch('/products')
         .then(res=>res.json())
         .then(res=>dispatch(receiveItems(res.data)))
+        handleClearCart();
     };
-
 
     const handlePurchase = (selectedItem) => {
         updateQuantity(selectedItem);
     }
+
+    // let totalCost = 0;
+    // let costPerItem;
+
+    // const calculateTotal = (selectedItem) => {
+    //     selectedItem.forEach(Number(selectedItem.price))
+    //     console.log()
+    // }
 
     return (
         <Wrapper>
