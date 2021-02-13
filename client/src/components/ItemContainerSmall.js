@@ -1,35 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { useHistory } from "react-router-dom";
-import ItemContainerBig from "./ItemContainerBig";
-import { addToCart, receiveItems } from "../actions";
+import { Link } from "react-router-dom";
+import { addToCart } from "../actions";
 import { useDispatch } from 'react-redux';
 
 const ItemContainerSmall = ({
     item,
     productName,
     imageSRC,
-    stock,
     category,
     companyId,
     price,
     location,
     element_id,
-    handleTarget
+    handleTarget,
+    handleCheckInstock,
 }) => {
-    // console.log(stock);
-    const dispatch = useDispatch();
-    let history = useHistory();
-    const [selectedItem, setSelectedItem] = useState();
 
-    const onClick = () => {
-        // console.log(element_id);
-        history.push(`/products/${element_id}`);
-        return (
-            <ItemContainerBig handleTarget={handleTarget} stock={stock}/>
-        )
-    }
+    const dispatch = useDispatch();
 
     const handleAddToCart = (item) => {
         dispatch(addToCart(item));   
@@ -40,29 +29,29 @@ const ItemContainerSmall = ({
 
     return (
         <SmallItemView>
-            <OnClickWrapper onClick={onClick}>
+            <Link to={ `/products/${element_id}`}>
+            <OnClickWrapper >
                 <ImageWrapper >
-                    {stock > 0 ? <Image src={imageSRC}/> : <OutOfStock src={imageSRC}/>}
+                    {handleCheckInstock(item) > 0 ? <Image src={imageSRC}/> : <OutOfStock src={imageSRC}/>}
                 </ImageWrapper>
                 <Title>{productName}</Title>
             </OnClickWrapper>
-            {stock > 0 ? <Price>{price}</Price> : <Padding />}
-            
-            {stock > 0 ?     
+            </Link>
+            {handleCheckInstock(item) > 0 ? <Price>{price}</Price> : <Padding />}
+            {handleCheckInstock(item) > 0 ?     
             <Button onClick={(ev) => {
                 handleAddToCart(item);
                 handleTarget(ev);
-            }} 
-                    disabled={stock===0}
-                    id={"cartButton"}>
-                        Add to Cart
+                }} 
+                disabled={handleCheckInstock(item) < 0}
+                id={"cartButton"}>
+                    Add to Cart
             </Button>
             : 
             <OutOfStockTextContainer>
                 <OutOfStockText>Out of Stock</OutOfStockText>
             </OutOfStockTextContainer>
             }
-
         </SmallItemView>
     )
 };
