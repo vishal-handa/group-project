@@ -31,6 +31,7 @@ const Cart = () => {
         }
     }
 
+    // selectedItem represents items that have been added to cart
     const selectedItem=Object.values(useSelector(state=>state.cart));
     console.log(selectedItem);
 
