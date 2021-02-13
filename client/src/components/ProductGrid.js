@@ -3,48 +3,48 @@ import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 import { useSelector } from "react-redux";
 
-const ProductGrid = ({ products }) => {
+const ProductGrid = ({ showProducts, setSortBy }) => {
     //console.log(products)
     const cartItems = useSelector(state => state.cart);
     //console.log(cartItems)
-    const [ sortBy, setSortBy ] = useState()
+    //const [ sortBy, setSortBy ] = useState()
     
-    const productsArray = products.map((item) => {
-        return {... item, price: parseFloat(item.price.replace("$", ""))}
-    })
-    //console.log(productsArray)
+//     const productsArray = products.map((item) => {
+//         return {... item, price: parseFloat(item.price.replace("$", ""))}
+//     })
+//     //console.log(productsArray)
 
-    const sortCopy = (arrOfObjects, key, order = 'asc') => {
-        const arrCopy = [...arrOfObjects];
-        if(order === 'asc'){
-           arrCopy.sort((a, b) => a[key] - b[key])
-       } else{
-           arrCopy.sort((a, b) => b[key] - a[key])
-        }
-        return arrCopy
-   };
+//     const sortCopy = (arrOfObjects, key, order = 'asc') => {
+//         const arrCopy = [...arrOfObjects];
+//         if(order === 'asc'){
+//            arrCopy.sort((a, b) => a[key] - b[key])
+//        } else{
+//            arrCopy.sort((a, b) => b[key] - a[key])
+//         }
+//         return arrCopy
+//    };
 
-    const ascendPrice = sortCopy(productsArray, 'price', 'asc');
-    const descendPrice = sortCopy(productsArray, 'price', 'desc');
-    //console.log({ascendPrice, descendPrice})
+//     const ascendPrice = sortCopy(productsArray, 'price', 'asc');
+//     const descendPrice = sortCopy(productsArray, 'price', 'desc');
+//     //console.log({ascendPrice, descendPrice})
 
     const handleSortBy = (event) => {
         setSortBy(event.target.value)
     }
     ///console.log(sortBy)
 
-    if(!products) {
+    if(!showProducts) {
         return <div>Loading</div>
     }
      
-    let showProducts;
-    if(sortBy === "low") {
-        showProducts = ascendPrice;
-    } else if (sortBy === "high") {
-        showProducts = descendPrice
-    } else {
-        showProducts = products;
-    }
+    // let showProducts;
+    // if(sortBy === "low") {
+    //     showProducts = ascendPrice;
+    // } else if (sortBy === "high") {
+    //     showProducts = descendPrice
+    // } else {
+    //     showProducts = products;
+    // }
     
     // Check to see if item is in cart, if yes return available stock (excluding numInCart), if not return original numInStock
     let stockNum;
