@@ -11,10 +11,10 @@ const CartItem = ({item, setHasCheckedOut}) => {
         {/* <ItemImage>Image</ItemImage> */}
             <ItemInfoContainer>
                 <ItemImage src={item.imageSrc}/>
-                <div>
+                <DescriptionQuantityContainer>
                     <ItemName>{item.name}</ItemName>
                     <ItemQuantity>Quantity: {item.numInCart}</ItemQuantity>
-                </div>
+                </DescriptionQuantityContainer>
                 <ItemPrice>{item.price}</ItemPrice>
             <RemoveItem onClick={() => {
                 dispatch(removeFromCart(item));
@@ -45,7 +45,13 @@ const ItemImage = styled.img`
     height: auto;
     margin-right: 100px;
     padding: 8px;
-    border: 1px solid blue;
+`;
+
+const DescriptionQuantityContainer = styled.div` 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90%;
 `;
 
 const ItemName = styled.p` 

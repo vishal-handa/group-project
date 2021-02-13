@@ -14,6 +14,7 @@ import Home from "./Home";
 import Menu from "./Menu";
 import Cart from "./Cart";
 import ItemContainerBig from './ItemContainerBig';
+import ConfirmationPage from './ConfirmationPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,9 @@ const App = () => {
           </Route>
           <Route exact path="/cart">
             {homePageState.cart && <Cart />}
+          </Route>
+          <Route exact path="/confirmation">
+            <ConfirmationPage />
           </Route>
         </Switch>
       </BrowserRouter>
