@@ -5,14 +5,14 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
 import { receiveItems } from "../actions";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const [hasCheckedOut, setHasCheckedOut] = useState(false);
-
-
     const [customerInfo, setCustomerInfo] = useState({firstName: "", lastName: "", email: ""});
     
+    // ensures customer has entered text into name and email fields
     const firstNameHandler = (name) => {
         return ({target: {value}}) => {
             setCustomerInfo(oldValues => ({...oldValues, [name]: value}));
@@ -59,7 +59,7 @@ const Cart = () => {
 
     const handlePurchase = (selectedItem) => {
         if (customerInfo.firstName.length > 0 && customerInfo.lastName.length > 0 & customerInfo.email.length > 0) {
-            console.log(`Thank you ${customerInfo.firstName}! Your purchase was successful!`)
+            // console.log(`Thank you ${customerInfo.firstName}! Your purchase was successful!`)
         }
         updateQuantity(selectedItem);
     }
@@ -68,11 +68,15 @@ const Cart = () => {
         <Wrapper>
             <Banner text={"Your Cart"} />
             <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
+            {selectedItem.length > 0 ?
             <CartContainer>
                 {selectedItem && selectedItem.map(elem=>{
                     return <CartItem item={elem} key={elem._id} setHasCheckedOut={setHasCheckedOut}/>
                 })}
             </CartContainer>
+            :
+            <p>Your cart is empty</p>
+            }
             <CheckoutButton onClick={() => handleCheckout()} disabled={selectedItem.length<1}>Checkout</CheckoutButton>
 
             {hasCheckedOut ?
@@ -108,7 +112,9 @@ const Cart = () => {
                     />
                     </Input>
                     {customerInfo.firstName.length > 0 && customerInfo.lastName.length > 0 & customerInfo.email.length > 0 ?
-                    <SubmitButton onClick={()=>handlePurchase(selectedItem)}>Complete Your Purchase</SubmitButton> 
+                    <Link to="/confirmation">
+                        <SubmitButton onClick={()=>handlePurchase(selectedItem)}>Complete Your Purchase</SubmitButton> 
+                    </Link>
                     :
                     <CompleteForm>Please complete the form</CompleteForm>
                     }
@@ -127,11 +133,13 @@ const Wrapper = styled.div`
 `;
 
 const ContinueShopping = styled(NavLink)`
-    margin: 5px 0px 30px 0px;
+    margin: 5px 0px 40px 0px;
+    padding: 15px;
     font-size: 30px;
     font-family: Montserrat;
     text-decoration: none;
     color: black;
+    border: 2px solid black;
     cursor: pointer;
 `;
 
