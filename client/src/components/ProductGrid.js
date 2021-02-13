@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ItemContainerSmall from "./ItemContainerSmall";
 import { useSelector } from "react-redux";
 
-const ProductGrid = ({ products, handleTarget }) => {
+const ProductGrid = ({ products }) => {
     //console.log(products)
     const cartItems = useSelector(state => state.cart);
     //console.log(cartItems)
@@ -80,7 +80,6 @@ const ProductGrid = ({ products, handleTarget }) => {
                         companyId={elem.companyId}
                         price={elem.price}
                         location={elem.body_location}
-                        handleTarget={handleTarget}
                     />
                 )
             })}

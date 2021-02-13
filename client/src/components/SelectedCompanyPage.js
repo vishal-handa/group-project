@@ -9,20 +9,12 @@ const SelectedCompanyPage = () => {
     // console.log(company);
     const [companyProducts, setCompanyProducts]=useState([]);
     const [ currentPage, setCurrentPage ] = useState(1);
-    const [theEvent, setTheEvent] = useState(0);
 
     useEffect(()=>{
         fetch(`/companies/${decodeURIComponent(company)}`)
             .then(res=>res.json())
             .then(res=>setCompanyProducts(res.data))
-    },[company, theEvent]);
-
-    const handleTarget=(ev)=>{
-        const clickId=ev.target.id;
-        if(clickId==="cartButton"){
-            setTheEvent(theEvent+1);
-        }
-    }
+    },[company]);
 
     const  productsPerPage = 16;
     const indexOfLastProduct = currentPage * productsPerPage; // 16
@@ -39,9 +31,7 @@ const SelectedCompanyPage = () => {
             {companyProducts ? 
             <>
                 <Banner text={`${company}`} />
-                <ProductGrid products={currentProducts}
-                            handleTarget={handleTarget}
-                />
+                <ProductGrid products={currentProducts} />
                 <Pagination 
                     productsPerPage={productsPerPage} 
                     totalProducts={companyProducts.length} 
