@@ -4,11 +4,33 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
+import Checkout from "./Checkout";
 import { receiveItems } from "../actions";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const [hasCheckedOut, setHasCheckedOut] = useState(false);
+
+
+    const [customerInfo, setCustomerInfo] = useState({firstName: "", lastName: "", email: ""});
+    
+    const firstNameHandler = (name) => {
+        return ({target: {value}}) => {
+            setCustomerInfo(oldValues => ({...oldValues, [name]: value}));
+        }
+    }
+
+    const lastNameHandler = (name) => {
+        return ({target: {value}}) => {
+            setCustomerInfo(oldValues => ({...oldValues, [name]: value}));
+        }
+    }
+
+    const emailHandler = (name) => {
+        return ({target: {value}}) => {
+            setCustomerInfo(oldValues => ({...oldValues, [name]: value}));
+        }
+    }
 
     const selectedItem=Object.values(useSelector(state=>state.cart));
     console.log(selectedItem);
@@ -16,7 +38,6 @@ const Cart = () => {
     const handleCheckout = () => {
         setHasCheckedOut(true);
     }
-    //console.log(hasCheckedOut);
 
     const updateQuantity = (selectedItem) => {
         selectedItem.map((item) => {
@@ -36,10 +57,12 @@ const Cart = () => {
         .then(res=>dispatch(receiveItems(res.data)))
     };
 
+
     const handlePurchase = (selectedItem) => {
+        if (customerInfo.firstName.length > 0 && customerInfo.lastName.length > 0 & customerInfo.email.length > 0) {
+            console.log(`Thank you ${customerInfo.firstName}! Your purchase was successful!`)
+        }
         updateQuantity(selectedItem);
-        console.log("Your purchase was successful!")
-        //alert("Your purchase was successful!")
     }
 
     return (
@@ -60,6 +83,8 @@ const Cart = () => {
                         name="firstName"
                         placeholder="First Name"
                         type="text"
+                        value={customerInfo.firstName}
+                        onChange={firstNameHandler("firstName")}
                         style={{height: "25px", width: "200px"}}
                     />
                     </Input>
@@ -68,6 +93,8 @@ const Cart = () => {
                         name="surname"
                         placeholder="Last Name"
                         type="text"
+                        value={customerInfo.lastName}
+                        onChange={lastNameHandler("lastName")}
                         style={{height: "25px", width: "200px"}}
                     />
                     </Input>
@@ -76,13 +103,16 @@ const Cart = () => {
                         name="email"
                         placeholder="Email"
                         type="text"
+                        value={customerInfo.email}
+                        onChange={emailHandler("email")}
                         style={{height: "25px", width: "200px"}}
                     />
                     </Input>
-                    <SubmitButton
-                    onClick={()=>handlePurchase(selectedItem)}
-                    >Complete Your Purchase 
-                    </SubmitButton>
+                    {customerInfo.firstName.length > 0 && customerInfo.lastName.length > 0 & customerInfo.email.length > 0 ?
+                    <SubmitButton onClick={()=>handlePurchase(selectedItem)}>Complete Your Purchase</SubmitButton> 
+                    :
+                    <CompleteForm>Please complete the form</CompleteForm>
+                    }
                 </CheckoutDiv>
                 :
                 <div />
@@ -184,7 +214,7 @@ const Input = styled.div`
 const SubmitButton = styled.button` 
     display: block;
     width: 400px;
-    height: 40px;
+    height: 50px;
     background: black;
     color: white;
     border: none;
@@ -194,6 +224,22 @@ const SubmitButton = styled.button`
     font-weight: 600;
     font-family: Montserrat;
     cursor: pointer;
+`;
+
+const CompleteForm = styled.div` 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 50px;
+    background: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin: 20px 0px 50px 0px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Montserrat;
 `;
 
 export default Cart;
