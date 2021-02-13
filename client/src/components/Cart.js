@@ -128,7 +128,7 @@ const Wrapper = styled.div`
 
 const ContinueShopping = styled(NavLink)`
     margin: 5px 0px 30px 0px;
-    font-size: 24px;
+    font-size: 30px;
     font-family: Montserrat;
     text-decoration: none;
     color: black;

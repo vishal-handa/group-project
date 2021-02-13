@@ -13,7 +13,7 @@ const CartItem = ({item, setHasCheckedOut}) => {
                 <ItemImage src={item.imageSrc}/>
                 <div>
                     <ItemName>{item.name}</ItemName>
-                    <ItemQuantity>{item.numInCart}</ItemQuantity>
+                    <ItemQuantity>Quantity: {item.numInCart}</ItemQuantity>
                 </div>
                 <ItemPrice>{item.price}</ItemPrice>
             <RemoveItem onClick={() => {
@@ -34,8 +34,8 @@ const Wrapper = styled.div`
 
 const ItemInfoContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
+    justify-content: flex-start;
+    padding: 10px;
     width: 100%;
 `;
 
@@ -43,15 +43,16 @@ const ItemImage = styled.img`
     display: block;
     width: 50px;
     height: auto;
-    margin: 0;
+    margin-right: 100px;
     padding: 8px;
+    border: 1px solid blue;
 `;
 
 const ItemName = styled.p` 
     margin: 5px 0px;
     font-size: 14px;
     font-family: Montserrat;
-    max-width:400px;
+    width: 500px;
 `;
 
 // make this an input field so customers can increase quantity
@@ -62,15 +63,17 @@ const ItemQuantity = styled.p`
 `;
 
 const ItemPrice = styled.p` 
-    margin: 5px 0px;
+    margin: 5px 50px 0px 0px;
     font-size: 14px;
     font-family: Montserrat;
+    width: 50px;
 `;
 
 const RemoveItem = styled.p` 
     margin: 5px 0px;
     font-size: 14px;
     font-family: Montserrat;
+    cursor: pointer;
 `;
 
 export default CartItem;
