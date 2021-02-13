@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "./CartItem";
-import Checkout from "./Checkout";
 import { receiveItems } from "../actions";
 
 const Cart = () => {
