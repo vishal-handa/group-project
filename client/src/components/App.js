@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import GlobalStyles from "./GlobalStyles";
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -47,6 +48,7 @@ const App = () => {
   return (
     <Wrapper>
       <BrowserRouter>
+      <GlobalStyles />
         <Menu homePageState={homePageState}/>
         <Switch>
           <Route exact path="/">
