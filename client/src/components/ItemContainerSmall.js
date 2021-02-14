@@ -71,9 +71,6 @@ const StyledLink=styled(Link)`
     color:black;
     &.disabled-link{
         pointer-events:none;
-        &:hover{
-            cursor:not-allowed !important;
-        }
     }
 `;
 
