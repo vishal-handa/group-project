@@ -8,6 +8,7 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  
   // selectedItem represents items that have been added to cart
   const selectedItem = Object.values(useSelector((state) => state.cart));
   console.log(selectedItem);
@@ -20,10 +21,13 @@ const Cart = () => {
 
   // Initial cost is set to 0
   const [subTotal, setSubTotal] = useState(0);
-  const [taxAmount, setTaxAmount] = useState(0);
+  const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
 
-  // ensures customer has entered text into name and email fields
+  // Determine province for tax calculations
+  const [province, setProvince] = useState("");
+
+  // Ensures customer has entered text into name and email fields
   const firstNameHandler = (name) => {
     return ({ target: { value } }) => {
       setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
@@ -88,7 +92,32 @@ const Cart = () => {
 
   useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
 
-  // const taxRate =
+  // Calculate tax based on customer province
+  const calculateTax = (province) => {
+    if (province === "AB" || province === "NT" || province === "NU" || province === "YT") {
+        setTax(subTotal * 0.05)
+    } else if (province === "BC" || province === "MB") {
+        setTax(subTotal * 0.12);
+    } else if (province === "ON") {
+        setTax(subTotal * 0.13);
+    } else if (province === "QC") {
+        setTax(subTotal * 0.14975);
+    } else if (province === "SK") {
+        setTax(subTotal * 0.11);
+    } else {
+        setTax(subTotal * 0.15);
+    }
+  }
+
+  // Update tax calculation if the province changes
+  useEffect(() => calculateTax(province), [province])
+
+  // Ensure tax and subtotal are numbers and not strings
+  let subTotalNum = Number(subTotal);
+  let taxNum = Number(tax);
+
+  // Calculate total price including tax
+  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [tax]))
 
   return (
     <Wrapper>
@@ -109,17 +138,17 @@ const Cart = () => {
             })}
           <TotalPrice>
             <p>
-              <span>Subtotal (CAD)</span>
+              <span>Subtotal (CAD): </span>
               <span>${subTotal}</span>
             </p>
             <label>Shipping destination: </label>
-            <select defaultValue="Select your location">
+            <select defaultValue="Select your location" onChange={event => setProvince(event.target.value)}>
               <option disabled>Select your location</option>
               <option value="AB">Alberta</option>
               <option value="BC">British Columbia</option>
               <option value="MB">Manitoba</option>
               <option value="NB">New Brunswick</option>
-              <option vlaue="NL">Newfoundland and Labrador</option>
+              <option value="NL">Newfoundland and Labrador</option>
               <option value="NT">Northwest Territories</option>
               <option value="NS">Nova Scotia</option>
               <option value="NU">Nunavut</option>
@@ -130,9 +159,9 @@ const Cart = () => {
               <option value="YT">Yukon</option>
             </select>
             <p>
-              <span>Total (CAD)</span>
-              Taxes included
-              <span>${total}</span>
+              <span>Total (CAD) </span>
+              Taxes included:
+              <span> ${total}</span>
             </p>
           </TotalPrice>
         </CartContainer>
