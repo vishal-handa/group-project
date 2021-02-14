@@ -93,9 +93,12 @@ const Cart = () => {
   useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
 
   // Calculate tax based on customer province
+  // If no province is selected, tax remains at $0.00
   const calculateTax = (province) => {
     if (province === "AB" || province === "NT" || province === "NU" || province === "YT") {
         setTax(subTotal * 0.05)
+    } else if (province === "NB" || province === "NL" || province === "NS" || province === "PE") {
+        setTax(subTotal * 0.15)
     } else if (province === "BC" || province === "MB") {
         setTax(subTotal * 0.12);
     } else if (province === "ON") {
@@ -105,19 +108,19 @@ const Cart = () => {
     } else if (province === "SK") {
         setTax(subTotal * 0.11);
     } else {
-        setTax(subTotal * 0.15);
+        setTax(0);
     }
   }
 
   // Update tax calculation if the province changes
-  useEffect(() => calculateTax(province), [province])
+  useEffect(() => calculateTax(province), [province, subTotal])
 
   // Ensure tax and subtotal are numbers and not strings
   let subTotalNum = Number(subTotal);
   let taxNum = Number(tax);
 
   // Calculate total price including tax
-  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [tax]))
+  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [province]))
 
   return (
     <Wrapper>
