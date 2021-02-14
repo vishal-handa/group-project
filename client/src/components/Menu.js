@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { fadeInDown, fadeOutUp, slideInLeft, slideInRight } from 'react-animations';
 import { Link } from 'react-router-dom';
 import BurgerMenu from "./TheBurger/BurgerMenu";
 
@@ -32,7 +33,11 @@ const Menu = ({homePageState}) => {
   return (
     <Wrapper>
       <MenuButton
-        onClick={() => setStatus(status === 'open' ? 'close' : 'open')}
+        onClick={() => {
+          setStatus(status === 'open' ? 'close' : 'open');
+          setCategoryIsActive(false);
+          setCompanyIsActive(false);
+        }}
       >
         <BurgerMenu status={status}/>
       </MenuButton>
@@ -45,9 +50,12 @@ const Menu = ({homePageState}) => {
       </div>
         
       
-      <MainMenu style={{display: status==='open' ? 'block' : 'none'}
+      <MainMenu 
+                className={status==='open' ? 'openMenu' : 'closeMenu'}
+      >
+      <MenuItemContainer style={{alignItems: (companyIsActive===true || categoryIsActive===true) ? 'flex-start' : 'center'}
+                                // {animation: (companyIsActive===true || categoryIsActive===true) ? `0.4s ${slideInRight}` : null}
       }>
-      <MenuItemContainer style={{alignItems: (companyIsActive===true || categoryIsActive===true) ? 'flex-start' : 'center'}}>
         <Link exact to="/">
           <MenuItem onClick={()=>setStatus('close')}>
             <MenuText>Home</MenuText>
@@ -117,14 +125,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  position: relative;
-`;
-
-const MenuItemContainer = styled.div` 
-  display: flex;
-  flex-direction:column;
-  transition:all ease 0.3s;
-  margin-bottom:20px;
+  position: fixed;
+  top:0;
+  background-color:white;
 `;
 
 const MenuButton = styled.button`
@@ -135,16 +138,52 @@ const MenuButton = styled.button`
     cursor: pointer;
   }
 `;
+const slideDown=keyframes`
+  ${fadeInDown};
+`;
+
+const slideUp=keyframes`
+  ${fadeOutUp};
+`;
+
+const slideLeft=keyframes`
+  ${slideInLeft};
+`;
+
+const slideRight=keyframes`
+  ${slideInRight}
+`;
+
+const MenuItemContainer = styled.div` 
+  display: flex;
+  flex-direction:column;
+  margin-bottom:20px;
+  z-index:9;
+  opacity:1;
+`;
+
 
 const MainMenu=styled.div`
-  position:absolute;
-  top:60px;
-  height:calc(100vh - 60px);
-  width:100%;
-  background-color:white;
-  z-index:1;
-  transition:all ease 0.3s;
+  &.openMenu{
+    display:block;
+    position:fixed;
+    top:60px;
+    bottom:0px;
+    height:100vh;
+    width:100%;
+    background-color:white;
+    z-index:10;
+    animation: 0.4s ${slideDown};
+    overflow-y: hidden;
+  }
+
+  &.closeMenu{
+    animation: 0.4s ${slideUp};
+    display:none;
+  }
 `;
+
+
 
 const CategoryNav = styled.nav` 
   background: #ffffff;
@@ -160,6 +199,7 @@ const CategoryNav = styled.nav`
   display:flex;
   transition:all ease 0.3s;
 `;
+
 const CompanyNav = styled.nav` 
   background: #ffffff;
   border-radius: 5px;
@@ -215,54 +255,3 @@ const StyledLink = styled(Link)`
 `;
 
 export default Menu;
-
-{/* <MenuItemContainer>
-        <Link to="/">
-          <MenuItem>
-            <MenuText>Home</MenuText>
-          </MenuItem>
-        </Link>
-      </MenuItemContainer>
-      <MenuItemContainer>
-        <Link to="/products">
-          <MenuItem>
-            <MenuText>Shop all products</MenuText>
-          </MenuItem>
-        </Link>
-      </MenuItemContainer>
-      <MenuItemContainer>
-        <CategoryMenuItem onClick={() => onClickCategory()}>
-          <MenuText>Shop by category</MenuText>
-        </CategoryMenuItem>
-        {categoryIsActive === true &&
-          <CategoryNav>
-            {listOfCategories.map((category) => {
-              return (
-                <div><StyledLink to={`/categories/${category}`} key={category}>{category}</StyledLink></div>
-              )
-            })}
-          </CategoryNav>
-      } 
-      </MenuItemContainer>
-
-      <MenuItemContainer>
-        <CompanyMenuItem onClick={onClickCompany}>
-          <MenuText>Shop by company</MenuText>
-        </CompanyMenuItem>
-        {companyIsActive === true &&
-          <CompanyNav>
-            {listOfCompanies.map((company) => {
-              return (
-                <div><StyledLink to={`/companies/${company}`} key={company}>{company}</StyledLink></div>
-              )
-            })}  
-          </CompanyNav>
-      }
-      </MenuItemContainer>
-      <MenuItemContainer>
-        <Link to="/cart">
-          <MenuItem>
-            <MenuText>🛒</MenuText>
-          </MenuItem>
-        </Link>
-      </MenuItemContainer> */}

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { addToCart } from "../actions";
 import { useDispatch } from 'react-redux';
+import imageFile from '../images/out-of-stock.png';
 
 const ItemContainerSmall = ({
     item,
@@ -28,14 +29,16 @@ const ItemContainerSmall = ({
 
     return (
         <SmallItemView>
-            <Link to={ `/products/${element_id}`}>
-            <OnClickWrapper >
-                <ImageWrapper >
-                    {handleCheckInstock(item) > 0 ? <Image src={imageSRC}/> : <OutOfStock src={imageSRC}/>}
-                </ImageWrapper>
-                <Title>{productName}</Title>
-            </OnClickWrapper>
-            </Link>
+            <StyledLink to={ `/products/${element_id}`}
+                        className={(handleCheckInstock(item) <=0) ? 'disabled-link' : null}
+            >
+                <OnClickWrapper className={(handleCheckInstock(item) <=0) ? 'disabled-link' : null}>
+                    <ImageWrapper >
+                        {handleCheckInstock(item) > 0 ? <Image src={imageSRC}/> : <OutOfStock src={imageFile} alt={'out of stock'}/> }
+                    </ImageWrapper>
+                    <Title>{productName}</Title>
+                </OnClickWrapper>
+            </StyledLink>
             {handleCheckInstock(item) > 0 ? <Price>{price}</Price> : <Padding />}
             {handleCheckInstock(item) > 0 ?     
             <Button onClick={() => {handleAddToCart(item)}} 
@@ -61,6 +64,17 @@ const SmallItemView = styled.div`
     text-align: center;
     width: 225px;
     height: 320px;
+`;
+
+const StyledLink=styled(Link)`
+    text-decoration:none;
+    color:black;
+    &.disabled-link{
+        pointer-events:none;
+        &:hover{
+            cursor:not-allowed !important;
+        }
+    }
 `;
 
 const OnClickWrapper = styled.div` 
@@ -102,7 +116,7 @@ const OutOfStock = styled.img`
     height: 180px;
     margin:0;
     padding:8px;
-    opacity: 25%;
+    background:rgba(255,255,255,1);
 `;
 
 const Title = styled.p`
