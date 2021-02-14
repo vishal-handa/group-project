@@ -53,9 +53,9 @@ const Menu = ({homePageState}) => {
       <MainMenu 
                 className={status==='open' ? 'openMenu' : 'closeMenu'}
       >
-      <MenuItemContainer style={{alignItems: (companyIsActive===true || categoryIsActive===true) ? 'flex-start' : 'center'}
-                                // {animation: (companyIsActive===true || categoryIsActive===true) ? `0.4s ${slideInRight}` : null}
-      }>
+      <MenuItemContainer style={{marginLeft: (companyIsActive===true || categoryIsActive===true) ? '5%' : '45%'}
+      }
+      >
         <Link exact to="/">
           <MenuItem onClick={()=>setStatus('close')}>
             <MenuText>Home</MenuText>
@@ -146,13 +146,6 @@ const slideUp=keyframes`
   ${fadeOutUp};
 `;
 
-const slideLeft=keyframes`
-  ${slideInLeft};
-`;
-
-const slideRight=keyframes`
-  ${slideInRight}
-`;
 
 const MenuItemContainer = styled.div` 
   display: flex;
@@ -160,6 +153,7 @@ const MenuItemContainer = styled.div`
   margin-bottom:20px;
   z-index:9;
   opacity:1;
+  transition: margin-left 0.4s linear;
 `;
 
 
@@ -167,7 +161,7 @@ const MainMenu=styled.div`
   &.openMenu{
     display:block;
     position:fixed;
-    top:60px;
+    top:53px;
     bottom:0px;
     height:100vh;
     width:100%;
@@ -178,8 +172,8 @@ const MainMenu=styled.div`
   }
 
   &.closeMenu{
-    animation: 0.4s ${slideUp};
     display:none;
+    animation: 0.4s ${slideUp};
   }
 `;
 
@@ -197,7 +191,7 @@ const CategoryNav = styled.nav`
   max-height: 400px;
   overflow-y: auto;
   display:flex;
-  transition:all ease 0.3s;
+  animation: 0.6s ${slideDown};
 `;
 
 const CompanyNav = styled.nav` 
@@ -214,7 +208,7 @@ const CompanyNav = styled.nav`
   overflow-y: auto;
   display:flex;
   flex-wrap:wrap;
-  transition:all ease 0.3s;
+  animation: 1s ${slideDown};
 `;
 
 
@@ -224,6 +218,9 @@ const MenuItem = styled.button`
   background-color:white;
   border:none;
   outline:none;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const CategoryMenuItem = styled.button` 
@@ -231,6 +228,9 @@ const CategoryMenuItem = styled.button`
   border:none;
   outline:none;
   width: 150px;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const CompanyMenuItem = styled.button` 
@@ -238,6 +238,9 @@ const CompanyMenuItem = styled.button`
   border:none;
   outline:none;
   width: 150px;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const MenuText = styled.p` 
@@ -248,10 +251,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     display: block;
     padding: 20px;
-
-    /* &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    } */
+    color:black;
 `;
 
 export default Menu;
