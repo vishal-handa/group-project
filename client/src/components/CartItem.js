@@ -1,29 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { removeFromCart } from "../actions";
+import { removeFromCart, changeCartQuantity } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({
-  item,
-  setHasCheckedOut,
-  quantityInCart,
-  setQuantityInCart,
-}) => {
+const CartItem = ({ item, setHasCheckedOut }) => {
   const dispatch = useDispatch();
+  const [quantityInCart, setQuantityInCart] = useState(item.numInCart);
 
+  // Update numInCart in our state so that it can be deducted from stock when order is completed
   useEffect(() => {
-    setQuantityInCart(item.numInCart);
-  }, []);
+    dispatch(changeCartQuantity(item, quantityInCart));
+  }, [quantityInCart]);
 
   // increases number of cart items until cart quantity exceeds stock quantity
   const increaseQuantity = () => {
-    if (quantityInCart <= item.numInStock) {
+    if (quantityInCart < item.numInStock) {
       setQuantityInCart(quantityInCart + 1);
     }
   };
 
   // decreases number of items in cart
-  // when number of items === 0, the item is removed from cart
   const decreaseQuantity = () => {
     if (quantityInCart > 1) {
       setQuantityInCart(quantityInCart - 1);
