@@ -28,6 +28,8 @@ const Pagination = ({ productsPerPage, totalProducts, handlePageClicked }) => {
 const PageBox = styled.div`
     display: flex;
     justify-content:center;
+    margin-top:10px;
+    padding:10px;
 `;
 
 const PageNumber = styled.li`
