@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import Banner from "./Banner";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import CartItem from "./CartItem";
+import styled from "styled-components";
 import { clearCart, receiveItems } from "../actions";
-import { Link } from "react-router-dom";
+import Banner from "./Banner";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
   // selectedItem represents items that have been added to cart
   const selectedItem = Object.values(useSelector((state) => state.cart));
-  //console.log(selectedItem);
+  console.log(selectedItem);
   const [hasCheckedOut, setHasCheckedOut] = useState(false);
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
-  const [quantityInCart, setQuantityInCart] = useState();
+
+  // Initial cost is set to 0
+  const [subTotal, setSubTotal] = useState(0);
+  const [taxAmount, setTaxAmount] = useState(0);
+  const [total, setTotal] = useState(0);
 
   // ensures customer has entered text into name and email fields
   const firstNameHandler = (name) => {
@@ -47,10 +50,10 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
+  // When order is completed, tell server the in cart item quantity at time of purchase so that
+  // numInStock can be updated for next purchase
   const updateQuantity = (selectedItem) => {
     selectedItem.map((item) => {
-      //
-      item = { ...item, numInCart: quantityInCart };
       console.log(item);
       fetch(`/updateProduct/${item._id}`, {
         method: "POST",
@@ -73,13 +76,19 @@ const Cart = () => {
     updateQuantity(selectedItem);
   };
 
-  // let totalCost = 0;
-  // let costPerItem;
+  // Get price of items * items' quantity in cart
+  const handleSubTotal = (selectedItem) => {
+    const itemPrice = selectedItem.map((item) => {
+      return parseFloat(item.price.replace("$", "")) * item.numInCart;
+    });
+    console.log(itemPrice);
+    const totalPrice = itemPrice.reduce((a, b) => a + b, 0);
+    setSubTotal(totalPrice.toFixed(2));
+  };
 
-  // const calculateTotal = (selectedItem) => {
-  //     selectedItem.forEach(Number(selectedItem.price))
-  //     console.log()
-  // }
+  useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
+
+  // const taxRate =
 
   return (
     <Wrapper>
@@ -89,16 +98,43 @@ const Cart = () => {
         <CartContainer>
           {selectedItem &&
             selectedItem.map((elem) => {
+              console.log(elem);
               return (
                 <CartItem
                   item={elem}
                   key={elem._id}
                   setHasCheckedOut={setHasCheckedOut}
-                  quantityInCart={quantityInCart}
-                  setQuantityInCart={setQuantityInCart}
                 />
               );
             })}
+          <TotalPrice>
+            <p>
+              <span>Subtotal (CAD)</span>
+              <span>${subTotal}</span>
+            </p>
+            <label>Shipping destination: </label>
+            <select defaultValue="Select your location">
+              <option disabled>Select your location</option>
+              <option value="AB">Alberta</option>
+              <option value="BC">British Columbia</option>
+              <option value="MB">Manitoba</option>
+              <option value="NB">New Brunswick</option>
+              <option vlaue="NL">Newfoundland and Labrador</option>
+              <option value="NT">Northwest Territories</option>
+              <option value="NS">Nova Scotia</option>
+              <option value="NU">Nunavut</option>
+              <option value="ON">Ontario</option>
+              <option value="PE">Prince Edward Island</option>
+              <option value="QC">Quebec</option>
+              <option value="SK">Saskatchewan</option>
+              <option value="YT">Yukon</option>
+            </select>
+            <p>
+              <span>Total (CAD)</span>
+              Taxes included
+              <span>${total}</span>
+            </p>
+          </TotalPrice>
         </CartContainer>
       ) : (
         <p>Your cart is empty</p>
@@ -190,6 +226,12 @@ const CartContainer = styled.div`
     3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
+`;
+
+const TotalPrice = styled.div`
+  border-top: 2px solid black;
+  padding: 15px;
+  margin: 15px;
 `;
 
 const ItemInfoContainer = styled.div`
