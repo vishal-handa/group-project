@@ -88,7 +88,6 @@ const DescriptionQuantityContainer = styled.div`
 const ItemName = styled.p`
   margin: 5px 0px;
   font-size: 14px;
-  font-family: Montserrat;
   width: 500px;
 `;
 

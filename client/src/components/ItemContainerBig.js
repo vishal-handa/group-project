@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../actions";
+import { handleCheckInstock } from "./helpers/handle-check-instock-function";
+import imageFile from "../images/out-of-stock.png";
 
 const ItemContainerBig = () => {
   const { id } = useParams();
   const [selectedItem, setSelectedItem] = useState({});
   const cartItems = useSelector((state) => state.cart);
   //console.log(selectedItem);
+  //console.log(selectedItem._id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,33 +28,22 @@ const ItemContainerBig = () => {
     dispatch(addToCart(item));
   };
 
-  // Same code as in itemSmall...
-  let stockNum;
-  const handleCheckInstock = (selectedItem) => {
-    if (cartItems[id]) {
-      stockNum = selectedItem.numInStock - cartItems[id].numInCart;
-    } else {
-      stockNum = selectedItem.numInStock;
-    }
-    return stockNum;
-  };
-
   // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"),
   // and opacity based on whether item is available or not
-  console.log(typeof selectedItem.price);
+
   return (
     <Wrapper>
       <BigItemView>
         <ImageWrapper>
-          {handleCheckInstock(selectedItem) > 0 ? (
+          {handleCheckInstock(cartItems, selectedItem) > 0 ? (
             <Image src={selectedItem.imageSrc} />
           ) : (
-            <OutOfStock src={selectedItem.imageSrc} />
+            <OutOfStock src={imageFile} alt={"out of stock"} />
           )}
         </ImageWrapper>
         <Title>{selectedItem.name}</Title>
 
-        {handleCheckInstock(selectedItem) > 0 ? (
+        {handleCheckInstock(cartItems, selectedItem) > 0 ? (
           <Price>
             {selectedItem.price.includes(".")
               ? selectedItem.price
@@ -61,12 +53,12 @@ const ItemContainerBig = () => {
           <Padding />
         )}
 
-        {handleCheckInstock(selectedItem) > 0 ? (
+        {handleCheckInstock(cartItems, selectedItem) > 0 ? (
           <Button
             onClick={() => {
               handleAddToCart(selectedItem);
             }}
-            disabled={handleCheckInstock(selectedItem) < 0}
+            disabled={handleCheckInstock(cartItems, selectedItem) < 0}
           >
             Add to Cart
           </Button>
@@ -123,7 +115,7 @@ const OutOfStock = styled.img`
   height: 300px;
   margin: 0;
   padding: 8px;
-  opacity: 25%;
+  background: rgba(255, 255, 255, 1);
 `;
 
 const Title = styled.p`

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Fade } from 'react-slideshow-image';
@@ -74,8 +75,63 @@ const Image=styled.img`
     width:inherit;
     object-fit:cover;
     height:500px;
-`;
+=======
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import Menu from "./Menu";
+import bags from "../images/bags.png";
 
+const Home = () => {
+  const theCategories = useSelector((state) => state.items.items);
+  return (
+    <Wrapper>
+      <Body>
+        {/* <Image src={bags} /> */}
+
+        <SiteName>BluCast</SiteName>
+      </Body>
+      {theCategories && (
+        <Footer>
+          <Div>
+            <Img
+              src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}
+            />
+          </Div>
+          <Div>
+            <Img
+              src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}
+            />
+          </Div>
+          <Div>
+            <Img
+              src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}
+            />
+          </Div>
+          <Div>
+            <Img
+              src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}
+            />
+          </Div>
+          <Div>
+            <Img
+              src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}
+            />
+          </Div>
+        </Footer>
+      )}
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div``;
+
+const Header = styled.section``;
+
+const Body = styled.section`
+  width: 100vw;
+  object-fit: cover;
+  height: calc(100vh - 20em);
+`;
 
 const Label=styled.p`
     justify-content: center;
@@ -132,6 +188,36 @@ const Img=styled.img`
     &:hover{
         transform:scale(1.1);
     }
+
+const SiteName = styled.p`
+  width: inherit;
+  height: inherit;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  color: white;
+  font-size: 11em;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-shadow: 0px 1px 9px #24100a;
+`;
+
+const Footer = styled.section`
+  object-fit: cover;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Div = styled.div`
+  width: 99%;
+  height: 45vh;
+  padding: 5px;
+`;
+
+const Img = styled.img`
+  width: inherit;
+  height: inherit;
 `;
 
 export default Home;
