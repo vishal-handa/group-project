@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
 import { addToCart } from "../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import imageFile from "../images/out-of-stock.png";
+import { handleCheckInstock } from "./helpers/handle-check-instock-function";
 
 const ItemContainerSmall = ({
   item,
@@ -15,9 +15,10 @@ const ItemContainerSmall = ({
   //   price,
   //   location,
   element_id,
-  handleCheckInstock,
 }) => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  //console.log(cartItems);
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
@@ -30,13 +31,17 @@ const ItemContainerSmall = ({
     <SmallItemView>
       <StyledLink
         to={`/products/${element_id}`}
-        className={handleCheckInstock(item) <= 0 ? "disabled-link" : null}
+        className={
+          handleCheckInstock(cartItems, item) <= 0 ? "disabled-link" : null
+        }
       >
         <OnClickWrapper
-          className={handleCheckInstock(item) <= 0 ? "disabled-link" : null}
+          className={
+            handleCheckInstock(cartItems, item) <= 0 ? "disabled-link" : null
+          }
         >
           <ImageWrapper>
-            {handleCheckInstock(item) > 0 ? (
+            {handleCheckInstock(cartItems, item) > 0 ? (
               <Image src={imageSRC} />
             ) : (
               <OutOfStock src={imageFile} alt={"out of stock"} />
@@ -45,13 +50,17 @@ const ItemContainerSmall = ({
           <Title>{productName}</Title>
         </OnClickWrapper>
       </StyledLink>
-      {handleCheckInstock(item) > 0 ? <Price>{item.price}</Price> : <Padding />}
-      {handleCheckInstock(item) > 0 ? (
+      {handleCheckInstock(cartItems, item) > 0 ? (
+        <Price>{item.price}</Price>
+      ) : (
+        <Padding />
+      )}
+      {handleCheckInstock(cartItems, item) > 0 ? (
         <Button
           onClick={() => {
             handleAddToCart(item);
           }}
-          disabled={handleCheckInstock(item) < 0}
+          disabled={handleCheckInstock(cartItems, item) < 0}
         >
           Add to Cart
         </Button>
