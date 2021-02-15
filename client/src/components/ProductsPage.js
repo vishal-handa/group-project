@@ -6,10 +6,16 @@ import ProductGrid from "./ProductGrid";
 const ProductsPage = ({ products, bannerText }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState();
+  //console.log(products);
 
+  // Turn the price into a number so that the array can be sorted by ascending and descending order
   const formattedProducts = products.map((item) => {
-    return { ...item, price: parseFloat(item.price.replace("$", "")) };
+    return {
+      ...item,
+      price: parseFloat(item.price.replace("$", "").replace(",", "")),
+    };
   });
+  //console.log(formattedProducts);
 
   const order = { asc: "asc", des: "des" };
   const sortProducts = (arrOfObjects, key, sortOrder = order.asc) => {
@@ -28,6 +34,7 @@ const ProductsPage = ({ products, bannerText }) => {
   const descendPrice = sortProducts(formattedProducts, "price", order.des);
   //console.log({ascendPrice, descendPrice})
 
+  //Set array that will be mapped over based on state of sortBy
   const showPageProducts =
     sortBy === "low"
       ? ascendPrice
@@ -44,9 +51,13 @@ const ProductsPage = ({ products, bannerText }) => {
     indexOfLastProduct
   );
 
-  //OnClick for page change
+  //OnClick for page change, and scroll near of product grid
   const handlePageClicked = (page) => {
     setCurrentPage(page);
+    window.scrollTo({
+      top: 225,
+      behavior: "smooth",
+    });
   };
 
   return (
