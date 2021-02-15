@@ -15,6 +15,7 @@ import Menu from "./Menu";
 import Cart from "./Cart";
 import ItemContainerBig from './ItemContainerBig';
 import ConfirmationPage from './ConfirmationPage';
+import Footer from './Footer';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const App = () => {
             <ConfirmationPage />
           </Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
     </Wrapper>
     
@@ -78,8 +80,6 @@ const App = () => {
 }
 
 const Wrapper = styled.div` 
-  /* display: flex; */
-
   height:100vh;
   margin: 0;
   padding: 0;

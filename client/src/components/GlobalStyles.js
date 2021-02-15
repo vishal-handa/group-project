@@ -69,7 +69,6 @@ export default createGlobalStyle`
     label,
     button {
         font-family: 'Montserrat';
-        text-align: center;
     }
 
     p,
