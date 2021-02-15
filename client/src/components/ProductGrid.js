@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import ItemContainerSmall from "./ItemContainerSmall";
-import { useSelector } from "react-redux";
 
 const ProductGrid = ({ showGridProducts, setSortBy }) => {
   //console.log(products)
-  const cartItems = useSelector((state) => state.cart);
 
   const handleSortBy = (event) => {
     setSortBy(event.target.value);
@@ -16,17 +14,6 @@ const ProductGrid = ({ showGridProducts, setSortBy }) => {
     return <div>Loading</div>;
   }
 
-  // Check to see if item is in cart, if yes return available stock (excluding numInCart), if not return original numInStock
-  let stockNum;
-  const handleCheckInstock = (elem) => {
-    if (cartItems[elem._id]) {
-      stockNum = elem.numInStock - cartItems[elem._id].numInCart;
-    } else {
-      stockNum = elem.numInStock;
-    }
-    return stockNum;
-  };
-  //console.log(showGridProducts);
   return (
     <Grid>
       <SortSelect
@@ -56,7 +43,6 @@ const ProductGrid = ({ showGridProducts, setSortBy }) => {
             element_id={elem._id}
             productName={elem.name}
             imageSRC={elem.imageSrc}
-            handleCheckInstock={handleCheckInstock}
             // category={elem.category}
             // companyId={elem.companyId}
             // price={elem.price}

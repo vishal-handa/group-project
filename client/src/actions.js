@@ -3,8 +3,8 @@ export const receiveCategories = (categories) => ({
   categories,
 });
 
-export const receiveItems = (items) => ({
-  type: "RECEIVE_ITEMS",
+export const receiveProducts = (items) => ({
+  type: "RECEIVE_PRODUCTS",
   items,
 });
 

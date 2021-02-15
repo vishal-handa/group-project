@@ -1,46 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import styled from "styled-components";
-import { useDispatch, useSelector } from 'react-redux';
-
-import { receiveCategories, receiveItems, receiveCompanies } from '../actions';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  handleFetchProducts,
+  handleFetchCategories,
+  handleFetchCompanies,
+} from "./helpers/fetch-request-helper";
 import SelectedCompanyPage from "./SelectedCompanyPage";
 import SelectedCategoryPage from "./SelectedCategoryPage";
-
 import AllProductPage from "./AllProductPage";
 
 import Home from "./Home";
 import Menu from "./Menu";
 import Cart from "./Cart";
-import ItemContainerBig from './ItemContainerBig';
-import ConfirmationPage from './ConfirmationPage';
+import ItemContainerBig from "./ItemContainerBig";
+import ConfirmationPage from "./ConfirmationPage";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const homePageState = useSelector(state=>state);
+  const homePageState = useSelector((state) => state);
   // console.log(homePageState);
-  
+
   useEffect(() => {
-    fetch('/categories')
-      .then(res=>res.json())
-      .then(res=>dispatch(receiveCategories(res.data)));
-
-    fetch("/companies")
-    .then((res) => res.json())
-    .then((data) => dispatch(receiveCompanies(data.data)))
-
-    fetch('/products')
-    .then(res=>res.json())
-    .then(res=>dispatch(receiveItems(res.data)));
+    handleFetchProducts(dispatch);
+    handleFetchCategories(dispatch);
+    handleFetchCompanies(dispatch);
   }, []);
 
   return (
     <Wrapper>
       <BrowserRouter>
-      <GlobalStyles />
-        <Menu homePageState={homePageState}/>
+        <GlobalStyles />
+        <Menu homePageState={homePageState} />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -72,15 +66,13 @@ const App = () => {
         </Switch>
       </BrowserRouter>
     </Wrapper>
-    
-  )
+  );
+};
 
-}
-
-const Wrapper = styled.div` 
+const Wrapper = styled.div`
   /* display: flex; */
 
-  height:100vh;
+  height: 100vh;
   margin: 0;
   padding: 0;
 `;
