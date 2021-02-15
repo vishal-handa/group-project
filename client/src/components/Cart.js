@@ -270,6 +270,26 @@ const CartContainer = styled.div`
     3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
+
+  &::-webkit-scrollbar-track
+  {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+  }
+
+  &::-webkit-scrollbar
+    {
+      width: 7px;
+      background-color: #F5F5F5;
+    }
+
+  &::-webkit-scrollbar-thumb
+    {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #555;
+    }
 `;
 
 const TotalPrice = styled.div`
