@@ -56,7 +56,7 @@ const Menu = ({homePageState}) => {
       <MenuItemContainer style={{marginLeft: (companyIsActive===true || categoryIsActive===true) ? '5%' : '45%'}
       }
       >
-        <Link exact to="/">
+        <Link to="/">
           <MenuItem onClick={()=>setStatus('close')}>
             <MenuText>Home</MenuText>
           </MenuItem>
@@ -263,7 +263,7 @@ const CompanyMenuItem = styled.button`
 `;
 
 const MenuText = styled.p` 
-  font-size: 16px;
+  font-size: 20px;
 `;
 
 const StyledLink = styled(Link)`
@@ -271,6 +271,7 @@ const StyledLink = styled(Link)`
     display: block;
     padding: 20px;
     color:black;
+    font-size:18px;
 `;
 
 export default Menu;
