@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { fadeInDown, fadeOutUp, slideInLeft, slideInRight } from 'react-animations';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import BurgerMenu from "./TheBurger/BurgerMenu";
 
 const Menu = ({homePageState}) => {
@@ -29,6 +30,22 @@ const Menu = ({homePageState}) => {
     setCompanyIsActive(!companyIsActive);
     setCategoryIsActive(false);
   }
+
+
+  // Determine total number of items in the cart and display next to cart icon
+  const [numItemsInCart, setNumItemsInCart] = useState(0);
+  const cartItems = Object.values(useSelector((state) => state.cart));
+
+  const calculateCartTotal = (cartItems) => {
+    const cartNumPerItem = cartItems.map((item) => {
+      return item.numInCart;
+    })
+    const totalCartItems = cartNumPerItem.reduce((a, b) => a + b, 0)
+    setNumItemsInCart(totalCartItems);
+  }
+
+  useEffect(() => calculateCartTotal(cartItems), [cartItems]);
+
     
   return (
     <Wrapper>
@@ -44,14 +61,19 @@ const Menu = ({homePageState}) => {
       <div>
       <Link to="/cart">
           <MenuItem onClick={()=>setStatus('close')}>
-            <MenuText>🛒</MenuText>
+            <CartItemDiv>
+              <MenuText>🛒</MenuText>
+              <Circle>
+                <CartItems>{numItemsInCart}</CartItems>
+              </Circle>
+            </CartItemDiv>
           </MenuItem>
         </Link>
       </div>
         
       
       <MainMenu 
-                className={status==='open' ? 'openMenu' : 'closeMenu'}
+        className={status==='open' ? 'openMenu' : 'closeMenu'}
       >
       <MenuItemContainer style={{marginLeft: (companyIsActive===true || categoryIsActive===true) ? '5%' : '45%'}
       }
@@ -177,8 +199,6 @@ const MainMenu=styled.div`
   }
 `;
 
-
-
 const CategoryNav = styled.nav` 
   background: #ffffff;
   border-radius: 5px;
@@ -230,8 +250,6 @@ const CompanyNav = styled.nav`
     }
 `;
 
-
-
 const MenuItem = styled.button` 
   width: 150px;
   background-color:white;
@@ -267,11 +285,34 @@ const MenuText = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-    text-decoration: none;
-    display: block;
-    padding: 20px;
-    color:black;
-    font-size:18px;
+  text-decoration: none;
+  display: block;
+  padding: 20px;
+  color:black;
+  font-size:18px;
+`;
+
+const CartItemDiv = styled.div` 
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+`;
+
+const Circle = styled.div` 
+  background-color: #DCDCDC;
+  height: 25px;
+  width: 25px;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 20px 0px 0px 15px;
+`;
+
+const CartItems = styled.p`
+  font-size: 16px;
+  z-index: 1;
 `;
 
 export default Menu;
