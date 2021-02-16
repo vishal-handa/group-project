@@ -1,33 +1,54 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import entertainment from '../images/entertainment.jpg';
-import fitness from '../images/fitness.jpg';
-import lifestyle from '../images/lifestyle.jpg';
-import medical from '../images/medical.png'
+import medical from '../images/medical.png';
+import belkin from './logos/belkin.png';
+import casio from './logos/casio.png';
+import lg from './logos/lg.jpg';
+import motorola from './logos/motorola.png';
+import nike from './logos/nike.jpg';
+import samsung from './logos/samsung.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
-
+    const randomArray = Array(10).fill().map(() => Math.floor(Math.random() * 348) + 1);
     return (
         <Wrapper>
             <Banner>
-                
+                <Image src={medical}/>
             </Banner>
             <Label>Popular Brands</Label>
+            <LogoContainer>
+                <Link to={'/companies/Belkin'}>
+                    <Logo src={belkin}/>
+                </Link>
+                <Link to={'/companies/Casio'}>
+                    <Logo src={casio}/>
+                </Link>
+                <Link to={'/companies/Lg'}>
+                    <Logo src={lg}/>
+                </Link>
+                <Link to={'/companies/Motorola'}>
+                    <Logo src={motorola}/>
+                </Link>
+                <Link to={'/companies/Nike'}>
+                    <Logo src={nike}/>
+                </Link>
+                <Link to={'/companies/Samsung'}>
+                    <Logo src={samsung}/>
+                </Link>
+            </LogoContainer>
             <Label>Most popular articles</Label>
-            {theCategories &&
+            {(theCategories && randomArray) &&
                 <ProductsList>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
-                    <Div><Img src={theCategories[Math.floor(Math.random() * 348) + 1].imageSrc}/></Div>
+                    {randomArray.map((elem)=>{
+                        return (
+                            <StyledLink key={elem} to={`/products/${theCategories[elem]._id}`}>
+                                <Img src={theCategories[elem].imageSrc}/>
+                            </StyledLink>
+                        )
+                    })}
                 </ProductsList>}
         </Wrapper>
     )
@@ -39,19 +60,13 @@ const Wrapper=styled.div`
 
 const Banner=styled.div`
     width:inherit;
-    object-fit:cover;
-    height:500px;
     top:55px;
-    div{
-        width:inherit;
-        height:inherit;
-    }
 `;
 
 const Image=styled.img`
     width:inherit;
+    height:800px;
     object-fit:cover;
-    height:500px;
 `;
 
 const Label=styled.p`
@@ -64,6 +79,20 @@ const Label=styled.p`
     margin-block-start: 0;
     margin-block-end: 0;
     text-shadow: 0px 1px 9px #24100A;
+`;
+
+const LogoContainer=styled.div`
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin: 10px 17% 30px 17%;
+`;
+
+const Logo=styled.img`
+    height:150px;
+    width:250px;
+    padding:5px;
 `;
 
 const ProductsList=styled.section`
@@ -93,7 +122,7 @@ const ProductsList=styled.section`
     }
 `;
 
-const Div=styled.div`
+const StyledLink=styled(Link)`
     margin: 10px;
     height:200px;
     width:200px;
