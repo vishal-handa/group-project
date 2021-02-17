@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Banner from "./Banner";
 import Pagination from "./Pagination";
 import ProductGrid from "./ProductGrid";
+import styled from "styled-components";
 
 const ProductsPage = ({ products, bannerText }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +62,7 @@ const ProductsPage = ({ products, bannerText }) => {
   };
 
   return (
-    <>
+    <Page>
       {products ? (
         <>
           <Banner text={bannerText} />
@@ -78,8 +79,12 @@ const ProductsPage = ({ products, bannerText }) => {
       ) : (
         "Loading"
       )}
-    </>
+    </Page>
   );
 };
+
+const Page = styled.div`
+  margin-top: 100px;
+`;
 
 export default ProductsPage;

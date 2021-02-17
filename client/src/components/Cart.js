@@ -49,10 +49,10 @@ const Cart = () => {
   };
 
   const creditCardHandler = (name) => {
-    return ({ target: { value }}) => {
+    return ({ target: { value } }) => {
       setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
-    }
-  }
+    };
+  };
 
   // Scroll further down page upon checkout so customer sees name/email/credit card fields
   const handleCheckout = () => {
@@ -196,21 +196,21 @@ const Cart = () => {
         <p>Your cart is empty</p>
       )}
 
-      {province === "" ?
-      <CheckoutButton
-        onClick={() => handleCheckout()}
-        disabled={selectedItem.length < 1 || province === ""}
-      >
-        Checkout
-      </CheckoutButton>
-      :
-      <CheckoutButton
-        onClick={() => handleCheckout()}
-        disabled={selectedItem.length < 1 || province === ""}
-      >
-        Checkout
-      </CheckoutButton>
-      }
+      {province === "" ? (
+        <CheckoutButton
+          onClick={() => handleCheckout()}
+          disabled={selectedItem.length < 1 || province === ""}
+        >
+          Checkout
+        </CheckoutButton>
+      ) : (
+        <CheckoutButton
+          onClick={() => handleCheckout()}
+          disabled={selectedItem.length < 1 || province === ""}
+        >
+          Checkout
+        </CheckoutButton>
+      )}
 
       {hasCheckedOut ? (
         <CheckoutDiv>
@@ -248,7 +248,7 @@ const Cart = () => {
             />
           </Input>
           <Input>
-            <input 
+            <input
               name="cardNumber"
               placeholder="Credit card number"
               type="email"
@@ -260,8 +260,9 @@ const Cart = () => {
           </Input>
           {customerInfo.firstName.length > 0 &&
           (customerInfo.lastName.length > 0) &
-          (customerInfo.email.length > 0 && customerInfo.email.includes("@")) &
-          (customerInfo.cardNumber.length > 0) ? (
+            (customerInfo.email.length > 0 &&
+              customerInfo.email.includes("@")) &
+            (customerInfo.cardNumber.length > 0) ? (
             <Link to="/confirmation">
               <SubmitButton onClick={() => handlePurchase(selectedItem)}>
                 Complete Your Purchase
@@ -293,6 +294,7 @@ const ContinueShopping = styled(NavLink)`
   text-decoration: none;
   color: black;
   border: 2px solid black;
+  border-radius: 3px;
   cursor: pointer;
 `;
 
@@ -302,31 +304,29 @@ const CartContainer = styled.div`
   min-width: 900px;
   max-height: 500px;
   overflow-y: auto;
+  border-radius: 3px;
   background: #fff;
   box-shadow: 3px 2.8px 2.2px rgba(0, 0, 0, 0.07),
     3px 6.7px 5.3px rgba(0, 0, 0, 0.05), 3px 12.5px 10px rgba(0, 0, 0, 0.042),
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
 
-  &::-webkit-scrollbar-track
-  {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
   }
 
-  &::-webkit-scrollbar
-    {
-      width: 7px;
-      background-color: #F5F5F5;
-    }
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: #f5f5f5;
+  }
 
-  &::-webkit-scrollbar-thumb
-    {
-      border-radius: 10px;
-      box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-      background-color: #555;
-    }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  }
 `;
 
 const TotalPrice = styled.div`
@@ -372,6 +372,7 @@ const CheckoutButton = styled.button`
   background: black;
   color: white;
   border: none;
+  border-radius: 3px;
   padding: 5px;
   margin: 50px;
   font-size: 24px;
@@ -399,12 +400,17 @@ const SubmitButton = styled.button`
   background: black;
   color: white;
   border: none;
+  border-radius: 3px;
   padding: 5px;
   margin: 20px 0px 50px 0px;
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;
-  &:link, &:focus, &:visited, &:hover, &:active {
+  &:link,
+  &:focus,
+  &:visited,
+  &:hover,
+  &:active {
     text-decoration: none;
   }
 `;
@@ -417,6 +423,7 @@ const CompleteForm = styled.div`
   height: 50px;
   background: black;
   border: none;
+  border-radius: 3px;
   margin: 20px 0px 50px 0px;
   font-size: 24px;
   font-weight: 600;

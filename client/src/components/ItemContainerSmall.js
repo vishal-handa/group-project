@@ -102,7 +102,7 @@ const OnClickWrapper = styled.div`
 
 const ImageWrapper = styled.div`
   overflow: hidden;
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid gray;
   display: flex;
   justify-content: center;
 `;
@@ -166,6 +166,7 @@ const OutOfStockTextContainer = styled.div`
   background: black;
   border: none;
   margin-bottom: 8px;
+  border-radius: 3px;
 `;
 
 const OutOfStockText = styled.p`

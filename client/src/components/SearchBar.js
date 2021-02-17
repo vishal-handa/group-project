@@ -27,29 +27,34 @@ const SearchBar = () => {
           setStatus("open");
         }}
       />
-      {(status==='open') && <SearchList>
-        {searchProductsArray
-          ?.filter((product) => {
-            if (searchTerm === "") {
-              return null;
-            } else if (
-              product.name.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return product;
-            }
-          })
-          .slice(0,9)
-          .map((product) => {
-            return (
-              <Button onClick={() => {
-                handleSearchTermClicked(product);
-                setStatus("close");
-              }}>
-                {product.name}
-              </Button>
-            );
-          })}
-      </SearchList>}
+      {status === "open" && (
+        <SearchList>
+          {searchProductsArray
+            ?.filter((product) => {
+              if (searchTerm === "") {
+                return null;
+              } else if (
+                product.name.toLowerCase().includes(searchTerm.toLowerCase())
+              ) {
+                return product;
+              }
+            })
+            .slice(0, 9)
+            .map((product) => {
+              return (
+                <Button
+                  onClick={() => {
+                    handleSearchTermClicked(product);
+                    setStatus("close");
+                    setSearchTerm("");
+                  }}
+                >
+                  {product.name}
+                </Button>
+              );
+            })}
+        </SearchList>
+      )}
     </div>
   );
 };
@@ -57,10 +62,10 @@ const SearchBar = () => {
 const Input = styled.input`
   width: 300px;
   padding: 10px;
-  margin:15px;
-  border:none;
-  outline:none;
-  border-bottom:2px solid black;
+  margin: 15px;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid black;
 `;
 
 const SearchList = styled.div`
@@ -68,19 +73,19 @@ const SearchList = styled.div`
   max-height: 150px;
 `;
 
-const Button=styled.button`
-  background:white;
-  outline:none;
-  border:none;
-  padding:5px;
-  text-align:left;
+const Button = styled.button`
+  background: white;
+  outline: none;
+  border: none;
+  padding: 5px;
+  text-align: left;
   transition: 0.3s;
-  width:290px;
-  margin-left:10px;
-  &:hover{
+  width: 290px;
+  margin-left: 10px;
+  &:hover {
     cursor: pointer;
-    background:gray;
-    color:white;
+    background: gray;
+    color: white;
   }
 `;
 

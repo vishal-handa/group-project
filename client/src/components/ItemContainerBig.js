@@ -197,6 +197,7 @@ const OutOfStockTextContainer = styled.div`
   background: black;
   border: none;
   margin-bottom: 8px;
+  border-radius: 3px;
 `;
 
 const OutOfStockText = styled.p`
