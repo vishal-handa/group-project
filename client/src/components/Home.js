@@ -17,12 +17,10 @@ const Home=()=>{
 
     const handleScroll=(direction)=>{
         if(direction==="left"){
-            console.log(scrollRef);
-            scrollRef.current.scrollLeft -= 150;
+            scrollRef.current.scrollLeft -= 200;
         }
         else{
-            console.log(scrollRef);
-            scrollRef.current.scrollLeft += 150;
+            scrollRef.current.scrollLeft += 200;
         }
     }
     return (
@@ -60,9 +58,9 @@ const Home=()=>{
                         >{'<'}</ScrollButton>
                     {(theCategories && randomArray) &&
                         <ProductsList ref={scrollRef}>
-                            {randomArray.map((elem)=>{
+                            {randomArray.map((elem, i)=>{
                                 return (
-                                    <StyledLink key={elem} to={`/products/${theCategories[elem]._id}`}>
+                                    <StyledLink key={elem+i} to={`/products/${theCategories[elem]._id}`}>
                                         <Img src={theCategories[elem].imageSrc}/>
                                     </StyledLink>
                                 )
@@ -115,14 +113,12 @@ const Div3=styled.div`
 `;
 
 const ScrollButton=styled.button`
-    position:relative;
-    top:50px;
     background:white;
     outline:none;
     border:none;
     height:50px;
     width:50px;
-    margin:20px;
+    margin:90px 20px 20px 20px;
     border-radius:50%;
     font-size:30px;
     transition:0.4s;
@@ -206,6 +202,7 @@ const Img=styled.img`
     height:inherit;
     border-radius:50%;
     transition: transform 0.3s;
+    object-fit:cover;
     &:hover{
         transform:scale(1.1);
     }

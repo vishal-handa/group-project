@@ -83,17 +83,24 @@ const Wrapper=styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-evenly;
-    margin: 40px 20px 20px 20px;
+    padding:40px 20px 20px 20px;
+    background-color:black;
+    width:inherit;
     &>div>p{
         font-size:13px;
+        color:white;
     }
     span{
         font-size:13px;
         margin-bottom:1em;
+        color:white;
     }
     &>section>div{
         margin-block-start: 1em;
         margin-block-end: 1em;
+    }
+    h3{
+        color:white;
     }
 `;
 

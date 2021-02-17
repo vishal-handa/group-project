@@ -65,8 +65,8 @@ const Menu = ({ homePageState }) => {
       <SearchBar />
       <div>
         <Link to="/cart">
-          <MenuItem onClick={() => setStatus("close")}>
-            <CartItemDiv>
+          <CartButton onClick={() => setStatus("close")}>
+            <CartItemDiv onClick={() => setStatus("close")}>
               <MenuText>
                 <BsBag size={24} />
               </MenuText>
@@ -74,7 +74,7 @@ const Menu = ({ homePageState }) => {
                 <CartItems>{numItemsInCart}</CartItems>
               </Circle>
             </CartItemDiv>
-          </MenuItem>
+          </CartButton>
         </Link>
       </div>
 
@@ -185,6 +185,7 @@ const MenuItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  padding-top:57px;
   z-index: 9;
   opacity: 1;
   transition: margin-left 0.4s linear;
@@ -214,6 +215,7 @@ const CategoryNav = styled.nav`
   top: 10%;
   right: 10px;
   width: 80%;
+  padding-top:57px;
   opacity: 1;
   padding-left: 5px;
   max-height: 400px;
@@ -230,6 +232,7 @@ const CompanyNav = styled.nav`
   right: 10px;
   width: 80%;
   height: 100%;
+  padding-top:57px;
   opacity: 1;
   padding-left: 5px;
   max-height: 400px;
@@ -264,6 +267,16 @@ const CompanyNav = styled.nav`
 
 const MenuItem = styled.button`
   width: 150px;
+  background-color: white;
+  border: none;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const CartButton = styled.button`
+  padding-right:10px;
   background-color: white;
   border: none;
   outline: none;

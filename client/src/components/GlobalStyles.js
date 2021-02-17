@@ -11,7 +11,9 @@ export default createGlobalStyle`
     body { 
         margin: 0
     }
-
+    body { 
+        scroll-behavior:smooth
+    }
     html, body, div,
     input, button, select, option,
     h1, h2, h3, h4, h5, h6, p,
