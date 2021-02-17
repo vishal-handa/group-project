@@ -18,6 +18,7 @@ const Cart = () => {
     firstName: "",
     lastName: "",
     email: "",
+    cardNumber: "",
   });
 
   // Initial cost is set to 0
@@ -47,8 +48,19 @@ const Cart = () => {
     };
   };
 
+  const creditCardHandler = (name) => {
+    return ({ target: { value }}) => {
+      setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
+    }
+  }
+
+  // Scroll further down page upon checkout so customer sees name/email/credit card fields
   const handleCheckout = () => {
     setHasCheckedOut(true);
+    window.scrollTo({
+      top: 700,
+      behavior: "smooth",
+    });
   };
 
   const handleClearCart = () => {
@@ -183,12 +195,22 @@ const Cart = () => {
       ) : (
         <p>Your cart is empty</p>
       )}
+
+      {province === "" ?
       <CheckoutButton
         onClick={() => handleCheckout()}
-        disabled={selectedItem.length < 1}
+        disabled={selectedItem.length < 1 || province === ""}
       >
         Checkout
       </CheckoutButton>
+      :
+      <CheckoutButton
+        onClick={() => handleCheckout()}
+        disabled={selectedItem.length < 1 || province === ""}
+      >
+        Checkout
+      </CheckoutButton>
+      }
 
       {hasCheckedOut ? (
         <CheckoutDiv>
@@ -197,6 +219,7 @@ const Cart = () => {
               name="firstName"
               placeholder="First Name"
               type="text"
+              required
               value={customerInfo.firstName}
               onChange={firstNameHandler("firstName")}
               style={{ height: "25px", width: "200px" }}
@@ -207,6 +230,7 @@ const Cart = () => {
               name="surname"
               placeholder="Last Name"
               type="text"
+              required
               value={customerInfo.lastName}
               onChange={lastNameHandler("lastName")}
               style={{ height: "25px", width: "200px" }}
@@ -217,14 +241,27 @@ const Cart = () => {
               name="email"
               placeholder="Email"
               type="text"
+              required
               value={customerInfo.email}
               onChange={emailHandler("email")}
               style={{ height: "25px", width: "200px" }}
             />
           </Input>
+          <Input>
+            <input 
+              name="cardNumber"
+              placeholder="Credit card number"
+              type="email"
+              reqired
+              value={customerInfo.cardNumber}
+              onChange={creditCardHandler("cardNumber")}
+              style={{ height: "25px", width: "200px" }}
+            />
+          </Input>
           {customerInfo.firstName.length > 0 &&
           (customerInfo.lastName.length > 0) &
-            (customerInfo.email.length > 0) ? (
+          (customerInfo.email.length > 0 && customerInfo.email.includes("@")) &
+          (customerInfo.cardNumber.length > 0) ? (
             <Link to="/confirmation">
               <SubmitButton onClick={() => handlePurchase(selectedItem)}>
                 Complete Your Purchase
@@ -318,7 +355,6 @@ const ItemName = styled.p`
   font-size: 14px;
 `;
 
-// make this an input field so customers can increase quantity
 const ItemQuantity = styled.p`
   margin: 5px 0px;
   font-size: 14px;
@@ -367,8 +403,10 @@ const SubmitButton = styled.button`
   margin: 20px 0px 50px 0px;
   font-size: 24px;
   font-weight: 600;
-  text-decoration: none;
   cursor: pointer;
+  &:link, &:focus, &:visited, &:hover, &:active {
+    text-decoration: none;
+  }
 `;
 
 const CompleteForm = styled.div`

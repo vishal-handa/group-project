@@ -35,6 +35,7 @@ const TextContainer = styled.div`
     align-items: center;
     height: 300px;
     width: 600px;
+    margin-top: 100px;
     border: 2px solid black;
 `;
 
