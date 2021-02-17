@@ -56,7 +56,7 @@ const ProductGrid = ({ showGridProducts, setSortBy }) => {
 
 const Grid = styled.div`
   display: block;
-  margin: 0 65px;
+  margin: 0 5%;
 `;
 
 const Wrapper = styled.div`

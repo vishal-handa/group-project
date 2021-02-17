@@ -31,6 +31,7 @@ const App = () => {
     handleFetchProducts(dispatch);
     handleFetchCategories(dispatch);
     handleFetchCompanies(dispatch);
+    document.title="BluCast || Get The Best Wearable Technology";
   }, []);
 
   return (

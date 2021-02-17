@@ -1,66 +1,92 @@
-import React from "react";
+import React, { createRef } from "react";
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import banner from '../images/banner.png';
 import belkin from './logos/belkin.png';
 import casio from './logos/casio.png';
-import lg from './logos/lg.jpg';
+import lg from './logos/lg.png';
 import motorola from './logos/motorola.png';
-import nike from './logos/nike.jpg';
+import nike from './logos/nike-new.png';
 import samsung from './logos/samsung.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
     const randomArray = Array(10).fill().map(() => Math.floor(Math.random() * 348) + 1);
+    const scrollRef = createRef();
+
+    const handleScroll=(direction)=>{
+        if(direction==="left"){
+            console.log(scrollRef);
+            scrollRef.current.scrollLeft -= 150;
+        }
+        else{
+            console.log(scrollRef);
+            scrollRef.current.scrollLeft += 150;
+        }
+    }
     return (
         <Wrapper>
             <Banner>
                 <Image src={banner}/>
             </Banner>
-            <Label>Popular Brands</Label>
-            <LogoContainer>
-                <Link to={'/companies/Belkin'}>
-                    <Logo src={belkin}/>
-                </Link>
-                <Link to={'/companies/Casio'}>
-                    <Logo src={casio}/>
-                </Link>
-                <Link to={'/companies/Lg'}>
-                    <Logo src={lg}/>
-                </Link>
-                <Link to={'/companies/Motorola'}>
-                    <Logo src={motorola}/>
-                </Link>
-                <Link to={'/companies/Nike'}>
-                    <Logo src={nike}/>
-                </Link>
-                <Link to={'/companies/Samsung'}>
-                    <Logo src={samsung}/>
-                </Link>
-            </LogoContainer>
-            <Label>Most popular articles</Label>
-            {(theCategories && randomArray) &&
-                <ProductsList>
-                    {randomArray.map((elem)=>{
-                        return (
-                            <StyledLink key={elem} to={`/products/${theCategories[elem]._id}`}>
-                                <Img src={theCategories[elem].imageSrc}/>
-                            </StyledLink>
-                        )
-                    })}
-                </ProductsList>}
+            <Div1>
+                <Label>Popular Brands</Label>
+                <LogoContainer>
+                    <Link to={'/companies/Belkin'}>
+                        <Logo src={belkin}/>
+                    </Link>
+                    <Link to={'/companies/Casio'}>
+                        <Logo src={casio}/>
+                    </Link>
+                    <Link to={'/companies/Lg'}>
+                        <Logo src={lg}/>
+                    </Link>
+                    <Link to={'/companies/Motorola'}>
+                        <Logo src={motorola}/>
+                    </Link>
+                    <Link to={'/companies/Nike'}>
+                        <Logo src={nike}/>
+                    </Link>
+                    <Link to={'/companies/Samsung'}>
+                        <Logo src={samsung}/>
+                    </Link>
+                </LogoContainer>
+            </Div1>
+            <Div2>
+                <Label>Most popular articles</Label>
+                <Div3>
+                    <ScrollButton type="button" onClick={()=>handleScroll("left")}
+                        >{'<'}</ScrollButton>
+                    {(theCategories && randomArray) &&
+                        <ProductsList ref={scrollRef}>
+                            {randomArray.map((elem)=>{
+                                return (
+                                    <StyledLink key={elem} to={`/products/${theCategories[elem]._id}`}>
+                                        <Img src={theCategories[elem].imageSrc}/>
+                                    </StyledLink>
+                                )
+                            })}
+                    </ProductsList>}
+                    
+                    <ScrollButton type="button" onClick={()=>handleScroll("right")}
+                    >{'>'}</ScrollButton>
+                </Div3>
+            </Div2>
         </Wrapper>
     )
 }
 
 const Wrapper=styled.div`
     width:100%;
+    scroll-snap-type: y mandatory;
+    scroll-snap-type: x none;
 `;
 
 const Banner=styled.div`
     width:inherit;
-    top:55px;
+    top:57px;
+    scroll-snap-align:start;
 `;
 
 const Image=styled.img`
@@ -69,16 +95,57 @@ const Image=styled.img`
     object-fit:cover;
 `;
 
+const Div1= styled.div`
+    height:520px;
+    background-color:#ffd6e0;
+    scroll-snap-align:start;
+`;
+
+const Div2= styled.div`
+    height:500px;
+    background-color:#c4f3ff;
+    scroll-snap-align:start;
+`;
+
+const Div3=styled.div`
+    display:flex;
+    flex-direction:row nowrap;
+    justify-content:space-between;
+    align-items:center;
+`;
+
+const ScrollButton=styled.button`
+    position:relative;
+    top:50px;
+    background:white;
+    outline:none;
+    border:none;
+    height:50px;
+    width:50px;
+    margin:20px;
+    border-radius:50%;
+    font-size:30px;
+    transition:0.4s;
+    border:1px solid gray;
+    &:hover{
+        cursor: pointer;
+        background:black;
+        color:white;
+    }
+`;
+
 const Label=styled.p`
     justify-content: center;
     flex-direction: column;
     align-items: center;
     display: flex;
-    color:white;
+    color:black;
     font-size:5em;
+    font-weight:900;
     margin-block-start: 0;
     margin-block-end: 0;
-    text-shadow: 0px 1px 9px #24100A;
+    padding-top:50px;
+    /* text-shadow: 0px 1px 9px #24100A; */
 `;
 
 const LogoContainer=styled.div`
@@ -86,21 +153,26 @@ const LogoContainer=styled.div`
     flex-direction:row;
     flex-wrap:wrap;
     justify-content:center;
-    margin: 10px 17% 30px 17%;
+    margin: 20px 12% 30px 12%;
+    align-items:center;
 `;
 
 const Logo=styled.img`
     height:150px;
     width:250px;
     padding:5px;
+    margin-inline-end:20px;
 `;
 
-const ProductsList=styled.section`
+const ProductsList=styled.div`
     display:flex;
     flex-flow: row nowrap;
+    padding-top:90px;
+    width:80%;
     scroll-snap-type: x mandatory;
     scroll-snap-type: y none;
     overflow-x:scroll;
+    scroll-behavior: smooth;
     &::-webkit-scrollbar-track
     {
         box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -133,7 +205,7 @@ const Img=styled.img`
     width:inherit;
     height:inherit;
     border-radius:50%;
-    transition: scale 0.6 linear;
+    transition: transform 0.3s;
     &:hover{
         transform:scale(1.1);
     }

@@ -94,7 +94,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+  margin: 58px 50px 50px 50px;
 `;
 
 const BigItemView = styled.div`
