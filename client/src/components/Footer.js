@@ -83,7 +83,7 @@ const Wrapper=styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-evenly;
-    margin:20px;
+    margin: 40px 20px 20px 20px;
     &>div>p{
         font-size:13px;
     }

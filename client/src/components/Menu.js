@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import BurgerMenu from "./TheBurger/BurgerMenu";
-import SearchBar from "./SelectedCategoryPage";
+import SearchBar from "./SearchBar";
 
 const Menu = ({ homePageState }) => {
   // assemble array of categories
