@@ -161,7 +161,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   background-color: white;
-  height: 70px;
+  height: 72px;
 `;
 
 const MenuButton = styled.button`
