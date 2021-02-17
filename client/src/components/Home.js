@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import medical from '../images/medical.png';
+import banner from '../images/banner.png';
 import belkin from './logos/belkin.png';
 import casio from './logos/casio.png';
 import lg from './logos/lg.jpg';
@@ -16,7 +16,7 @@ const Home=()=>{
     return (
         <Wrapper>
             <Banner>
-                <Image src={medical}/>
+                <Image src={banner}/>
             </Banner>
             <Label>Popular Brands</Label>
             <LogoContainer>
@@ -65,7 +65,7 @@ const Banner=styled.div`
 
 const Image=styled.img`
     width:inherit;
-    height:800px;
+    height:600px;
     object-fit:cover;
 `;
 
