@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import BurgerMenu from "./TheBurger/BurgerMenu";
-import SearchBar from "./SelectedCategoryPage";
+import SearchBar from "./SearchBar";
 
 const Menu = ({ homePageState }) => {
   // assemble array of categories
@@ -61,6 +61,7 @@ const Menu = ({ homePageState }) => {
       >
         <BurgerMenu status={status} />
       </MenuButton>
+      <SearchBar />
       <div>
         <Link to="/cart">
           <MenuItem onClick={() => setStatus("close")}>
@@ -144,7 +145,7 @@ const Menu = ({ homePageState }) => {
               })}
             </CompanyNav>
           )}
-          <SearchBar setStatus={setStatus} />
+          
         </MenuItemContainer>
       </MainMenu>
     </Wrapper>
@@ -158,12 +159,14 @@ const Wrapper = styled.div`
   position: fixed;
   top: 0;
   background-color: white;
+  height:70px;
 `;
 
 const MenuButton = styled.button`
   background: none;
   border: none;
   outline: none;
+  z-index:10;
   &:hover {
     cursor: pointer;
   }
@@ -186,22 +189,20 @@ const MenuItemContainer = styled.div`
 `;
 
 const MainMenu = styled.div`
-  &.openMenu {
-    display: block;
     position: fixed;
-    top: 53px;
     bottom: 0px;
     height: 100vh;
     width: 100%;
     background-color: white;
-    z-index: 10;
-    animation: 0.4s ${slideDown};
     overflow-y: hidden;
+  &.openMenu {
+    display: block;
+    animation: 0.4s ${slideDown};
   }
 
   &.closeMenu {
-    display: none;
-    animation: 0.4s ${slideUp};
+    animation: 0.4s ${slideUp} forwards;
+
   }
 `;
 
@@ -235,23 +236,34 @@ const CompanyNav = styled.nav`
   display: flex;
   flex-wrap: wrap;
   animation: 1s ${slideDown};
+
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #f5f5f5;
   }
 
-  &::-webkit-scrollbar {
-    width: 7px;
-    background-color: #f5f5f5;
-  }
+  &::-webkit-scrollbar-track
+    {
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      background-color: #F5F5F5;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #555;
-  }
+  &::-webkit-scrollbar
+    {
+      width: 7px;
+      background-color: #F5F5F5;
+    }
+
+  &::-webkit-scrollbar-thumb
+    {
+      border-radius: 10px;
+      box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #555;
+    }
 `;
+
 
 const MenuItem = styled.button`
   width: 150px;

@@ -24,7 +24,7 @@ const ItemContainerBig = () => {
       .then((data) => {
         setSelectedItem(data.data[0]);
       });
-  }, []);
+  }, [id]);
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
