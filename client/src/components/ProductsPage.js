@@ -4,7 +4,8 @@ import Pagination from "./Pagination";
 import ProductGrid from "./ProductGrid";
 import styled from "styled-components";
 
-const ProductsPage = ({ products, bannerText }) => {
+const ProductsPage = ({ products, bannerText, bannerImage }) => {
+  //console.log(bannerImage);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState();
   //console.log(products);
@@ -65,7 +66,7 @@ const ProductsPage = ({ products, bannerText }) => {
     <Page>
       {products ? (
         <>
-          <Banner text={bannerText} />
+          <Banner text={bannerText} bannerImage={bannerImage} />
           <ProductGrid
             showGridProducts={currentProducts}
             setSortBy={setSortBy}
