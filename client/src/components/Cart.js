@@ -29,7 +29,7 @@ const Cart = () => {
   // Determine province for tax calculations
   const [province, setProvince] = useState("");
 
-  // Ensures customer has entered text into name and email fields
+  // Ensures customer has entered text into name, email, and credit card fields
   const firstNameHandler = (name) => {
     return ({ target: { value } }) => {
       setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
@@ -101,6 +101,7 @@ const Cart = () => {
     setSubTotal(totalPrice.toFixed(2));
   };
 
+  // Update pre-tax subtotal each time there is a change to the cart items
   useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
 
   // Calculate tax based on customer province
@@ -193,24 +194,25 @@ const Cart = () => {
           </TotalPrice>
         </CartContainer>
       ) : (
-        <p>Your cart is empty</p>
+        <EmptyCart>Your cart is empty</EmptyCart>
       )}
 
-      {province === "" ? (
-        <CheckoutButton
-          onClick={() => handleCheckout()}
-          disabled={selectedItem.length < 1 || province === ""}
-        >
-          Checkout
-        </CheckoutButton>
-      ) : (
-        <CheckoutButton
-          onClick={() => handleCheckout()}
-          disabled={selectedItem.length < 1 || province === ""}
-        >
-          Checkout
-        </CheckoutButton>
-      )}
+      {selectedItem.length < 1 ?
+      <div style={{height: "100px"}}/>
+      :
+      <div>
+        {(province === "") ? (
+          <SelectProvince>Please select a province</SelectProvince>
+        ) : (
+          <CheckoutButton
+            onClick={() => handleCheckout()}
+            disabled={selectedItem.length < 1 || province === ""}
+          >
+            Checkout
+          </CheckoutButton>
+        )}
+      </div>
+      }
 
       {hasCheckedOut ? (
         <CheckoutDiv>
@@ -296,6 +298,11 @@ const ContinueShopping = styled(NavLink)`
   border: 2px solid black;
   border-radius: 3px;
   cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 `;
 
 const CartContainer = styled.div`
@@ -335,16 +342,37 @@ const TotalPrice = styled.div`
   margin: 15px;
 `;
 
+
+const EmptyCart = styled.p` 
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const SelectProvince = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 50px;
+  color: black;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 50px;
+  font-size: 24px;
+  font-weight: 600;
+`;
+
 const CheckoutButton = styled.button`
   display: block;
   width: 200px;
-  height: 50px;
+  height: 60px;
   background: black;
   color: white;
   border-radius: 3px;
   padding: 5px;
   margin: 50px;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 600;
   cursor: pointer;
 `;
