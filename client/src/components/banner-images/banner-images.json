@@ -1,0 +1,31 @@
+[
+  {
+    "Category": "Lifestyle",
+    "ImageSrc": "http://images.unsplash.com/photo-1551632811-561732d1e306?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxMjA3fDB8MXxzZWFyY2h8Mnx8aGlraW5nfHwwfHx8&ixlib=rb-1.2.1&q=80&w=1080"
+  },
+  {
+    "Category": "Fitness",
+    "ImageSrc": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8Zml0bmVzc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+  },
+
+  {
+    "Category": "Gaming",
+    "ImageSrc": "https://gameranx.com/wp-content/uploads/2017/08/m750_photo_player_001.jpg"
+  },
+  {
+    "Category": "Medical",
+    "ImageSrc": "https://dwkujuq9vpuly.cloudfront.net/news/wp-content/uploads/2020/03/Apple-watch-HR-main.jpg"
+  },
+  {
+    "Category": "Pets and Animals",
+    "ImageSrc": "https://eco18.com/wp-content/uploads/2020/07/AdobeStock_250628313-scaled.jpeg"
+  },
+  {
+    "Category": "Entertainment",
+    "ImageSrc": "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Y2FtZXJhfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80"
+  },
+  {
+    "Category": "Industrial",
+    "ImageSrc": "https://www.irmach.com/wp-content/uploads/2019/08/gears-and-cogwheels-engine-industrial-background-PLVGKM8-1200x480.jpg"
+  }
+]
