@@ -81,4 +81,10 @@ export default createGlobalStyle`
         font-family: 'Montserrat';
     }
 
+    button {
+        border: none;
+        text-decoration: none;
+        outline: none;
+    }
+
 `; 

@@ -75,8 +75,6 @@ const SearchList = styled.div`
 
 const Button = styled.button`
   background: white;
-  outline: none;
-  border: none;
   padding: 5px;
   text-align: left;
   transition: 0.3s;

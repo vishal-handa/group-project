@@ -114,8 +114,6 @@ const Div3=styled.div`
 
 const ScrollButton=styled.button`
     background:white;
-    outline:none;
-    border:none;
     height:50px;
     width:50px;
     margin:90px 20px 20px 20px;

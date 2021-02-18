@@ -166,8 +166,6 @@ const Wrapper = styled.div`
 
 const MenuButton = styled.button`
   background: none;
-  border: none;
-  outline: none;
   z-index: 10;
   &:hover {
     cursor: pointer;
@@ -268,8 +266,6 @@ const CompanyNav = styled.nav`
 const MenuItem = styled.button`
   width: 150px;
   background-color: white;
-  border: none;
-  outline: none;
   &:hover {
     cursor: pointer;
   }
@@ -278,8 +274,6 @@ const MenuItem = styled.button`
 const CartButton = styled.button`
   padding-right:10px;
   background-color: white;
-  border: none;
-  outline: none;
   &:hover {
     cursor: pointer;
   }
@@ -287,8 +281,6 @@ const CartButton = styled.button`
 
 const CategoryMenuItem = styled.button`
   background-color: white;
-  border: none;
-  outline: none;
   width: 150px;
   &:hover {
     cursor: pointer;
@@ -297,8 +289,6 @@ const CategoryMenuItem = styled.button`
 
 const CompanyMenuItem = styled.button`
   background-color: white;
-  border: none;
-  outline: none;
   width: 150px;
   &:hover {
     cursor: pointer;

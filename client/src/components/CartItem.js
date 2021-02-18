@@ -116,7 +116,6 @@ const QuantityButton = styled.button`
   height: 20px;
   width: 20px;
   border-radius: 2px;
-  border: none;
   background-color: #f3f3f3;
 `;
 
