@@ -145,23 +145,27 @@ const Title = styled.p`
 const Button = styled.button`
   display: block;
   width: 100%;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
+  border: 2px solid black;
   border-radius: 3px;
   padding: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
 
+  outline: none;
+  transition: 0.3s;
   &:hover {
-    background-color: gray;
+    background-color: black;
+    color:white;
   }
 `;
 
 const OutOfStockTextContainer = styled.div`
   display: block;
   width: 100%;
-  background: black;
+  background: #ffd6e0;
   border: none;
   margin-bottom: 8px;
   border-radius: 3px;
