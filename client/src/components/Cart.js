@@ -341,7 +341,6 @@ const CheckoutButton = styled.button`
   height: 50px;
   background: black;
   color: white;
-  border: none;
   border-radius: 3px;
   padding: 5px;
   margin: 50px;
@@ -368,20 +367,12 @@ const SubmitButton = styled.button`
   height: 50px;
   background: black;
   color: white;
-  border: none;
   border-radius: 3px;
   padding: 5px;
   margin: 20px 0px 50px 0px;
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;
-  &:link,
-  &:focus,
-  &:visited,
-  &:hover,
-  &:active {
-    text-decoration: none;
-  }
 `;
 
 const CompleteForm = styled.div`

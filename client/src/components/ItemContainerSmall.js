@@ -147,13 +147,11 @@ const Button = styled.button`
   width: 100%;
   background: black;
   color: white;
-  border: none;
   border-radius: 3px;
   padding: 8px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  outline: none;
 
   &:hover {
     background-color: gray;
