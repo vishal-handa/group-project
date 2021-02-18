@@ -12,7 +12,7 @@ const ItemContainerBig = () => {
   const { id } = useParams();
   const [selectedItem, setSelectedItem] = useState({});
   const cartItems = useSelector((state) => state.cart);
-  console.log(selectedItem);
+  // console.log(selectedItem);
   //console.log(selectedItem._id);
   const dispatch = useDispatch();
 

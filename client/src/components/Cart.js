@@ -240,7 +240,7 @@ const Cart = () => {
             <input
               name="email"
               placeholder="Email"
-              type="text"
+              type="email"
               required
               value={customerInfo.email}
               onChange={emailHandler("email")}
@@ -251,8 +251,8 @@ const Cart = () => {
             <input
               name="cardNumber"
               placeholder="Credit card number"
-              type="email"
-              reqired
+              type="text"
+              required
               value={customerInfo.cardNumber}
               onChange={creditCardHandler("cardNumber")}
               style={{ height: "25px", width: "200px" }}
@@ -335,36 +335,6 @@ const TotalPrice = styled.div`
   margin: 15px;
 `;
 
-const ItemInfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-  width: 100%;
-`;
-
-const ItemImage = styled.img`
-  display: block;
-  width: 50px;
-  height: auto;
-  margin: 0;
-  padding: 8px;
-`;
-
-const ItemName = styled.p`
-  margin: 5px 0px;
-  font-size: 14px;
-`;
-
-const ItemQuantity = styled.p`
-  margin: 5px 0px;
-  font-size: 14px;
-`;
-
-const ItemPrice = styled.p`
-  margin: 5px 0px;
-  font-size: 14px;
-`;
-
 const CheckoutButton = styled.button`
   display: block;
   width: 200px;
@@ -384,7 +354,6 @@ const CheckoutDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 150px;
   width: 800px;
   margin-bottom: 100px;
 `;
