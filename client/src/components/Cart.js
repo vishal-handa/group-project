@@ -146,7 +146,9 @@ const Cart = () => {
 
   return (
     <Wrapper>
-      <Banner text={"Your Cart"} />
+      <BannerDiv>
+        <Banner text={"Your Cart"} />
+      </BannerDiv>
       <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
       {selectedItem.length > 0 ? (
         <CartContainer>
@@ -287,6 +289,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const BannerDiv = styled.div` 
+  padding-top: 57px;
 `;
 
 const ContinueShopping = styled(NavLink)`

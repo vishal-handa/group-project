@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const ConfirmationPage = () => {
-  let randomNumber;
+  const [confirmationNumber, setConfirmationNumber] = useState();
 
-  const confirmationNumber = () => {
+  // Generate a random number that can be used for a confirmation number
+  let randomNumber;
+  const generateRandomNumber = () => {
     let maxNumber = 500000;
     randomNumber = Math.floor(Math.random() * maxNumber + 1);
   };
 
-  confirmationNumber();
+  // Call the generateRandomNumber function once page is loaded
+  // Assign the random number as the customer's confirmation number
+  useEffect(() => {
+    generateRandomNumber();
+    setConfirmationNumber(randomNumber);
+  }, []);
 
   return (
     <Wrapper>
-      <TextContainer>
-        <Header>Thanks for your purchase!</Header>
-        <OrderNumber>Your order # is {randomNumber}</OrderNumber>
-      </TextContainer>
+      <ContainerDiv>
+        <TextContainer>
+          <Header>Thanks for your purchase!</Header>
+          <OrderNumber>Your order # is {confirmationNumber}</OrderNumber>
+        </TextContainer>
+      </ContainerDiv>
     </Wrapper>
   );
 };
@@ -28,6 +37,10 @@ const Wrapper = styled.div`
   margin-bottom:50px;
 `;
 
+const ContainerDiv = styled.div` 
+  padding-top: 57px;
+`;
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,7 +48,7 @@ const TextContainer = styled.div`
   align-items: center;
   height: 300px;
   width: 600px;
-  margin-top: 100px;
+  margin-top: 50px;
   border: 2px solid black;
   border-radius: 3px;
 `;
