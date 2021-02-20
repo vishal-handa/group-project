@@ -1,6 +1,18 @@
+export const loadingCategories = () => ({
+  type: "LOADING_CATEGORIES",
+});
+
 export const receiveCategories = (categories) => ({
   type: "RECEIVE_CATEGORIES",
   categories,
+});
+
+export const errorCategories = () => ({
+  type: "ERROR",
+});
+
+export const loadingProducts = () => ({
+  type: "LOADING_PRODUCTS",
 });
 
 export const receiveProducts = (items) => ({
@@ -8,9 +20,21 @@ export const receiveProducts = (items) => ({
   items,
 });
 
+export const errorProducts = () => ({
+  type: "ERROR",
+});
+
+export const loadingCompanies = () => ({
+  type: "LOADING_COMPANIES",
+});
+
 export const receiveCompanies = (companies) => ({
   type: "RECEIVE_COMPANIES",
   companies,
+});
+
+export const errorCompanies = () => ({
+  type: "ERROR",
 });
 
 export const addToCart = (item) => ({
