@@ -82,7 +82,7 @@ const Button = styled.button`
   margin-left: 10px;
   &:hover {
     cursor: pointer;
-    background: gray;
+    background: #9ca5b5;
     color: white;
   }
 `;
