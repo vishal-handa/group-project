@@ -7,21 +7,22 @@ const SelectedCompanyPage = () => {
   const { company } = useParams();
   // console.log(company);
   const [companyProducts, setCompanyProducts] = useState([]);
-
-  const CompanyBanner =
-    CompanyBanners[Math.floor(Math.random() * CompanyBanners.length)];
+  const [companyBanner, setCompanyBanner] = useState();
 
   useEffect(() => {
     fetch(`/companies/${decodeURIComponent(company)}`)
       .then((res) => res.json())
       .then((res) => setCompanyProducts(res.data));
+    setCompanyBanner(
+      CompanyBanners[Math.floor(Math.random() * CompanyBanners.length)]
+    );
   }, [company]);
 
   return (
     <ProductsPage
       products={companyProducts}
       bannerText={company}
-      bannerImage={CompanyBanner.ImageSrc}
+      bannerImage={companyBanner && companyBanner.ImageSrc}
     />
   );
 };
