@@ -183,7 +183,7 @@ const MenuItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  padding-top:57px;
+  padding-top: 57px;
   z-index: 9;
   opacity: 1;
   transition: margin-left 0.4s linear;
@@ -213,7 +213,7 @@ const CategoryNav = styled.nav`
   top: 10%;
   right: 10px;
   width: 80%;
-  padding-top:57px;
+  padding-top: 57px;
   opacity: 1;
   padding-left: 5px;
   max-height: 400px;
@@ -230,7 +230,7 @@ const CompanyNav = styled.nav`
   right: 10px;
   width: 80%;
   height: 100%;
-  padding-top:57px;
+  padding-top: 57px;
   opacity: 1;
   padding-left: 5px;
   max-height: 400px;
@@ -272,7 +272,7 @@ const MenuItem = styled.button`
 `;
 
 const CartButton = styled.button`
-  padding-right:10px;
+  padding-right: 10px;
   background-color: white;
   &:hover {
     cursor: pointer;
@@ -302,9 +302,16 @@ const MenuText = styled.p`
 const StyledLink = styled(Link)`
   text-decoration: none;
   display: block;
-  padding: 20px;
+  padding: 10px;
+  margin: 10px;
   color: black;
   font-size: 18px;
+
+  &:hover {
+    border-radius: 3px;
+    background-color: #9ca5b5;
+    color: white;
+  }
 `;
 
 const CartItemDiv = styled.div`
