@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import ProductsPage from "./ProductsPage";
+import AllProductsImage from "./banner-images/allproducts-background.jpg";
 
 const AllProductPage = () => {
   const allTheProducts = useSelector((state) => state.items.items);
@@ -11,7 +12,13 @@ const AllProductPage = () => {
     return <div>Loading</div>;
   }
 
-  return <ProductsPage products={allTheProducts} bannerText={"All Products"} />;
+  return (
+    <ProductsPage
+      products={allTheProducts}
+      bannerText={"All Products"}
+      bannerImage={AllProductsImage}
+    />
+  );
 };
 
 export default AllProductPage;
