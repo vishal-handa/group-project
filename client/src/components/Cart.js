@@ -63,6 +63,7 @@ const Cart = () => {
     });
   };
 
+  // Clear cart once a customer has completed their purchase
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -142,7 +143,7 @@ const Cart = () => {
   let taxNum = Number(tax);
 
   // Calculate total price including tax
-  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [province]));
+  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [subTotalNum, taxNum, province]));
 
   return (
     <Wrapper>
@@ -298,13 +299,15 @@ const Banner = styled.div`
   width: 90%;
   height: 300px;
   margin: 100px 5% 50px 5%;
+  border: 2px solid black;
   border-radius: 3px;
   background-size: cover;
   background-position-y: 90%;
 
   & h1 {
-    font-size: 100px;
+    font-size: 80px;
     color: white;
+    text-shadow: 1px 1px 3px #000000;
   }
 `;
 
