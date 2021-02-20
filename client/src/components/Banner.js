@@ -8,6 +8,8 @@ const Banner = ({ text, bannerImage }) => {
         backgroundImage: `url(${bannerImage})`,
         backgroundSize: "cover",
         border: "2px solid black",
+        backgroundPositionY: "55%",
+
         //opacity: "0.5",
       }}
     >
@@ -24,14 +26,11 @@ const BannerBox = styled.div`
   width: 90%;
   height: 300px;
   border-radius: 3px;
-  //background-color: lightslategray;
 
   & h1 {
-    font-size: 80px;
+    font-size: 100px;
     text-align: center;
     color: white;
-    //color: black;
-    //text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   }
 `;
 
