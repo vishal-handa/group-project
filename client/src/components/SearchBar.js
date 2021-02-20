@@ -40,7 +40,7 @@ const SearchBar = () => {
               }
             })
             .slice(0, 9)
-            .map((product) => {
+            .map((product, i) => {
               return (
                 <Button
                   onClick={() => {
@@ -48,6 +48,7 @@ const SearchBar = () => {
                     setStatus("close");
                     setSearchTerm("");
                   }}
+                  key={i}
                 >
                   {product.name}
                 </Button>

@@ -12,7 +12,7 @@ import samsung from './logos/samsung.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
-    const randomArray = Array(10).fill().map(() => Math.floor(Math.random() * 348) + 1);
+    // const randomArray = Array(10).fill().map(() => Math.floor(Math.random() * 348) + 1);
     const scrollRef = createRef();
 
     const handleScroll=(direction)=>{
@@ -23,6 +23,21 @@ const Home=()=>{
             scrollRef.current.scrollLeft += 200;
         }
     }
+
+    const randomNum=(min, max)=>{
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    const nums=(num)=>{
+        let ints = [];
+        while (ints.length < num) {
+            let randNum = randomNum(1, 348);
+            if(!ints.indexOf(randNum) > -1){
+            ints.push(randNum);
+            }
+        }
+        return ints;
+    }
+    const randomArray = nums(10);
     return (
         <Wrapper>
             <Banner>
@@ -58,9 +73,9 @@ const Home=()=>{
                         >{'<'}</ScrollButton>
                     {(theCategories && randomArray) &&
                         <ProductsList ref={scrollRef}>
-                            {randomArray.map((elem, i)=>{
+                            {randomArray.map((elem)=>{
                                 return (
-                                    <StyledLink key={elem+i} to={`/products/${theCategories[elem]._id}`}>
+                                    <StyledLink key={elem} to={`/products/${theCategories[elem]._id}`}>
                                         <Img src={theCategories[elem].imageSrc}/>
                                     </StyledLink>
                                 )
