@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { handleFetchProducts } from "./helpers/fetch-request-helper";
 import { clearCart } from "../actions";
-import Banner from "./Banner";
+import cart from "../images/cart.jpg";
 import CartItem from "./CartItem";
 
 const Cart = () => {
@@ -146,9 +146,9 @@ const Cart = () => {
 
   return (
     <Wrapper>
-      <BannerDiv>
-        <Banner text={"Your Cart"} />
-      </BannerDiv>
+      <Banner style={{backgroundImage: `url(${cart})`}}>
+        <h1>Your Cart</h1>
+      </Banner>
       <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
       {selectedItem.length > 0 ? (
         <CartContainer>
@@ -291,8 +291,21 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const BannerDiv = styled.div` 
-  padding-top: 57px;
+const Banner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 300px;
+  margin: 100px 5% 50px 5%;
+  border-radius: 3px;
+  background-size: cover;
+  background-position-y: 90%;
+
+  & h1 {
+    font-size: 100px;
+    color: white;
+  }
 `;
 
 const ContinueShopping = styled(NavLink)`
@@ -347,7 +360,6 @@ const TotalPrice = styled.div`
   padding: 15px;
   margin: 15px;
 `;
-
 
 const EmptyCart = styled.p` 
   font-size: 20px;
