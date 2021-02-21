@@ -63,12 +63,11 @@ const Menu = ({ homePageState }) => {
         <BurgerMenu status={status} />
       </MenuButton>
       <SearchBar />
-      <div>
         <Link to="/cart">
           <CartButton onClick={() => setStatus("close")}>
             <CartItemDiv onClick={() => setStatus("close")}>
               <MenuText>
-                <BsBag size={24} />
+                <BsBag size={24} style={{color:'white'}}/>
               </MenuText>
               <Circle>
                 <CartItems>{numItemsInCart}</CartItems>
@@ -76,7 +75,6 @@ const Menu = ({ homePageState }) => {
             </CartItemDiv>
           </CartButton>
         </Link>
-      </div>
 
       <MainMenu className={status === "open" ? "openMenu" : "closeMenu"}>
         <MenuItemContainer
@@ -160,7 +158,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: fixed;
   top: 0;
-  background-color: white;
+  background-color: black;
   height: 72px;
 `;
 
@@ -273,7 +271,7 @@ const MenuItem = styled.button`
 
 const CartButton = styled.button`
   padding-right: 10px;
-  background-color: white;
+  background-color: black;
   &:hover {
     cursor: pointer;
   }
@@ -321,7 +319,7 @@ const CartItemDiv = styled.div`
 `;
 
 const Circle = styled.div`
-  background-color: #dcdcdc;
+  background-color: white;
   height: 25px;
   width: 25px;
   z-index: 0;
