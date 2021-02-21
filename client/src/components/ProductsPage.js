@@ -9,9 +9,9 @@ const ProductsPage = ({ products, bannerText, bannerImage }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState();
   //console.log(products);
-  
+
   // Turn the price into a number so that the array can be sorted by ascending and descending order
-  const formattedProducts =  products?.map((item) => {
+  const formattedProducts = products?.map((item) => {
     return {
       ...item,
       price: parseFloat(item.price.replace("$", "").replace(",", "")),
@@ -57,7 +57,7 @@ const ProductsPage = ({ products, bannerText, bannerImage }) => {
   const handlePageClicked = (page) => {
     setCurrentPage(page);
     window.scrollTo({
-      top: 225,
+      top: 350,
       behavior: "smooth",
     });
   };
