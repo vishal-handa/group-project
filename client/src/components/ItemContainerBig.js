@@ -105,11 +105,12 @@ const BigItemView = styled.div`
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
   text-align: center;
-  width: 75%;
-  height: 450px;
+  width: 70%;
+  height: 425px;
   margin-top: 50px;
   margin-bottom: 20px;
   border-radius: 3px;
+  border: 2px solid black;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -185,10 +186,10 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  transition:0.3s;
+  transition: 0.3s;
   &:hover {
     background-color: black;
-    color:white;
+    color: white;
   }
   margin-bottom: none;
 `;

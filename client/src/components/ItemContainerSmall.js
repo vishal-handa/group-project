@@ -84,6 +84,7 @@ const SmallItemView = styled.div`
   width: 225px;
   height: 320px;
   border-radius: 3px;
+  border: 2px solid black;
 `;
 
 const StyledLink = styled(Link)`
@@ -158,7 +159,7 @@ const Button = styled.button`
   transition: 0.3s;
   &:hover {
     background-color: black;
-    color:white;
+    color: white;
   }
 `;
 
