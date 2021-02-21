@@ -15,7 +15,7 @@ const Wrapper=styled.div`
     display: flex;
     flex-direction: column;
     &>i{
-        background-color: gray;
+        background-color: white;
         width: 32px;
         height: 4px;
         margin: 4px;
@@ -25,6 +25,7 @@ const Wrapper=styled.div`
 
     &>.open:nth-child(1) {
         transform: rotate(45deg) translateY(8px) translateX(8px);
+        background-color: black;
     }
 
     &>.open:nth-child(2) {
@@ -33,6 +34,7 @@ const Wrapper=styled.div`
 
     &>.open:nth-child(3) {
         transform: rotate(-45deg) translateY(-8px) translateX(8px);
+        background-color: black;
     }
 
 

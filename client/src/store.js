@@ -1,18 +1,17 @@
 import { createStore } from "redux";
-
+import { loadState, saveState } from "./localstorage";
 import combineReducers from "./reducers";
 
-export default function configureStore(initialState) {
-    const persistedState = localStorage.getItem('reduxState') 
-                        ? JSON.parse(localStorage.getItem('reduxState'))
-                        : {};
+export default function configureStore() {
+    const persistedState = loadState();
     const store = createStore(
         combineReducers,
         persistedState,
+        // initialState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
-    store.subscribe(()=>{
-        localStorage.setItem('reduxState', JSON.stringify(store.getState()))
-    })
+    store.subscribe(() => {
+        saveState(store.getState())
+    });
     return store;
 }
