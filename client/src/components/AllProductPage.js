@@ -8,7 +8,7 @@ import { Status } from "./helpers/constants";
 const AllProductPage = () => {
   const products = useSelector((state) => state.items.items);
   const status = useSelector((state) => state.items.status);
-  console.log(products);
+  //console.log(products);
   if (status === Status.LOADING || !products) {
     return <FaSpinner />;
   }
