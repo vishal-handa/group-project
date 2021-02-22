@@ -1,3 +1,4 @@
+//loadState picks the state from local storage and updates the redux state.
 export const loadState = () => {
     try {
         const serializedState = localStorage.getItem('state');
@@ -10,6 +11,7 @@ export const loadState = () => {
     }
 }; 
 
+//saveState puts the redux state to local storage.
 export const saveState = (state) => {
     try {
         const serializedState = JSON.stringify(state);

@@ -26,7 +26,7 @@ const App = () => {
 
   const homePageState = useSelector((state) => state);
   // console.log(homePageState);
-
+  // functions from fetch-request-FaHireAHelper.js to populate redux state
   useEffect(() => {
     handleFetchProducts(dispatch);
     handleFetchCategories(dispatch);
@@ -49,15 +49,11 @@ const App = () => {
           <Route path="/products/:id">
             <ItemContainerBig />
           </Route>
-          <Route exact path="/categories">
-            All of categories
-          </Route>
+          <Route exact path="/categories" />
           <Route path="/categories/:category">
             <SelectedCategoryPage />
           </Route>
-          <Route exact path="/companies">
-            All of our brands
-          </Route>
+          <Route exact path="/companies" />
           <Route path="/companies/:company">
             <SelectedCompanyPage />
           </Route>

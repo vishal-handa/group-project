@@ -7,7 +7,7 @@ const SelectedCategoryPage = () => {
   const { category } = useParams();
   // console.log(category);
   const [categoryProducts, setCategoryProducts] = useState([]);
-
+  //fetching products based on category and putting them in local state.
   useEffect(() => {
     fetch(`/categories/${decodeURIComponent(category)}`)
       .then((res) => res.json())
@@ -17,7 +17,7 @@ const SelectedCategoryPage = () => {
 
   const bannerPic = bannerImages.find((image) => image.Category === category);
   //console.log(bannerPic);
-
+  //pass them to product grid to be rendered.
   return (
     <ProductsPage
       products={categoryProducts}

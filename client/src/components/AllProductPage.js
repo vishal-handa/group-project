@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import ProductsPage from "./ProductsPage";
 import AllProductsImage from "./banner-images/allproducts-background.jpg";
 import { FaSpinner } from "react-icons/fa";
-import { BiError } from "react-icons/bi";
 import { Status } from "./helpers/constants";
 
 const AllProductPage = () => {

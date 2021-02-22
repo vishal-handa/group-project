@@ -3,8 +3,8 @@ import styled, { keyframes } from "styled-components";
 import {
   fadeInDown,
   fadeOutUp,
-  slideInLeft,
-  slideInRight,
+  // slideInLeft,
+  // slideInRight,
 } from "react-animations";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -19,6 +19,7 @@ const Menu = ({ homePageState }) => {
   // assemble array of companies
   let listOfCompanies = [];
 
+  //populating the company list array 
   if (homePageState.companies.companies) {
     listOfCompanies = Object.values(homePageState.companies.companies);
   }
@@ -27,11 +28,13 @@ const Menu = ({ homePageState }) => {
   const [companyIsActive, setCompanyIsActive] = useState(false);
   const [status, setStatus] = useState("close");
 
+  //toggling and setting the states to false on click
   const onClickCategory = () => {
     setCategoryIsActive(!categoryIsActive);
     setCompanyIsActive(false);
   };
 
+  //toggling and setting the states to false on click
   const onClickCompany = () => {
     setCompanyIsActive(!companyIsActive);
     setCategoryIsActive(false);
@@ -53,6 +56,7 @@ const Menu = ({ homePageState }) => {
 
   return (
     <Wrapper>
+      {/* hamburger menu with class and setting the states to false */}
       <MenuButton
         onClick={() => {
           setStatus(status === "open" ? "close" : "open");
@@ -62,8 +66,11 @@ const Menu = ({ homePageState }) => {
       >
         <BurgerMenu status={status} />
       </MenuButton>
+      {/* //search bar to search the products */}
       <SearchBar />
+      {/* cart button */}
         <Link to="/cart">
+          {/* set the status state to close to close the menu  */}
           <CartButton onClick={() => setStatus("close")}>
             <CartItemDiv onClick={() => setStatus("close")}>
               <MenuText>
@@ -75,8 +82,9 @@ const Menu = ({ homePageState }) => {
             </CartItemDiv>
           </CartButton>
         </Link>
-
+      {/* sub menu that opens up on hamburger menu click */}
       <MainMenu className={status === "open" ? "openMenu" : "closeMenu"}>
+        {/* menu item container moves to left or right based on the click on company and category link */}
         <MenuItemContainer
           style={{
             marginLeft:
@@ -85,18 +93,19 @@ const Menu = ({ homePageState }) => {
                 : "45%",
           }}
         >
+          {/* menu links */}
           <Link to="/">
             <MenuItem onClick={() => setStatus("close")}>
-              <MenuText>Home</MenuText>
+              <MenuText>Home</MenuText> {/*home menu */} 
             </MenuItem>
           </Link>
 
           <Link to="/products">
             <MenuItem onClick={() => setStatus("close")}>
-              <MenuText>Shop all products</MenuText>
+              <MenuText>Shop all products</MenuText> {/*all products menu */} 
             </MenuItem>
           </Link>
-
+          {/* list of categories on click */}
           <CategoryMenuItem onClick={() => onClickCategory()}>
             <MenuText>Shop by category</MenuText>
           </CategoryMenuItem>
@@ -121,7 +130,7 @@ const Menu = ({ homePageState }) => {
               })}
             </CategoryNav>
           )}
-
+          {/* list of companies on click */}
           <CompanyMenuItem onClick={onClickCompany}>
             <MenuText>Shop by company</MenuText>
           </CompanyMenuItem>

@@ -9,6 +9,7 @@ const SelectedCompanyPage = () => {
   const [companyProducts, setCompanyProducts] = useState([]);
   const [companyBanner, setCompanyBanner] = useState();
 
+  //fetching products based on company name and putting them in local state.
   useEffect(() => {
     fetch(`/companies/${decodeURIComponent(company)}`)
       .then((res) => res.json())
@@ -17,7 +18,7 @@ const SelectedCompanyPage = () => {
       CompanyBanners[Math.floor(Math.random() * CompanyBanners.length)]
     );
   }, [company]);
-
+  //pass them to product grid to be rendered.
   return (
     <ProductsPage
       products={companyProducts}
