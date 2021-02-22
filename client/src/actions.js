@@ -1,3 +1,5 @@
+// redux actions for updating redux state
+
 export const loadingCategories = () => ({
   type: "LOADING_CATEGORIES",
 });

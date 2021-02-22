@@ -12,9 +12,9 @@ import samsung from './logos/samsung.png';
 
 const Home=()=>{
     const theCategories = useSelector(state=>state.items.items);
-    // const randomArray = Array(10).fill().map(() => Math.floor(Math.random() * 348) + 1);
+    //createRef to creat a reference on click.
     const scrollRef = createRef();
-
+    //scroll function to scroll the div based on createRef
     const handleScroll=(direction)=>{
         if(direction==="left"){
             scrollRef.current.scrollLeft -= 200;
@@ -23,7 +23,7 @@ const Home=()=>{
             scrollRef.current.scrollLeft += 200;
         }
     }
-
+    //following two functions create an array of unique random integers between 0 and 348
     const randomNum=(min, max)=>{
         return Math.floor(Math.random() * (max - min)) + min;
     }
@@ -40,9 +40,11 @@ const Home=()=>{
     const randomArray = nums(10);
     return (
         <Wrapper>
+            {/* main banner */}
             <Banner>
                 <Image src={banner}/>
             </Banner>
+            {/* part 2 of the home page which includes the logos of the most popular branda with links to their respective company pages */}
             <Div1>
                 <Label>Popular Brands</Label>
                 <LogoContainer>
@@ -66,6 +68,7 @@ const Home=()=>{
                     </Link>
                 </LogoContainer>
             </Div1>
+            {/* Another part of the homepage that displays random articles from the database that uses the scroll functions. */}
             <Div2>
                 <Label>Most popular articles</Label>
                 <Div3>

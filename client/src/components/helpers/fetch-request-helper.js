@@ -10,6 +10,7 @@ import {
   errorCompanies,
 } from "../../actions";
 
+//fetch to populate the redux state for all products from the server with loading and error dispatch actions.
 export const handleFetchProducts = (dispatch) => {
   dispatch(loadingProducts());
   return fetch("/products")
@@ -18,6 +19,7 @@ export const handleFetchProducts = (dispatch) => {
     .catch(()=>dispatch(errorProducts()));
 };
 
+//fetch to populate the redux state for all categories from the server with loading and error dispatch actions.
 export const handleFetchCategories = (dispatch) => {
   dispatch(loadingCategories());
   return fetch("/categories")
@@ -26,6 +28,7 @@ export const handleFetchCategories = (dispatch) => {
     .catch(()=>dispatch(errorCategories()));
 };
 
+//fetch to populate the redux state for all companies from the server with loading and error dispatch actions.
 export const handleFetchCompanies = (dispatch) => {
   dispatch(loadingCompanies());
   return fetch("/companies")

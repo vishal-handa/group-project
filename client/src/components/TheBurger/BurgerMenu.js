@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 const BurgerMenu = ({status}) => {
     return (
+        //wrapper for the hamburger menu
         <Wrapper>
-            <i className={status}></i>
-            <i className={status}></i>
-            <i className={status}></i>
+            <p className={status}/>
+            <p className={status}/>
+            <p className={status}/>
         </Wrapper>
     );
 };
@@ -14,7 +15,8 @@ const BurgerMenu = ({status}) => {
 const Wrapper=styled.div`
     display: flex;
     flex-direction: column;
-    &>i{
+    //styling for the hamburger menu lines
+    &>p{
         background-color: white;
         width: 32px;
         height: 4px;
@@ -22,7 +24,7 @@ const Wrapper=styled.div`
         border-radius: 2px;
         transition:all ease 0.3s;
     }
-
+    //styling using classes for opening action.
     &>.open:nth-child(1) {
         transform: rotate(45deg) translateY(8px) translateX(8px);
         background-color: black;
@@ -37,7 +39,7 @@ const Wrapper=styled.div`
         background-color: black;
     }
 
-
+    //styling using classes for closing action.
     &>.close:nth-child(1) {
         transform: rotate(0) translateY(0);
     }

@@ -5,12 +5,14 @@ const initialState={
 
 export default function companyReducer(state = initialState, action){
     switch (action.type){
+        //action while list of companies is being fetched.
         case 'LOADING_COMPANIES':{
             return {
                 ...state,
                 status:'loading',
             }
         }
+        //action after fetching to populate the state.
         case 'RECEIVE_COMPANIES':{
             // console.log(action)
             return{
@@ -19,6 +21,7 @@ export default function companyReducer(state = initialState, action){
                 status:'idle',
             }
         }
+        //action if there is an error in fetching.
         case 'ERROR':{
             return {
                 ...state,
