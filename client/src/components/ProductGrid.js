@@ -43,10 +43,6 @@ const ProductGrid = ({ showGridProducts, setSortBy }) => {
             element_id={elem._id}
             productName={elem.name}
             imageSRC={elem.imageSrc}
-            // category={elem.category}
-            // companyId={elem.companyId}
-            // price={elem.price}
-            // location={elem.body_location}
           />
         ))}
       </Wrapper>

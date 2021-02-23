@@ -6,16 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import imageFile from "../images/out-of-stock.png";
 import { handleCheckInstock } from "./helpers/handle-check-instock-function";
 
-const ItemContainerSmall = ({
-  item,
-  productName,
-  imageSRC,
-  //   category,
-  //   companyId,
-  //   price,
-  //   location,
-  element_id,
-}) => {
+const ItemContainerSmall = ({ item, productName, imageSRC, element_id }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
   //console.log(cartItems);
