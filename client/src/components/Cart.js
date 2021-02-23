@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { handleFetchProducts } from "./helpers/fetch-request-helper";
 import { clearCart } from "../actions";
-import cart from "../images/cart.jpg";
+import cart from "./banner-images/cart.jpg";
 import CartItem from "./CartItem";
 
 const Cart = () => {
@@ -14,7 +14,7 @@ const Cart = () => {
   const selectedItem = Object.values(useSelector((state) => state.cart));
 
   // hasCheckedOut is initially set to false
-  // Once a customer has checked out, they are prompted for their information 
+  // Once a customer has checked out, they are prompted for their information
   const [hasCheckedOut, setHasCheckedOut] = useState(false);
 
   // Customer details initially set to empty strings
@@ -34,7 +34,7 @@ const Cart = () => {
   const [province, setProvince] = useState("");
 
   // Ensures customer has entered text into name, email, and credit card fields
-  // We're not very picky about what they enter so long as there is text in every field 
+  // We're not very picky about what they enter so long as there is text in every field
   const firstNameHandler = (name) => {
     return ({ target: { value } }) => {
       setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
@@ -63,7 +63,7 @@ const Cart = () => {
   const handleCheckout = () => {
     setHasCheckedOut(true);
     window.scrollTo({
-      top: 700,
+      top: 950,
       behavior: "smooth",
     });
   };
@@ -92,6 +92,10 @@ const Cart = () => {
     });
     handleFetchProducts(dispatch);
     handleClearCart();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   // Get price of items * items' quantity in cart
@@ -106,7 +110,6 @@ const Cart = () => {
 
   // Update pre-tax subtotal each time there is a change to the cart items
   useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
-
 
   // Calculate tax based on customer province
   // If no province is selected, tax remains at $0.00
@@ -146,11 +149,13 @@ const Cart = () => {
   let taxNum = Number(tax);
 
   // Calculate total price including tax
-  useEffect(() => setTotal((subTotalNum + taxNum).toFixed(2), [subTotalNum, taxNum, province]));
+  useEffect(() =>
+    setTotal((subTotalNum + taxNum).toFixed(2), [subTotalNum, taxNum, province])
+  );
 
   return (
     <Wrapper>
-      <Banner style={{backgroundImage: `url(${cart})`}}>
+      <Banner style={{ backgroundImage: `url(${cart})` }}>
         <h1>Your Cart</h1>
       </Banner>
       <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
@@ -158,47 +163,50 @@ const Cart = () => {
       {/* Cart items and checkout prompts appear conditionally */}
       {selectedItem.length > 0 ? (
         <CartContainer>
-          {selectedItem &&
-            selectedItem.map((elem) => {
-              console.log(elem);
-              return (
-                <CartItem
-                  item={elem}
-                  key={elem._id}
-                  setHasCheckedOut={setHasCheckedOut}
-                />
-              );
-            })}
+          <CartItemContainer>
+            {selectedItem &&
+              selectedItem.map((elem) => {
+                console.log(elem);
+                return (
+                  <CartItem
+                    item={elem}
+                    key={elem._id}
+                    setHasCheckedOut={setHasCheckedOut}
+                  />
+                );
+              })}
+          </CartItemContainer>
           <TotalPrice>
-            <p>
+            <Subtotal>
               <span>Subtotal (CAD): </span>
               <span>${subTotal}</span>
-            </p>
-            <label>Shipping destination: </label>
-            <select
-              defaultValue="Select your location"
-              onChange={(event) => setProvince(event.target.value)}
-            >
-              <option disabled>Select your location</option>
-              <option value="AB">Alberta</option>
-              <option value="BC">British Columbia</option>
-              <option value="MB">Manitoba</option>
-              <option value="NB">New Brunswick</option>
-              <option value="NL">Newfoundland and Labrador</option>
-              <option value="NT">Northwest Territories</option>
-              <option value="NS">Nova Scotia</option>
-              <option value="NU">Nunavut</option>
-              <option value="ON">Ontario</option>
-              <option value="PE">Prince Edward Island</option>
-              <option value="QC">Quebec</option>
-              <option value="SK">Saskatchewan</option>
-              <option value="YT">Yukon</option>
-            </select>
-            <p>
-              <span>Total (CAD) </span>
-              Taxes included:
+            </Subtotal>
+            <Subtotal>
+              <label>Shipping destination: </label>
+              <select
+                defaultValue="Select your location"
+                onChange={(event) => setProvince(event.target.value)}
+              >
+                <option disabled>Select your location</option>
+                <option value="AB">Alberta</option>
+                <option value="BC">British Columbia</option>
+                <option value="MB">Manitoba</option>
+                <option value="NB">New Brunswick</option>
+                <option value="NL">Newfoundland and Labrador</option>
+                <option value="NT">Northwest Territories</option>
+                <option value="NS">Nova Scotia</option>
+                <option value="NU">Nunavut</option>
+                <option value="ON">Ontario</option>
+                <option value="PE">Prince Edward Island</option>
+                <option value="QC">Quebec</option>
+                <option value="SK">Saskatchewan</option>
+                <option value="YT">Yukon</option>
+              </select>
+            </Subtotal>
+            <Total>
+              <span>Total (CAD) taxes included:</span>
               <span> ${total}</span>
-            </p>
+            </Total>
           </TotalPrice>
         </CartContainer>
       ) : (
@@ -206,22 +214,22 @@ const Cart = () => {
       )}
 
       {/* Customers must choose their province before they can check out */}
-      {selectedItem.length < 1 ?
-      <div style={{height: "100px"}}/>
-      :
-      <div>
-        {(province === "") ? (
-          <SelectProvince>Please select a province</SelectProvince>
-        ) : (
-          <CheckoutButton
-            onClick={() => handleCheckout()}
-            disabled={selectedItem.length < 1 || province === ""}
-          >
-            Checkout
-          </CheckoutButton>
-        )}
-      </div>
-      }
+      {selectedItem.length < 1 ? (
+        <div style={{ height: "100px" }} />
+      ) : (
+        <div>
+          {province === "" ? (
+            <SelectProvince>Please select a province</SelectProvince>
+          ) : (
+            <CheckoutButton
+              onClick={() => handleCheckout()}
+              disabled={selectedItem.length < 1 || province === ""}
+            >
+              Checkout
+            </CheckoutButton>
+          )}
+        </div>
+      )}
 
       {/* Customer information fields are conditionally rendered upon checkout
       Once the fields have been completed, the customer is taken to a confirmation page */}
@@ -304,8 +312,8 @@ const Banner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 300px;
+  width: 45%;
+  height: 200px;
   margin: 100px 5% 50px 5%;
   border: 2px solid black;
   border-radius: 3px;
@@ -340,7 +348,7 @@ const CartContainer = styled.div`
   flex-direction: column;
   min-width: 900px;
   max-height: 500px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   border-radius: 3px;
   background: #fff;
   box-shadow: 3px 2.8px 2.2px rgba(0, 0, 0, 0.07),
@@ -348,6 +356,26 @@ const CartContainer = styled.div`
     3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
 
+  /* &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: #f5f5f5;
+  } */
+
+  /* &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  } */
+`;
+
+const CartItemContainer = styled.div`
+  overflow-y: auto;
   &::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
@@ -358,7 +386,6 @@ const CartContainer = styled.div`
     width: 7px;
     background-color: #f5f5f5;
   }
-
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -372,7 +399,7 @@ const TotalPrice = styled.div`
   margin: 15px;
 `;
 
-const EmptyCart = styled.p` 
+const EmptyCart = styled.p`
   font-size: 20px;
   font-weight: 600;
 `;
@@ -449,6 +476,17 @@ const CompleteForm = styled.div`
 const CompleteFormText = styled.p`
   color: white;
   padding: 5px;
+`;
+const Subtotal = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 25px;
+`;
+
+const Total = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
 `;
 
 export default Cart;
