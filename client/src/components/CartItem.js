@@ -12,14 +12,15 @@ const CartItem = ({ item, setHasCheckedOut }) => {
     dispatch(changeCartQuantity(item, quantityInCart));
   }, [quantityInCart]);
 
-  // increases number of cart items until cart quantity exceeds stock quantity
+  // Increases number of cart items until cart quantity exceeds stock quantity
   const increaseQuantity = () => {
     if (quantityInCart < item.numInStock) {
       setQuantityInCart(quantityInCart + 1);
     }
   };
 
-  // decreases number of items in cart
+  // Decreases number of items in cart
+  // If number is decreased below 1, item is removed from cart
   const decreaseQuantity = () => {
     if (quantityInCart > 1) {
       setQuantityInCart(quantityInCart - 1);

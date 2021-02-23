@@ -10,12 +10,17 @@ import { IoShirtOutline, IoLocationSharp } from "react-icons/io5";
 
 const ItemContainerBig = () => {
   const { id } = useParams();
+
   const [selectedItem, setSelectedItem] = useState({});
+
+  // Determine which items have been added to cart based on state
   const cartItems = useSelector((state) => state.cart);
-  // console.log(selectedItem);
-  //console.log(selectedItem._id);
+
   const dispatch = useDispatch();
 
+
+  // Fetches product information based on id from params
+  // Assigns that data with setSelectedItem
   useEffect(() => {
     fetch(`/products/${id}`, {
       method: "GET",
@@ -26,16 +31,21 @@ const ItemContainerBig = () => {
       });
   }, [id]);
 
+
+  // onClick calls handleAddToCart function
+  // handleAddToCart triggers reducer action that adds selected item to cart
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
   };
 
-  // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"),
-  // and opacity based on whether item is available or not
+
+  // Code below conditionally renders price, messaging ("add to cart" active link vs. "out of stock"),
+  // functionality (ability to add items to cart) and image depending on whether the item is in stock or not
 
   return (
     <Wrapper>
       <BigItemView>
+        {/* Product image is conditionally rendered if item is in stock  */}
         <ImageWrapper>
           {handleCheckInstock(cartItems, selectedItem) > 0 ? (
             <Image src={selectedItem.imageSrc} />
@@ -49,6 +59,8 @@ const ItemContainerBig = () => {
             <ProductRef>REF. {selectedItem._id}</ProductRef>
           </div>
           <div>
+
+            {/* Price is displayed if item is in stock */}
             {handleCheckInstock(cartItems, selectedItem) > 0 ? (
               <Price>
                 {selectedItem.price.includes(".")
@@ -58,6 +70,8 @@ const ItemContainerBig = () => {
             ) : (
               <Padding />
             )}
+
+            {/* 'Add to cart' button is enabled if item is in stock */}
             {handleCheckInstock(cartItems, selectedItem) > 0 ? (
               <Button
                 onClick={() => {
