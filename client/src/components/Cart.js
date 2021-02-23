@@ -12,8 +12,12 @@ const Cart = () => {
 
   // selectedItem represents items that have been added to cart
   const selectedItem = Object.values(useSelector((state) => state.cart));
-  console.log(selectedItem);
+
+  // hasCheckedOut is initially set to false
+  // Once a customer has checked out, they are prompted for their information 
   const [hasCheckedOut, setHasCheckedOut] = useState(false);
+
+  // Customer details initially set to empty strings
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
@@ -21,7 +25,7 @@ const Cart = () => {
     cardNumber: "",
   });
 
-  // Initial cost is set to 0
+  // Initial subtotal and tax are set to 0
   const [subTotal, setSubTotal] = useState(0);
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
@@ -30,6 +34,7 @@ const Cart = () => {
   const [province, setProvince] = useState("");
 
   // Ensures customer has entered text into name, email, and credit card fields
+  // We're not very picky about what they enter so long as there is text in every field 
   const firstNameHandler = (name) => {
     return ({ target: { value } }) => {
       setCustomerInfo((oldValues) => ({ ...oldValues, [name]: value }));
@@ -68,9 +73,10 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
-  // When order is completed, tell server the in cart item quantity at time of purchase so that
-  // numInStock can be updated for next purchase
-  const updateQuantity = (selectedItem) => {
+  // When order is completed, tell server the quantity of items in the cart at time of purchase so that
+  // numInStock can be updated for future purchases
+  // handleClearCart() ensures cart is emptied once the transaction is done
+  const handlePurchase = (selectedItem) => {
     selectedItem.map((item) => {
       console.log(item);
       fetch(`/updateProduct/${item._id}`, {
@@ -88,10 +94,6 @@ const Cart = () => {
     handleClearCart();
   };
 
-  const handlePurchase = (selectedItem) => {
-    updateQuantity(selectedItem);
-  };
-
   // Get price of items * items' quantity in cart
   const handleSubTotal = (selectedItem) => {
     const itemPrice = selectedItem.map((item) => {
@@ -104,6 +106,7 @@ const Cart = () => {
 
   // Update pre-tax subtotal each time there is a change to the cart items
   useEffect(() => handleSubTotal(selectedItem), [selectedItem]);
+
 
   // Calculate tax based on customer province
   // If no province is selected, tax remains at $0.00
@@ -135,10 +138,10 @@ const Cart = () => {
     }
   };
 
-  // Update tax calculation if the province changes
+  // Update tax calculation if the province or subTotal changes
   useEffect(() => calculateTax(province), [province, subTotal]);
 
-  // Ensure tax and subtotal are numbers and not strings
+  // Ensure tax and subTotal are numbers
   let subTotalNum = Number(subTotal);
   let taxNum = Number(tax);
 
@@ -151,6 +154,8 @@ const Cart = () => {
         <h1>Your Cart</h1>
       </Banner>
       <ContinueShopping to={`/products`}>Continue Shopping</ContinueShopping>
+
+      {/* Cart items and checkout prompts appear conditionally */}
       {selectedItem.length > 0 ? (
         <CartContainer>
           {selectedItem &&
@@ -200,6 +205,7 @@ const Cart = () => {
         <EmptyCart>Your cart is empty</EmptyCart>
       )}
 
+      {/* Customers must choose their province before they can check out */}
       {selectedItem.length < 1 ?
       <div style={{height: "100px"}}/>
       :
@@ -217,6 +223,8 @@ const Cart = () => {
       </div>
       }
 
+      {/* Customer information fields are conditionally rendered upon checkout
+      Once the fields have been completed, the customer is taken to a confirmation page */}
       {hasCheckedOut ? (
         <CheckoutDiv>
           <Input>

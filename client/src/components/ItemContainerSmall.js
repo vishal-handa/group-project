@@ -8,18 +8,19 @@ import { handleCheckInstock } from "./helpers/handle-check-instock-function";
 
 const ItemContainerSmall = ({ item, productName, imageSRC, element_id }) => {
   const dispatch = useDispatch();
+
+  // Determine which items have been added to cart based on state
   const cartItems = useSelector((state) => state.cart);
-  //console.log(cartItems);
 
   const handleAddToCart = (item) => {
     dispatch(addToCart(item));
   };
 
-  // code below conditionally renders price, messaging ("add to cart" vs. "out of stock"),
-  // and opacity based on whether item is available or not
-
+  
   return (
     <SmallItemView>
+
+      {/* Can click through to big version if item is in stock */}
       <StyledLink
         to={`/products/${element_id}`}
         className={
@@ -31,6 +32,7 @@ const ItemContainerSmall = ({ item, productName, imageSRC, element_id }) => {
             handleCheckInstock(cartItems, item) <= 0 ? "disabled-link" : null
           }
         >
+          {/* Product image conditionally renders if item is in stock */}
           <ImageWrapper>
             {handleCheckInstock(cartItems, item) > 0 ? (
               <Image src={imageSRC} />
@@ -41,11 +43,15 @@ const ItemContainerSmall = ({ item, productName, imageSRC, element_id }) => {
           <Title>{productName}</Title>
         </OnClickWrapper>
       </StyledLink>
+
+      {/* Price conditionally renders if item is in stock */}
       {handleCheckInstock(cartItems, item) > 0 ? (
         <Price>{item.price}</Price>
       ) : (
         <Padding />
       )}
+
+      {/* 'Add to cart' button is active if item is in stock */}
       {handleCheckInstock(cartItems, item) > 0 ? (
         <Button
           onClick={() => {
