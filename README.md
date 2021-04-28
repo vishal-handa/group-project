@@ -1,60 +1,59 @@
-# Wearables E-Commerce Project
+# Group E-Commerce Project
 
-[See the list of TEAMS](__documentation/TEAMS.md)
+## Introduction
 
-You will make use of _everything_ that you have learned thus far in the bootcamp to build an e-commerce app that will showcase all of the provided _wearables_ items.
+The main objective for our group project for Concordia University’s Full-Stack Web Development Diploma program was to create an e-commerce store that sells wearable technologies. Our goal was to develop a user-friendly website that allows customers to easily navigate through the dataset of 300+ products and to go through a purchase process once products had been added to their cart.
 
-The stack is React.Js, Redux, Node.Js, and styled-components.
+## Project Requirements
 
-Your node server should be RESTful and follow REST principles, at least to the extent we learned during the bootcamp.
+Frontend
+Allow users to:
+View all items in the database
+Purchase items that are in stock
+View a cart containing the items they intend to purchase
+Edit cart before completing purchase
 
----
+Backend
+The node server should:
+Be RESTful
+Provide the frontend with the required data in a succinct and organized way
+Update the inventory as users make purchases
 
-**✋ You CANNOT use any external UI libraries, including, but not limited to, Material UI, Bootstrap.**
+## Packages Used
 
----
+Frontend:
+react-animations
+react-icons
+react-redux
+react-router-dom
 
-## Getting Started
+## Methodology and Languages
 
-<img src="./server/assets/software-dev-path.jpg" style="width: 100%;" />
+Our tech stack for this project included React.Js, Redux, and Node.Js while styling was primarily executed with Styled-Components. We divided the workload so that each team member had the opportunity to work on both backend and frontend aspects. This allowed us to gain valuable experience with each framework while also cementing our ability to collaborate effectively as a team.
 
-You have your assignment and your team. What should you do first? This will vary for every team, and even every team member.
+## Features
 
-**The important thing is to NOT just jump in and start coding!**
+• Animated burger menu
+The hamburger menu is animated with opening and closing animations. The menu items also change position when clicked, and they also change positions if they have sub-menu-items.
 
-There probably shouldn't be any coding until very near the end of the first day.
+• Searchbar
+Customers can search and filter through the 300+ products offered on the e-commerce site.
 
-## Meet your Product Manager!
+• Filtering of products
+Customers are able to filter and sort the products by various parameters such as company name, category, and price.
 
-Each team has been assigned a product manager. This person is in charge of answering questions, guiding you and basically preventing everything from falling apart!
+• Pagination
+To make viewing the products more user-friendly, we implemented pagination to allow users to scroll through pages instead of having all the products on the same page.
 
-This person should be present for some of your team meetings, but not all. PMs are super busy people and have multiple projects, people to manage. 😉
+• Tax calculations
+Customers are prompted to select their home province upon checkout. Once they have specified their province, the appropriate taxes are then automatically calculated and added to their total purchase cost.
 
-## Planning
+• Database update
+Whenever a certain product is added in the cart, the quantity is updated in the database at the same time, which in turn updates the redux state at the frontend. This enables a live change of the product quantity at every click. This also makes it possible to maintain the maximum number of specific items that the customers can purchase.
 
-1. You will break into 3 groups (with your assigned PM.)
-2. Your PM will answer any initial questions, and give you more information, as required.
-3. Breakout into a separate meeting with just your team. _Your PM will bounce from team to team to make sure you're on track._
-4. Time to use the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDA.md)
+• Local storage
+Since the project uses redux states for rendering the most updated data, it was imperative to store those states locally using local storage, and update redux state using local storage. This ensures that the entire state persists when the user reloads the page or opens the application again while the server is running.
 
-### First team meeting
-
-It could also be a good/fun idea to give yourselves an original team name. :)
-
-Your first team meeting should start with the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDa.md).
-
-[Successful Software Project Delivery in 10 Steps](https://www.appnovation.com/blog/successful-software-project-delivery-10-steps).
-
-💡 How a project starts is indicative of how it will end.
-
-## Teamwork
-
-The most important aspect of this project is the ability to work in a team. No matter your contribution to the project, you should understand the **FULL** codebase. This will require that you
-
-- **review** each other's code
-- **ask** questions when you don't understand
-- **comment** your code extensively. _Always go for clarity over brevity._
-
-## GitHub
-
-see the [GITHUB Document](__documentation/GITHUB.md)
+<img src="./screenshots/homepage.png" style="width: 100%;" />
+<img src="./screenshots/lifestyle.png" style="width: 100%;" />
+<img src="./screenshots/product.png" style="width: 100%;" />
