@@ -4,7 +4,6 @@
 
 The main objective for our group project for Concordia University’s Full-Stack Web Development Diploma program was to create an e-commerce store that sells wearable technologies. Our goal was to develop a user-friendly website that allows customers to easily navigate through the dataset of 300+ products and to go through a purchase process once products had been added to their cart.
 
-
 ## Project Requirements
 
 Frontend
@@ -20,7 +19,6 @@ Be RESTful
 Provide the frontend with the required data in a succinct and organized way
 Update the inventory as users make purchases
 
-
 ## Packages Used
 
 Frontend:<br />
@@ -29,11 +27,9 @@ react-icons<br />
 react-redux<br />
 react-router-dom <br />
 
-
 ## Methodology and Languages
 
 Our tech stack for this project included React.Js, Redux, and Node.Js while styling was primarily executed with Styled-Components. We divided the workload so that each team member had the opportunity to work on both backend and frontend aspects. This allowed us to gain valuable experience with each framework while also cementing our ability to collaborate effectively as a team.
-
 
 ## Features
 
@@ -61,4 +57,3 @@ Since the project uses redux states for rendering the most updated data, it was 
 <img src="./screenshots/homepage.png" style="width: 100%;" />
 <img src="./screenshots/lifestyle.png" style="width: 100%;" />
 <img src="./screenshots/product.png" style="width: 100%;" />
-
