@@ -22,10 +22,10 @@ Update the inventory as users make purchases
 ## Packages Used
 
 Frontend:
-• react-animations
-• react-icons
-• react-redux
-• react-router-dom
+react-animations<br />
+react-icons<br />
+react-redux<br />
+react-router-dom <br />
 
 ## Methodology and Languages
 
