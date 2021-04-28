@@ -1,4 +1,4 @@
-# Group E-Commerce Project
+# Wearables Group E-Commerce Project
 
 ## Introduction
 
