@@ -21,7 +21,7 @@ Update the inventory as users make purchases
 
 ## Packages Used
 
-Frontend:
+Frontend:<br />
 react-animations<br />
 react-icons<br />
 react-redux<br />
